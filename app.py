@@ -47,3 +47,6 @@ if __name__ == '__main__':
         os.makedirs('slideassets')
     # Flask sunucusunu başlat
     app.run(debug=True)
+
+
+    
