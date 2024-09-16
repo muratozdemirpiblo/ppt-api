@@ -41,12 +41,8 @@ def create_ppt():
     # Sunumu indirme olarak döndür
     return send_file(pptx_file, as_attachment=True)
 
-if __name__ == '__main__':
-    # slideassets klasörünün mevcut olduğundan emin olun
-    if not os.path.exists('slideassets'):
-        os.makedirs('slideassets')
-    # Flask sunucusunu başlat
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080)
 
 
     
