@@ -7,9 +7,12 @@ import base64
 
 app = Flask(__name__)
 
-@app.route('/create-ppt', methods=['GET'])
+@app.route('/create-ppt', methods=['POST'])
 def create_ppt():
     # PowerPoint sunumu oluştur
+    client_name = request.form.get('client_name')
+
+
     prs = Presentation()
 
     # İlk slaytı ekle
@@ -32,9 +35,21 @@ def create_ppt():
     textbox = slide.shapes.add_textbox(left, top, width, height)
     text_frame = textbox.text_frame
     p = text_frame.add_paragraph()
-    p.text = "Client Name: Value Board Pack template"
+    p.text = "Client Name:\nValue Board Pack template"
     p.font.size = Inches(0.64)  # Yaklaşık 48 pt
     p.font.bold = True
+
+    # Başlık ekleme
+    left = Inches(0,75)
+    top = Inches(4,36)
+    width = Inches(5,78)
+    height = Inches(0,68)
+    textbox = slide.shapes.add_textbox(left, top, width, height)
+    text_frame = textbox.text_frame
+    p = text_frame.add_paragraph()
+    p.text = "Financials"
+    p.font.size = Inches(0.28)  # Yaklaşık 48 pt
+   
 
     # Dosyayı belleğe kaydet
     pptx_io = io.BytesIO()
