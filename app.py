@@ -69,7 +69,7 @@ def create_ppt():
 
 
 @app.route('/test', methods=['GET'])
-def create_ppt():
+def create_ppt_test():
     # PowerPoint sunumu oluştur
    
 
