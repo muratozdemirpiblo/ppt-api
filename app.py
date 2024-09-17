@@ -1,7 +1,9 @@
-from flask import Flask, send_file
+from flask import Flask, jsonify
 from pptx import Presentation
 from pptx.util import Inches
 import os
+import io
+import base64
 
 app = Flask(__name__)
 
@@ -34,15 +36,19 @@ def create_ppt():
     p.font.size = Inches(0.64)  # Yaklaşık 48 pt
     p.font.bold = True
 
-    # Sunumu kaydet
-    pptx_file = 'example.pptx'
-    prs.save(pptx_file)
+    # Dosyayı belleğe kaydet
+    pptx_io = io.BytesIO()
+    prs.save(pptx_io)
+    pptx_io.seek(0)
 
-    # Sunumu indirme olarak döndür
-    return send_file(pptx_file, as_attachment=True)
+    # Dosyayı base64 formatında encode et
+    pptx_base64 = base64.b64encode(pptx_io.read()).decode('utf-8')
+
+    # JSON formatında base64 ile encode edilmiş dosyayı döndür
+    return jsonify({
+        'file_name': 'presentation.pptx',
+        'file_content': pptx_base64
+    })
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
-
-
-    
