@@ -59,6 +59,31 @@ def create_ppt():
     p.text = "Financials"
     p.font.size = Inches(0.28)  # Yaklaşık 48 pt
 
+    # İkinci slaytı ekle
+    slide_layout2 = prs.slide_layouts[5]  # Başlık ve içerik düzeni
+    slide2 = prs.slides.add_slide(slide_layout2)
+
+    for shape in slide2.shapes:
+        if not shape.has_text_frame:
+            continue
+        text_frame = shape.text_frame
+        if text_frame.text == 'Click to add title' or text_frame.text == 'Click to add text':
+            sp = shape
+            slide2.shapes._spTree.remove(sp._element)
+
+    # Üst kutucuk (Başlık) ekleme
+    left = Inches(0.75)
+    top = Inches(0.75)
+    width = Inches(12)
+    height = Inches(1.0)
+    textbox = slide2.shapes.add_textbox(left, top, width, height)
+    text_frame = textbox.text_frame
+    p = text_frame.add_paragraph()
+    p.text = "Calculator headings categorised into the below sections"
+    p.font.size = Pt(24)  # Yaklaşık 24 pt
+    p.font.name = 'Montserrat SemiBold'
+    p.font.color.rgb = RGBColor(0, 0, 0)  # Siyah renk
+
     # Dosyayı belleğe kaydet
     pptx_io = io.BytesIO()
     prs.save(pptx_io)
