@@ -39,7 +39,10 @@ def create_ppt():
     prs.save(pptx_file)
 
     # Sunumu indirme olarak döndür
-    return send_file(pptx_file, as_attachment=True)
+    return send_file(pptx_io,
+                     mimetype='application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                     as_attachment=True,
+                     download_name='presentation.pptx')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
