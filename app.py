@@ -40,10 +40,10 @@ def create_ppt():
     p.font.bold = True
 
     # Başlık ekleme
-    left = Inches(0,75)
-    top = Inches(4,36)
-    width = Inches(5,78)
-    height = Inches(0,68)
+    left = Inches(0.75)
+    top = Inches(4.36)
+    width = Inches(5.78)
+    height = Inches(0.68)
     textbox = slide.shapes.add_textbox(left, top, width, height)
     text_frame = textbox.text_frame
     p = text_frame.add_paragraph()
