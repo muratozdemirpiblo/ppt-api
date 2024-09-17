@@ -3,6 +3,7 @@ from pptx import Presentation
 from pptx.util import Inches
 import os
 import io
+import base64
 
 app = Flask(__name__)
 
@@ -120,7 +121,7 @@ def create_ppt_test():
     pptx_io.seek(0)
 
     # Dosyayı doğrudan yanıt olarak döndür
-    return send_file(pptx_io, attachment_filename='test_presentation.pptx', as_attachment=True)
+    return send_file(pptx_io, download_name='test_presentation.pptx', as_attachment=True)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
