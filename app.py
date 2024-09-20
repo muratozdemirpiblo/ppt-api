@@ -97,12 +97,8 @@ def create_ppt():
         return "Error: 'client_name' parameter is required", 400
 
 
-    # Dosyayı belleğe kaydet
-    pptx_io = io.BytesIO()
-    prs.save(pptx_io)
-    pptx_io.seek(0)
 
-    
+
 
     values = ['£220,155', '£315,400', '£125,600', '£400,250', '£540,000', '£155,300', '£230,120', '£180,450', '£260,700', '£310,500']
     zip_path = r"template.zip"  # Tam dosya yolunu girin
