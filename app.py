@@ -103,7 +103,7 @@ def create_ppt():
     values = ['£220,155', '£315,400', '£125,600', '£400,250', '£540,000', '£155,300', '£230,120', '£180,450', '£260,700', '£310,500']
     zip_path = r"template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
-    image_url = 'https://muratozdemirpiblo.github.io/Background.jpg'  # İlgili görselin URL'sini buraya girin
+    image_url = 'https://lobster-app-z8zqd.ondigitalocean.app/chart-image'  # İlgili görselin URL'sini buraya girin
 
     modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url)
 
