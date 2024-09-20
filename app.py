@@ -102,6 +102,8 @@ def create_ppt():
     prs.save(pptx_io)
     pptx_io.seek(0)
 
+    
+
     values = ['£220,155', '£315,400', '£125,600', '£400,250', '£540,000', '£155,300', '£230,120', '£180,450', '£260,700', '£310,500']
     zip_path = r"template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
