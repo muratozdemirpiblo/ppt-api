@@ -115,7 +115,7 @@ def create_ppt():
     zip_path = r"template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
 
-    modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,itfinance)
+    modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,str(itfinance))
 
     pptx_io = io.BytesIO()
     with open(output_pptx_path, 'rb') as f:
