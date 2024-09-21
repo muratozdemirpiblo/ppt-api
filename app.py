@@ -18,8 +18,7 @@ import shutil
 
 app = Flask(__name__)
 
-
-def modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url):
+def modify_slide_xml_and_image(zip_path, output_pptx_path):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -32,8 +31,6 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url):
     slides_dir = os.path.join(temp_dir, 'ppt', 'slides')
     slide_files = [f for f in os.listdir(slides_dir) if f.startswith('slide') and f.endswith('.xml')]
     
-    # Değerler listesi için index
-    value_index = 0
 
     # Her bir slide dosyasını işle
     for slide_file in slide_files:
@@ -48,30 +45,46 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url):
 
         # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
         for elem in root.findall('.//a:t', namespace):
-            if '£XX,000' in elem.text:
-                elem.text = elem.text.replace('£XX,000', values[value_index])
-                value_index += 1
-                if value_index >= len(values):
-                    break  # Listedeki tüm değerler kullanıldığında durdur
+            if 'valclient' in elem.text:
+                elem.text = elem.text.replace('valclient', 'test')
+            if 'itfinance' in elem.text:
+                elem.text = elem.text.replace('itfinance', '34,340')
+            if 'rpo' in elem.text:
+                elem.text = elem.text.replace('rpo', '34,340')
+            if 'poa' in elem.text:
+                elem.text = elem.text.replace('poa', '34,340')
+            if 'cip' in elem.text:
+                elem.text = elem.text.replace('cip', '34,340')
+            if 'mspi' in elem.text:
+                elem.text = elem.text.replace('mspi', '34,340')
+            if 'valmsl' in elem.text:
+                elem.text = elem.text.replace('valmsl', '34,340')
+            if 'valfqmr' in elem.text:
+                elem.text = elem.text.replace('valfqmr', '34,340')
+            if 'valdcap' in elem.text:
+                elem.text = elem.text.replace('valdcap', '34,340')
+            if 'valcifw' in elem.text:
+                elem.text = elem.text.replace('valcifw', '34,340')
+            if 'valoem' in elem.text:
+                elem.text = elem.text.replace('valoem', '34,340')
+            if 'valbnft' in elem.text:
+                elem.text = elem.text.replace('valbnft', '£34,340')
+            if '£valnpvv' in elem.text:
+                elem.text = elem.text.replace('£valnpvv', '£34,340')
+            if 'valacd' in elem.text:
+                elem.text = elem.text.replace('valacd', '34,340')
+            if 'valroi' in elem.text:
+                elem.text = elem.text.replace('valroi', '34')
+            if 'valinvestment' in elem.text:
+                elem.text = elem.text.replace('valinvestment', '34,340')
+            if 'valmonths' in elem.text:
+                elem.text = elem.text.replace('valmonths', '2')
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
 
-        if value_index >= len(values):
-            break  # Tüm değerler değiştirildiyse döngüyü durdur
 
-    # Görseli güncelleme
-    image_path = os.path.join(temp_dir, 'ppt', 'media', 'image16.png')
-
-    # URL'den yeni görseli indir
-    response = requests.get(image_url, stream=True)
-    if response.status_code == 200:
-        # İndirilen görseli ppt/media klasöründeki image16.png ile değiştir
-        with open(image_path, 'wb') as out_file:
-            shutil.copyfileobj(response.raw, out_file)
-        print("image16.png başarıyla indirildi ve değiştirildi.")
-    else:
-        print("Görsel URL'den indirilemedi.")
+    
 
     # Güncellenmiş dosyaları tekrar ZIP yap
     with zipfile.ZipFile(output_pptx_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
@@ -83,9 +96,6 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url):
 
     # Geçici çalışma dizinini temizle
     shutil.rmtree(temp_dir)
-
-    # Kullanım
-    
 
 @app.route('/create-ppt', methods=['POST'])
 def create_ppt():
@@ -100,12 +110,10 @@ def create_ppt():
 
 
 
-    values = ['£220,155', '£315,400', '£125,600', '£400,250', '£540,000', '£155,300', '£230,120', '£180,450', '£260,700', '£310,500']
     zip_path = r"template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
-    image_url = 'https://lobster-app-z8zqd.ondigitalocean.app/chart-image'  # İlgili görselin URL'sini buraya girin
 
-    modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url)
+    modify_slide_xml_and_image(zip_path, output_pptx_path)
 
     pptx_io = io.BytesIO()
     with open(output_pptx_path, 'rb') as f:
@@ -120,57 +128,6 @@ def create_ppt():
         'file_name': 'presentation.pptx',
         'file_content': pptx_base64
     })
-
-
-@app.route('/chart')
-def donut_chart():
-    return render_template('sales.html')
-
-@app.route('/chart-image')
-def get_chart_image():
-    # Chrome seçeneklerini ayarla
-    options = webdriver.ChromeOptions()
-    options.add_argument('headless')  # Arayüzsüz modda çalıştır
-    options.add_argument('window-size=480x480')  # Pencere boyutu
-
-    # Chrome sürücüsünü başlat
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
-
-    # Flask uygulamasındaki / sayfasına git
-    driver.get("http://127.0.0.1:8080/chart")
-
-    # Grafik yüklenmesi için bekle
-    time.sleep(2)
-
-    # Ekran görüntüsü al
-    screenshot_path = "chart_screenshot.png"
-    driver.save_screenshot(screenshot_path)
-
-    # Tarayıcıyı kapat
-    driver.quit()
-
-    # Ekran görüntüsünü Pillow ile işleyip grafiği kırp
-    image = Image.open(screenshot_path)
-
-    # Grafik alanını doğru ayarlamak için kırpma koordinatlarını dinamik olarak belirleyin
-    # Örnek olarak, görüntü boyutunu kontrol edelim
-    width, height = image.size
-
-    # Grafik alanının boyutunu ve konumunu belirlemek için aşağıdaki değerleri ayarlayın
-    # Bu değerleri, sayfanın HTML ve CSS yapısına göre güncellemeniz gerekebilir
-    chart_left = int(width * 0.1)  # Sol kenar boşluğu
-    chart_top = int(height * 0.1)  # Üst kenar boşluğu
-    chart_right = int(width * 0.9)  # Sağ kenar boşluğu
-    chart_bottom = int(height * 0.9)  # Alt kenar boşluğu
-
-    # Kırpma işlemi
-    cropped_image = image.crop((chart_left, chart_top, chart_right, chart_bottom))
-
-    # Kırpılmış resmi kaydet
-    cropped_image.save(screenshot_path)
-
-    # Resmi döndür
-    return send_file(screenshot_path, mimetype='image/png')
 
 
 

@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 import requests
 import shutil
 
-def modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url):
+def modify_slide_xml_and_image(zip_path, output_pptx_path):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -17,8 +17,6 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url):
     slides_dir = os.path.join(temp_dir, 'ppt', 'slides')
     slide_files = [f for f in os.listdir(slides_dir) if f.startswith('slide') and f.endswith('.xml')]
     
-    # Değerler listesi için index
-    value_index = 0
 
     # Her bir slide dosyasını işle
     for slide_file in slide_files:
@@ -33,30 +31,46 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url):
 
         # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
         for elem in root.findall('.//a:t', namespace):
-            if '£XX,000' in elem.text:
-                elem.text = elem.text.replace('£XX,000', values[value_index])
-                value_index += 1
-                if value_index >= len(values):
-                    break  # Listedeki tüm değerler kullanıldığında durdur
+            if 'valclient' in elem.text:
+                elem.text = elem.text.replace('valclient', 'test')
+            if 'itfinance' in elem.text:
+                elem.text = elem.text.replace('itfinance', '34,340')
+            if 'rpo' in elem.text:
+                elem.text = elem.text.replace('rpo', '34,340')
+            if 'poa' in elem.text:
+                elem.text = elem.text.replace('poa', '34,340')
+            if 'cip' in elem.text:
+                elem.text = elem.text.replace('cip', '34,340')
+            if 'mspi' in elem.text:
+                elem.text = elem.text.replace('mspi', '34,340')
+            if 'valmsl' in elem.text:
+                elem.text = elem.text.replace('valmsl', '34,340')
+            if 'valfqmr' in elem.text:
+                elem.text = elem.text.replace('valfqmr', '34,340')
+            if 'valdcap' in elem.text:
+                elem.text = elem.text.replace('valdcap', '34,340')
+            if 'valcifw' in elem.text:
+                elem.text = elem.text.replace('valcifw', '34,340')
+            if 'valoem' in elem.text:
+                elem.text = elem.text.replace('valoem', '34,340')
+            if 'valbnft' in elem.text:
+                elem.text = elem.text.replace('valbnft', '£34,340')
+            if '£valnpvv' in elem.text:
+                elem.text = elem.text.replace('£valnpvv', '£34,340')
+            if 'valacd' in elem.text:
+                elem.text = elem.text.replace('valacd', '34,340')
+            if 'valroi' in elem.text:
+                elem.text = elem.text.replace('valroi', '34')
+            if 'valinvestment' in elem.text:
+                elem.text = elem.text.replace('valinvestment', '34,340')
+            if 'valmonths' in elem.text:
+                elem.text = elem.text.replace('valmonths', '2')
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
 
-        if value_index >= len(values):
-            break  # Tüm değerler değiştirildiyse döngüyü durdur
 
-    # Görseli güncelleme
-    image_path = os.path.join(temp_dir, 'ppt', 'media', 'image16.png')
-
-    # URL'den yeni görseli indir
-    response = requests.get(image_url, stream=True)
-    if response.status_code == 200:
-        # İndirilen görseli ppt/media klasöründeki image16.png ile değiştir
-        with open(image_path, 'wb') as out_file:
-            shutil.copyfileobj(response.raw, out_file)
-        print("image16.png başarıyla indirildi ve değiştirildi.")
-    else:
-        print("Görsel URL'den indirilemedi.")
+    
 
     # Güncellenmiş dosyaları tekrar ZIP yap
     with zipfile.ZipFile(output_pptx_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
@@ -70,9 +84,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url):
     shutil.rmtree(temp_dir)
 
 # Kullanım
-values = ['£220,155', '£315,400', '£125,600', '£400,250', '£540,000', '£155,300', '£230,120', '£180,450', '£260,700', '£310,500']
 zip_path = r"template.zip"  # Tam dosya yolunu girin
 output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
-image_url = 'https://muratozdemirpiblo.github.io/Background.jpg'  # İlgili görselin URL'sini buraya girin
 
-modify_slide_xml_and_image(zip_path, output_pptx_path, values, image_url)
+modify_slide_xml_and_image(zip_path, output_pptx_path)
