@@ -19,7 +19,8 @@ import shutil
 app = Flask(__name__)
 
 def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
-                               itfinance):
+                               itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
+                               valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -49,37 +50,37 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'valclient' in elem.text:
                 elem.text = elem.text.replace('valclient', client_name)
             if 'itfinance' in elem.text:
-                elem.text = elem.text.replace('itfinance', itfinance)
+                elem.text = elem.text.replace('itfinance', itfinance.replace("£", "").replace(" ", ""))
             if 'rpo' in elem.text:
-                elem.text = elem.text.replace('rpo', '34,340')
+                elem.text = elem.text.replace('rpo', rpo.replace("£", "").replace(" ", ""))
             if 'poa' in elem.text:
-                elem.text = elem.text.replace('poa', '34,340')
+                elem.text = elem.text.replace('poa', poa.replace("£", "").replace(" ", ""))
             if 'cip' in elem.text:
-                elem.text = elem.text.replace('cip', '34,340')
+                elem.text = elem.text.replace('cip', cip.replace("£", "").replace(" ", ""))
             if 'mspi' in elem.text:
-                elem.text = elem.text.replace('mspi', '34,340')
+                elem.text = elem.text.replace('mspi', mspi.replace("£", "").replace(" ", ""))
             if 'valmsl' in elem.text:
-                elem.text = elem.text.replace('valmsl', '34,340')
+                elem.text = elem.text.replace('valmsl', valmsl.replace("£", "").replace(" ", ""))
             if 'valfqmr' in elem.text:
-                elem.text = elem.text.replace('valfqmr', '34,340')
+                elem.text = elem.text.replace('valfqmr', valfqmr.replace("£", "").replace(" ", ""))
             if 'valdcap' in elem.text:
-                elem.text = elem.text.replace('valdcap', '34,340')
+                elem.text = elem.text.replace('valdcap', valdcap.replace("£", "").replace(" ", ""))
             if 'valcifw' in elem.text:
-                elem.text = elem.text.replace('valcifw', '34,340')
+                elem.text = elem.text.replace('valcifw', valcifw.replace("£", "").replace(" ", ""))
             if 'valoem' in elem.text:
-                elem.text = elem.text.replace('valoem', '34,340')
+                elem.text = elem.text.replace('valoem', valoem.replace("£", "").replace(" ", ""))
             if 'valbnft' in elem.text:
-                elem.text = elem.text.replace('valbnft', '£34,340')
-            if '£valnpvv' in elem.text:
-                elem.text = elem.text.replace('£valnpvv', '£34,340')
+                elem.text = elem.text.replace('valbnft', valbnft.replace("£", "").replace(" ", ""))
+            if 'valnpvv' in elem.text:
+                elem.text = elem.text.replace('valnpvv', valnpvv.replace("£", "").replace(" ", ""))
             if 'valacd' in elem.text:
-                elem.text = elem.text.replace('valacd', '34,340')
+                elem.text = elem.text.replace('valacd', valacd.replace("£", "").replace(" ", ""))
             if 'valroi' in elem.text:
-                elem.text = elem.text.replace('valroi', '34')
+                elem.text = elem.text.replace('valroi', valroi)
             if 'valinvestment' in elem.text:
-                elem.text = elem.text.replace('valinvestment', '34,340')
+                elem.text = elem.text.replace('valinvestment', valinvestment.replace("£", "").replace(" ", ""))
             if 'valmonths' in elem.text:
-                elem.text = elem.text.replace('valmonths', '2')
+                elem.text = elem.text.replace('valmonths', valmonths)
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
@@ -104,6 +105,21 @@ def create_ppt():
     data = request.get_json()
     client_name = data.get('client_name')
     itfinance = data.get('itfinance')
+    rpo = data.get('rpo')
+    poa = data.get('poa')
+    cip = data.get('cip')
+    mspi = data.get('mspi')
+    valmsl = data.get('valmsl')
+    valfqmr = data.get('valfqmr')
+    valdcap = data.get('valdcap')
+    valcifw = data.get('valcifw')
+    valoem = data.get('valoem')
+    valbnft = data.get('valbnft')
+    valnpvv = data.get('valnpvv')
+    valacd = data.get('valacd')
+    valroi = data.get('valroi')
+    valinvestment = data.get('valinvestment')
+    valmonths = data.get('valmonths')
     
     if not client_name:
         return "Error: 'client_name' parameter is required", 400
@@ -115,7 +131,8 @@ def create_ppt():
     zip_path = r"template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
 
-    modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,str(itfinance))
+    modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
+                               valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths)
 
     pptx_io = io.BytesIO()
     with open(output_pptx_path, 'rb') as f:
