@@ -18,7 +18,8 @@ import shutil
 
 app = Flask(__name__)
 
-def modify_slide_xml_and_image(zip_path, output_pptx_path):
+def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
+                               itfinance):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -46,9 +47,9 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path):
         # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
         for elem in root.findall('.//a:t', namespace):
             if 'valclient' in elem.text:
-                elem.text = elem.text.replace('valclient', 'test')
+                elem.text = elem.text.replace('valclient', client_name)
             if 'itfinance' in elem.text:
-                elem.text = elem.text.replace('itfinance', '34,340')
+                elem.text = elem.text.replace('itfinance', itfinance)
             if 'rpo' in elem.text:
                 elem.text = elem.text.replace('rpo', '34,340')
             if 'poa' in elem.text:
@@ -102,6 +103,7 @@ def create_ppt():
     # 'client_name' parametresini POST isteği ile al
     data = request.get_json()
     client_name = data.get('client_name')
+    itfinance = data.get('itfinance')
     
     if not client_name:
         return "Error: 'client_name' parameter is required", 400
@@ -113,7 +115,7 @@ def create_ppt():
     zip_path = r"template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
 
-    modify_slide_xml_and_image(zip_path, output_pptx_path)
+    modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,itfinance)
 
     pptx_io = io.BytesIO()
     with open(output_pptx_path, 'rb') as f:
