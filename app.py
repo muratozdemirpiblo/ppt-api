@@ -702,10 +702,10 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-        update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                                year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
-                                year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
-                                year5return=year5total)
+        update_zip_with_new_xml(zip_path, output_zip_path,year1invest='12222',
+                                year1return='12222',year2invest='12222',year2return='12222',year3invest='12222',
+                                year3return='12222',year4invest='12222',year4return='12222',year5invest='12222',
+                                year5return='12222')
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
