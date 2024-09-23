@@ -700,17 +700,17 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('valmonths', valmonths)
             if 'valhours' in elem.text:
                 elem.text = elem.text.replace('valhours', valhours)
-    zip_path = 'template.zip'  # Güncellemek istediğin template.zip
-    output_zip_path = 'template.zip'  # Çıkış dosyasının adı
+        zip_path = 'template.zip'  # Güncellemek istediğin template.zip
+        output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-    update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                                year1return=year1invest,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
+        update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
+                                year1return='500',year2invest=year2invest,year2return=year2return,year3invest=year3invest,
                                 year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
                                 year5return=year5return)
 
         # Güncellenmiş slide XML dosyasını kaydet
-    tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
+        tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
 
 
     
@@ -774,9 +774,6 @@ def create_ppt():
     zip_path = r"template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
 
-    zip_path = 'template.zip'  # Güncellemek istediğin template.zip
-    output_zip_path = 'template.zip'  # Çıkış dosyasının adı
-
     modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
                                valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths,valhours,
                                year1invest=year1invest,
@@ -784,7 +781,8 @@ def create_ppt():
                                 year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
                                 year5return=year5total)
     
-    
+    zip_path = 'template.zip'  # Güncellemek istediğin template.zip
+    output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
 
 
