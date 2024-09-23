@@ -756,7 +756,12 @@ def create_ppt():
 
 
 
-
+    # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
+    update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
+                            year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
+                            year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
+                            year5return=year5total)
+    
     zip_path = r"template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
 
@@ -766,11 +771,7 @@ def create_ppt():
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
-    # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-    update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                            year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
-                            year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
-                            year5return=year5total)
+    
 
     pptx_io = io.BytesIO()
     with open(output_pptx_path, 'rb') as f:
