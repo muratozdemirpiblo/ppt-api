@@ -602,20 +602,20 @@ def update_zip_with_new_xml(zip_path, output_zip_path,year1invest,year1return,ye
             if '<c:numCache>' in line:
                 # Yeni verileri ekle
                 lines.insert(index + 1, '    <c:ptCount val="14"/>\n')
-                lines.insert(index + 2, '    <c:pt idx="0"><c:v>{year1invest}</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="1"><c:v>{year1return}</c:v></c:pt>\n')
+                lines.insert(index + 2, '    <c:pt idx="0"><c:v>10000</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="1"><c:v>5000</c:v></c:pt>\n')
 
-                lines.insert(index + 2, '    <c:pt idx="3"><c:v>{year2invest}</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="4"><c:v>{year2return}</c:v></c:pt>\n')
+                lines.insert(index + 2, '    <c:pt idx="3"><c:v>20000</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="4"><c:v>100</c:v></c:pt>\n')
 
-                lines.insert(index + 2, '    <c:pt idx="6"><c:v>{year3invest}</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="7"><c:v>{year3return}</c:v></c:pt>\n')
+                lines.insert(index + 2, '    <c:pt idx="6"><c:v>305</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="7"><c:v>12000</c:v></c:pt>\n')
 
-                lines.insert(index + 2, '    <c:pt idx="9"><c:v>{year4invest}</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="10"><c:v>{year4return}</c:v></c:pt>\n')
+                lines.insert(index + 2, '    <c:pt idx="9"><c:v>1000</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="10"><c:v>10500</c:v></c:pt>\n')
 
-                lines.insert(index + 2, '    <c:pt idx="12"><c:v>{year5invest}</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="13"><c:v>{year5return}</c:v></c:pt>\n')
+                lines.insert(index + 2, '    <c:pt idx="12"><c:v>555</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="13"><c:v>6300</c:v></c:pt>\n')
                 break
         xml_file.seek(0)
         xml_file.writelines(lines)
