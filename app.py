@@ -595,33 +595,40 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
     with open(new_xml_path, 'w', encoding='utf-8') as xml_file:
         xml_file.write(chart_xml_content)
 
+    with open(new_xml_path, 'r+', encoding='utf-8') as xml_file:
+        lines = xml_file.readlines()
+        for index, line in enumerate(lines):
+            if '<c:numCache>' in line:
+                # Yeni verileri ekle
+                
+                break
+        xml_file.seek(0)
+        xml_file.writelines(lines)
+
+
     # <c:numCache> içerisine yeni verileri ekle
     with open(new_xml_path, 'r+', encoding='utf-8') as xml_file:
         lines = xml_file.readlines()
         for index, line in enumerate(lines):
             if '<c:numCache>' in line:
                 # Yeni verileri ekle
-                lines.insert(index + 1, '    <c:ptCount val="14"/>\n')
-                lines.insert(index + 2, '    <c:pt idx="0"><c:v>13000</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="1"><c:v>16430.547826086971</c:v></c:pt>\n')
-
-                lines.insert(index + 2, '    <c:pt idx="3"><c:v>13000</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="4"><c:v>16430.547826086971</c:v></c:pt>\n')
-
-                lines.insert(index + 2, '    <c:pt idx="6"><c:v>13000</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="7"><c:v>16430.547826086971</c:v></c:pt>\n')
-
-                lines.insert(index + 2, '    <c:pt idx="9"><c:v>13000</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="10"><c:v>16430.547826086971</c:v></c:pt>\n')
-
-                lines.insert(index + 2, '    <c:pt idx="12"><c:v>13000</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="13"><c:v>16430.547826086971</c:v></c:pt>\n')
+                lines.insert(index + 1, '    <c:ptCount val="10"/>\n')
+                lines.insert(index + 2, '    <c:pt idx="0"><c:v>{}</c:v></c:pt>\n'.format(year1invest))
+                lines.insert(index + 3, '    <c:pt idx="1"><c:v>{}</c:v></c:pt>\n'.format(year1return))
+                lines.insert(index + 4, '    <c:pt idx="2"><c:v>{}</c:v></c:pt>\n'.format(year2invest))
+                lines.insert(index + 5, '    <c:pt idx="3"><c:v>{}</c:v></c:pt>\n'.format(year2return))
+                lines.insert(index + 6, '    <c:pt idx="4"><c:v>{}</c:v></c:pt>\n'.format(year3invest))
+                lines.insert(index + 7, '    <c:pt idx="5"><c:v>{}</c:v></c:pt>\n'.format(year3return))
+                lines.insert(index + 8, '    <c:pt idx="6"><c:v>{}</c:v></c:pt>\n'.format(year4invest))
+                lines.insert(index + 9, '    <c:pt idx="7"><c:v>{}</c:v></c:pt>\n'.format(year4return))
+                lines.insert(index + 10, '    <c:pt idx="8"><c:v>{}</c:v></c:pt>\n'.format(year5invest))
+                lines.insert(index + 11, '    <c:pt idx="9"><c:v>{}</c:v></c:pt>\n'.format(year5return))
                 break
         xml_file.seek(0)
         xml_file.writelines(lines)
 
     # Güncellenmiş dosyaları yeni ZIP dosyası olarak kaydet
-    with zipfile.ZipFile(output_zip_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
+    with zipfile.ZipFile('template.zip', 'w', zipfile.ZIP_DEFLATED) as zip_ref:
         for foldername, subfolders, filenames in os.walk(temp_dir):
             for filename in filenames:
                 filepath = os.path.join(foldername, filename)
