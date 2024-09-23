@@ -602,7 +602,7 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
             if '<c:numCache>' in line:
                 # Yeni verileri ekle
                 lines.insert(index + 1, '    <c:ptCount val="10"/>\n')
-                lines.insert(index + 2, f'    <c:pt idx="0"><c:v>{year1invest}</c:v></c:pt>\n')
+                lines.insert(index + 2, f'    <c:pt idx="0"><c:v></c:v></c:pt>\n'.format(year1invest))
                 lines.insert(index + 3, f'    <c:pt idx="1"><c:v>{year1return}</c:v></c:pt>\n')
                 lines.insert(index + 4, f'    <c:pt idx="2"><c:v>{year2invest}</c:v></c:pt>\n')
                 lines.insert(index + 5, f'    <c:pt idx="3"><c:v>{year2return}</c:v></c:pt>\n')
@@ -703,7 +703,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
         update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
+                                year1return='500',year2invest=year2invest,year2return=year2return,year3invest=year3invest,
                                 year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
                                 year5return=year5return)
 
