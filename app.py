@@ -578,7 +578,8 @@ def create_chart_xml():
 '''
     return xml_content
 
-def update_zip_with_new_xml(zip_path, output_zip_path):
+def update_zip_with_new_xml(zip_path, output_zip_path,year1invest=0,year1return=0,year2invest=0,year2return=0,
+                            year3invest=0,year3return=0,year4invest=0,year4return=0,year5invest=0,year5return=0):
     temp_dir = 'temp_zip'
     os.makedirs(temp_dir, exist_ok=True)
 
@@ -601,20 +602,20 @@ def update_zip_with_new_xml(zip_path, output_zip_path):
             if '<c:numCache>' in line:
                 # Yeni verileri ekle
                 lines.insert(index + 1, '    <c:ptCount val="14"/>\n')
-                lines.insert(index + 2, '    <c:pt idx="0"><c:v>13000</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="1"><c:v>16430.547826086971</c:v></c:pt>\n')
+                lines.insert(index + 2, '    <c:pt idx="0"><c:v>{year1invest}</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="1"><c:v>{year1return}</c:v></c:pt>\n')
 
-                lines.insert(index + 2, '    <c:pt idx="3"><c:v>13000</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="4"><c:v>16430.547826086971</c:v></c:pt>\n')
+                lines.insert(index + 2, '    <c:pt idx="3"><c:v>{year2invest}</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="4"><c:v>{year2return}</c:v></c:pt>\n')
 
-                lines.insert(index + 2, '    <c:pt idx="6"><c:v>13000</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="7"><c:v>16430.547826086971</c:v></c:pt>\n')
+                lines.insert(index + 2, '    <c:pt idx="6"><c:v>{year3invest}</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="7"><c:v>{year3return}</c:v></c:pt>\n')
 
-                lines.insert(index + 2, '    <c:pt idx="9"><c:v>13000</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="10"><c:v>16430.547826086971</c:v></c:pt>\n')
+                lines.insert(index + 2, '    <c:pt idx="9"><c:v>{year4invest}</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="10"><c:v>{year4return}</c:v></c:pt>\n')
 
-                lines.insert(index + 2, '    <c:pt idx="12"><c:v>13000</c:v></c:pt>\n')
-                lines.insert(index + 3, '    <c:pt idx="13"><c:v>16430.547826086971</c:v></c:pt>\n')
+                lines.insert(index + 2, '    <c:pt idx="12"><c:v>{year5invest}</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="13"><c:v>{year5return}</c:v></c:pt>\n')
                 break
         xml_file.seek(0)
         xml_file.writelines(lines)
@@ -733,6 +734,21 @@ def create_ppt():
     valroi = data.get('valroi')
     valinvestment = data.get('valinvestment')
     valmonths = data.get('valmonths')
+    year1total = data.get('year1total')
+    year1invest = data.get('year1invest')
+
+    year2otal = data.get('year2total')
+    year2invest = data.get('year2invest')
+
+    year3total = data.get('year3total')
+    year3invest = data.get('year3invest')
+
+    year4total = data.get('year4total')
+    year4invest = data.get('year4invest')
+
+    year5total = data.get('year5total')
+    year5invest = data.get('year5invest')
+    
     
     if not client_name:
         return "Error: 'client_name' parameter is required", 400
@@ -751,7 +767,10 @@ def create_ppt():
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
     # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-    update_zip_with_new_xml(zip_path, output_zip_path)
+    update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
+                            year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
+                            year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
+                            year5return=year5total)
 
     pptx_io = io.BytesIO()
     with open(output_pptx_path, 'rb') as f:
