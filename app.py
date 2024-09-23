@@ -1,17 +1,26 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, send_file, jsonify,render_template
+from pptx import Presentation
+from pptx.util import Inches, Pt, Cm
+from pptx.dml.color import RGBColor
 import os
-import io
+import io,time
 import base64
+import matplotlib.pyplot as plt
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from PIL import Image
 import zipfile
+import os
 import xml.etree.ElementTree as ET
+import requests
 import shutil
 
 app = Flask(__name__)
 
-# XML içeriği oluşturma fonksiyonu
 def create_chart_xml():
-    # Buraya yeni XML içeriğinizi ekleyin
-    return '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    # XML içeriğini tanımla
+    xml_content = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <c:chartSpace
 	xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart"
 	xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
@@ -426,38 +435,8 @@ def create_chart_xml():
 						<c:numRef>
 							<c:f>'Value Proposition Analysis'!$G$25:$G$38</c:f>
 							<c:numCache>
-								<c:formatCode>_(* #,##0_);_(* \(#,##0\);_(* "-"??_);_(@_)</c:formatCode>
-								<c:ptCount val="14"/>
-								<c:pt idx="0">
-									<c:v>33000</c:v>
-								</c:pt>
-								<c:pt idx="1">
-									<c:v>66430.547826086971</c:v>
-								</c:pt>
-								<c:pt idx="3">
-									<c:v>29400</c:v>
-								</c:pt>
-								<c:pt idx="4">
-									<c:v>80665.665217391332</c:v>
-								</c:pt>
-								<c:pt idx="6">
-									<c:v>30870</c:v>
-								</c:pt>
-								<c:pt idx="7">
-									<c:v>94900.782608695677</c:v>
-								</c:pt>
-								<c:pt idx="9">
-									<c:v>32413.5</c:v>
-								</c:pt>
-								<c:pt idx="10">
-									<c:v>94900.782608695677</c:v>
-								</c:pt>
-								<c:pt idx="12">
-									<c:v>34034.175000000003</c:v>
-								</c:pt>
-								<c:pt idx="13">
-									<c:v>94900.782608695677</c:v>
-								</c:pt>
+								<c:formatCode>_(* #,##0_);_(* \\(#,##0\\);_(* "-"??_);_(@_)</c:formatCode>
+    
 							</c:numCache>
 						</c:numRef>
 					</c:val>
@@ -595,10 +574,12 @@ def create_chart_xml():
 	<c:externalData r:id="rId3">
 		<c:autoUpdate val="0"/>
 	</c:externalData>
-</c:chartSpace>'''
+</c:chartSpace>
+'''
+    return xml_content
 
 
-# ZIP dosyasını güncelleyen fonksiyon
+
 def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return, year2invest, year2return,
                              year3invest, year3return, year4invest, year4return, year5invest, year5return):
     temp_dir = 'temp_zip'
@@ -608,37 +589,36 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
         zip_ref.extractall(temp_dir)
 
-    # Yeni XML içeriği oluştur
+    # Yeni XML içeriğini oluştur
     chart_xml_content = create_chart_xml()
 
-    # Yeni chart1.xml dosyasını oluştur ve verilerle güncelle
+    # Yeni içeriği chart1.xml olarak kaydet
     new_xml_path = os.path.join(temp_dir, 'ppt', 'charts', 'chart1.xml')
     with open(new_xml_path, 'w', encoding='utf-8') as xml_file:
         xml_file.write(chart_xml_content)
 
+    # <c:numCache> içerisine yeni verileri ekle
     with open(new_xml_path, 'r+', encoding='utf-8') as xml_file:
         lines = xml_file.readlines()
         for index, line in enumerate(lines):
             if '<c:numCache>' in line:
                 # Yeni verileri ekle
-                data_entries = [
-                    f'    <c:pt idx="0"><c:v>{year1invest}</c:v></c:pt>\n',
-                    f'    <c:pt idx="1"><c:v>{year1return}</c:v></c:pt>\n',
-                    f'    <c:pt idx="2"><c:v>{year2invest}</c:v></c:pt>\n',
-                    f'    <c:pt idx="3"><c:v>{year2return}</c:v></c:pt>\n',
-                    f'    <c:pt idx="4"><c:v>{year3invest}</c:v></c:pt>\n',
-                    f'    <c:pt idx="5"><c:v>{year3return}</c:v></c:pt>\n',
-                    f'    <c:pt idx="6"><c:v>{year4invest}</c:v></c:pt>\n',
-                    f'    <c:pt idx="7"><c:v>{year4return}</c:v></c:pt>\n',
-                    f'    <c:pt idx="8"><c:v>{year5invest}</c:v></c:pt>\n',
-                    f'    <c:pt idx="9"><c:v>{year5return}</c:v></c:pt>\n'
-                ]
-                lines[index + 1:index + 1] = data_entries
+                lines.insert(index + 1, '    <c:ptCount val="10"/>\n')
+                lines.insert(index + 2, f'    <c:pt idx="0"><c:v>{year1invest}</c:v></c:pt>\n')
+                lines.insert(index + 3, f'    <c:pt idx="1"><c:v>{year1return}</c:v></c:pt>\n')
+                lines.insert(index + 4, f'    <c:pt idx="2"><c:v>{year2invest}</c:v></c:pt>\n')
+                lines.insert(index + 5, f'    <c:pt idx="3"><c:v>{year2return}</c:v></c:pt>\n')
+                lines.insert(index + 6, f'    <c:pt idx="4"><c:v>{year3invest}</c:v></c:pt>\n')
+                lines.insert(index + 7, f'    <c:pt idx="5"><c:v>{year3return}</c:v></c:pt>\n')
+                lines.insert(index + 8, f'    <c:pt idx="6"><c:v>{year4invest}</c:v></c:pt>\n')
+                lines.insert(index + 9, f'    <c:pt idx="7"><c:v>{year4return}</c:v></c:pt>\n')
+                lines.insert(index + 10, f'    <c:pt idx="8"><c:v>{year5invest}</c:v></c:pt>\n')
+                lines.insert(index + 11, f'    <c:pt idx="9"><c:v>{year5return}</c:v></c:pt>\n')
                 break
         xml_file.seek(0)
         xml_file.writelines(lines)
 
-    # Güncellenmiş ZIP dosyasını oluştur
+    # Güncellenmiş dosyaları yeni ZIP dosyası olarak kaydet
     with zipfile.ZipFile(output_zip_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
         for foldername, subfolders, filenames in os.walk(temp_dir):
             for filename in filenames:
@@ -646,42 +626,96 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
                 arcname = os.path.relpath(filepath, temp_dir)
                 zip_ref.write(filepath, arcname)
 
-    # Geçici dosyaları sil
+    # Geçici dizini temizle
     shutil.rmtree(temp_dir)
 
 
-# PPTX dosyasını düzenleyen fonksiyon
-def modify_slide_xml_and_image(zip_path, output_pptx_path, client_name, **values):
+
+def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
+                               itfinance='0',rpo='0',poa='0',cip='0',mspi='0',valmsl='0',valfqmr='0',valdcap='0',
+                               valcifw='0',valoem='0',valbnft='0',valnpvv='0',valacd='0',valroi='0',valinvestment='0',valmonths='0',valhours='0',
+                               year1invest='0',
+                                year1return='0',year2invest='0',year2return='0',year3invest='0',
+                                year3return='0',year4invest='0',year4return='0',year5invest='0',
+                                year5return='0'):
+    # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
 
-    # ZIP dosyasını çıkar
+    # .pptx dosyasını aç ve dosyaları çıkar
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
         zip_ref.extractall(temp_dir)
 
+    # slides klasöründeki tüm slide XML dosyalarını bul ve işle
     slides_dir = os.path.join(temp_dir, 'ppt', 'slides')
     slide_files = [f for f in os.listdir(slides_dir) if f.startswith('slide') and f.endswith('.xml')]
+    
 
-    # XML namespace
-    namespace = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}
-
+    # Her bir slide dosyasını işle
     for slide_file in slide_files:
         slide_xml_path = os.path.join(slides_dir, slide_file)
+        
+        # XML dosyasını parse et
         tree = ET.parse(slide_xml_path)
         root = tree.getroot()
 
-        # XML içindeki placeholder metinleri değiştir
-        for elem in root.findall('.//a:t', namespace):
-            for key, value in values.items():
-                if key in elem.text:
-                    elem.text = elem.text.replace(key, value)
+        # XML namespace tanımı (değiştirebilir)
+        namespace = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}
 
+        # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
+        for elem in root.findall('.//a:t', namespace):
+            if 'valclient' in elem.text:
+                elem.text = elem.text.replace('valclient', client_name)
+            if 'itfinance' in elem.text:
+                elem.text = elem.text.replace('itfinance', itfinance.replace("£", "").replace(" ", ""))
+            if 'valrpo' in elem.text:
+                elem.text = elem.text.replace('valrpo', rpo.replace("£", "").replace(" ", ""))
+            if 'valpoa' in elem.text:
+                elem.text = elem.text.replace('valpoa', poa.replace("£", "").replace(" ", ""))
+            if 'valcip' in elem.text:
+                elem.text = elem.text.replace('valcip', cip.replace("£", "").replace(" ", ""))
+            if 'mspi' in elem.text:
+                elem.text = elem.text.replace('mspi', mspi.replace("£", "").replace(" ", ""))
+            if 'valmsl' in elem.text:
+                elem.text = elem.text.replace('valmsl', valmsl.replace("£", "").replace(" ", ""))
+            if 'valfqmr' in elem.text:
+                elem.text = elem.text.replace('valfqmr', valfqmr.replace("£", "").replace(" ", ""))
+            if 'valdcap' in elem.text:
+                elem.text = elem.text.replace('valdcap', valdcap.replace("£", "").replace(" ", ""))
+            if 'valcifw' in elem.text:
+                elem.text = elem.text.replace('valcifw', valcifw.replace("£", "").replace(" ", ""))
+            if 'valoem' in elem.text:
+                elem.text = elem.text.replace('valoem', valoem.replace("£", "").replace(" ", ""))
+            if 'valbnft' in elem.text:
+                elem.text = elem.text.replace('valbnft', valbnft.replace("£", "").replace(" ", ""))
+            if 'valnpvv' in elem.text:
+                elem.text = elem.text.replace('valnpvv', valnpvv.replace("£", "").replace(" ", ""))
+            if 'valacd' in elem.text:
+                elem.text = elem.text.replace('valacd', valacd.replace("£", "").replace(" ", ""))
+            if 'valroi' in elem.text:
+                elem.text = elem.text.replace('valroi', valroi)
+            if 'valinvestment' in elem.text:
+                elem.text = elem.text.replace('valinvestment', valinvestment.replace("£", "").replace(" ", ""))
+            if 'valmonths' in elem.text:
+                elem.text = elem.text.replace('valmonths', valmonths)
+            if 'valhours' in elem.text:
+                elem.text = elem.text.replace('valhours', valhours)
+        zip_path = 'template.zip'  # Güncellemek istediğin template.zip
+        output_zip_path = 'template.zip'  # Çıkış dosyasının adı
+
+        # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
+        update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
+                                year1return=year1invest,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
+                                year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
+                                year5return=year5return)
+
+        # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
 
-    # Yeni chart XML dosyası ve ZIP güncellemesi
-    update_zip_with_new_xml(zip_path, zip_path, **values)
 
-    # Güncellenmiş dosyaları ZIP yap
+    
+
+    # Güncellenmiş dosyaları tekrar ZIP yap
     with zipfile.ZipFile(output_pptx_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
         for foldername, subfolders, filenames in os.walk(temp_dir):
             for filename in filenames:
@@ -689,68 +723,84 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, client_name, **values
                 arcname = os.path.relpath(filepath, temp_dir)
                 zip_ref.write(filepath, arcname)
 
-    # Geçici dosyaları sil
+    # Geçici çalışma dizinini temizle
     shutil.rmtree(temp_dir)
-
 
 @app.route('/create-ppt', methods=['POST'])
 def create_ppt():
+    # 'client_name' parametresini POST isteği ile al
     data = request.get_json()
-
-    # Zorunlu parametre kontrolü
     client_name = data.get('client_name')
+    itfinance = data.get('itfinance')
+    rpo = data.get('rpo')
+    poa = data.get('poa')
+    cip = data.get('cip')
+    mspi = data.get('mspi')
+    valmsl = data.get('valmsl')
+    valfqmr = data.get('valfqmr')
+    valdcap = data.get('valdcap')
+    valcifw = data.get('valcifw')
+    valoem = data.get('valoem')
+    valbnft = data.get('valbnft')
+    valnpvv = data.get('valnpvv')
+    valacd = data.get('valacd')
+    valroi = data.get('valroi')
+    valinvestment = data.get('valinvestment')
+    valmonths = data.get('valmonths')
+    valhours = data.get('valhours')
+    year1total = data.get('year1total')
+    year1invest = data.get('year1invest')
+
+    year2otal = data.get('year2total')
+    year2invest = data.get('year2invest')
+
+    year3total = data.get('year3total')
+    year3invest = data.get('year3invest')
+
+    year4total = data.get('year4total')
+    year4invest = data.get('year4invest')
+
+    year5total = data.get('year5total')
+    year5invest = data.get('year5invest')
+    
+    
     if not client_name:
-        return jsonify({"error": "'client_name' parameter is required"}), 400
+        return "Error: 'client_name' parameter is required", 400
 
-    # Diğer değerler
-    values = {
-        'itfinance': data.get('itfinance', '0'),
-        'rpo': data.get('rpo', '0'),
-        'poa': data.get('poa', '0'),
-        'cip': data.get('cip', '0'),
-        'mspi': data.get('mspi', '0'),
-        'valmsl': data.get('valmsl', '0'),
-        'valfqmr': data.get('valfqmr', '0'),
-        'valdcap': data.get('valdcap', '0'),
-        'valcifw': data.get('valcifw', '0'),
-        'valoem': data.get('valoem', '0'),
-        'valbnft': data.get('valbnft', '0'),
-        'valnpvv': data.get('valnpvv', '0'),
-        'valacd': data.get('valacd', '0'),
-        'valroi': data.get('valroi', '0'),
-        'valinvestment': data.get('valinvestment', '0'),
-        'valmonths': data.get('valmonths', '0'),
-        'valhours': data.get('valhours', '0'),
-        'year1invest': data.get('year1invest', '0'),
-        'year1return': data.get('year1total', '0'),
-        'year2invest': data.get('year2invest', '0'),
-        'year2return': data.get('year2total', '0'),
-        'year3invest': data.get('year3invest', '0'),
-        'year3return': data.get('year3total', '0'),
-        'year4invest': data.get('year4invest', '0'),
-        'year4return': data.get('year4total', '0'),
-        'year5invest': data.get('year5invest', '0'),
-        'year5return': data.get('year5total', '0')
-    }
 
-    zip_path = r"template.zip"
-    output_pptx_path = r"output.pptx"
 
-    # PPTX dosyasını düzenle
-    modify_slide_xml_and_image(zip_path, output_pptx_path, client_name, **values)
 
-    # Dosyayı ByteIO olarak al ve base64 formatında geri döndür
+
+    zip_path = r"template.zip"  # Tam dosya yolunu girin
+    output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
+
+    modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
+                               valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths,valhours,
+                               year1invest=year1invest,
+                                year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
+                                year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
+                                year5return=year5total)
+    
+    zip_path = 'template.zip'  # Güncellemek istediğin template.zip
+    output_zip_path = 'template.zip'  # Çıkış dosyasının adı
+
+
+
     pptx_io = io.BytesIO()
     with open(output_pptx_path, 'rb') as f:
         pptx_io.write(f.read())
     pptx_io.seek(0)
 
+    # Dosyayı base64 formatında encode et
     pptx_base64 = base64.b64encode(pptx_io.read()).decode('utf-8')
 
+    # JSON formatında base64 ile encode edilmiş dosyayı döndür
     return jsonify({
         'file_name': 'presentation.pptx',
         'file_content': pptx_base64
     })
+
+
 
 
 if __name__ == "__main__":
