@@ -635,7 +635,7 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
 
 def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                itfinance='0',rpo='0',poa='0',cip='0',mspi='0',valmsl='0',valfqmr='0',valdcap='0',
-                               valcifw='0',valoem='0',valbnft='0',valnpvv='0',valacd='0',valroi='0',valinvestment='0',valmonths='0'):
+                               valcifw='0',valoem='0',valbnft='0',valnpvv='0',valacd='0',valroi='0',valinvestment='0',valmonths='0',valhours='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -696,6 +696,16 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('valinvestment', valinvestment.replace("£", "").replace(" ", ""))
             if 'valmonths' in elem.text:
                 elem.text = elem.text.replace('valmonths', valmonths)
+            if 'valhours' in elem.text:
+                elem.text = elem.text.replace('valhours', valhours)
+        zip_path = 'template.zip'  # Güncellemek istediğin template.zip
+        output_zip_path = 'template.zip'  # Çıkış dosyasının adı
+
+        # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
+        update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
+                                year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
+                                year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
+                                year5return=year5total)
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
@@ -735,6 +745,7 @@ def create_ppt():
     valroi = data.get('valroi')
     valinvestment = data.get('valinvestment')
     valmonths = data.get('valmonths')
+    valhours = data.get('valhours')
     year1total = data.get('year1total')
     year1invest = data.get('year1invest')
 
@@ -762,16 +773,12 @@ def create_ppt():
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
 
     modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
-                               valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths)
+                               valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths,valhours)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
-    # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-    update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                            year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
-                            year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
-                            year5return=year5total)
+
 
     pptx_io = io.BytesIO()
     with open(output_pptx_path, 'rb') as f:
