@@ -578,8 +578,8 @@ def create_chart_xml():
 '''
     return xml_content
 
-def update_zip_with_new_xml(zip_path, output_zip_path,year1invest=0,year1return=0,year2invest=0,year2return=0,
-                            year3invest=0,year3return=0,year4invest=0,year4return=0,year5invest=0,year5return=0):
+def update_zip_with_new_xml(zip_path, output_zip_path,year1invest,year1return,year2invest,year2return,
+                            year3invest,year3return,year4invest,year4return,year5invest,year5return):
     temp_dir = 'temp_zip'
     os.makedirs(temp_dir, exist_ok=True)
 
