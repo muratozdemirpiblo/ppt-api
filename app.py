@@ -635,7 +635,11 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
 
 def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                itfinance='0',rpo='0',poa='0',cip='0',mspi='0',valmsl='0',valfqmr='0',valdcap='0',
-                               valcifw='0',valoem='0',valbnft='0',valnpvv='0',valacd='0',valroi='0',valinvestment='0',valmonths='0',valhours='0'):
+                               valcifw='0',valoem='0',valbnft='0',valnpvv='0',valacd='0',valroi='0',valinvestment='0',valmonths='0',valhours='0',
+                               year1invest='0',
+                                year1return='0',year2invest='0',year2return='0',year3invest='0',
+                                year3return='0',year4invest='0',year4return='0',year5invest='0',
+                                year5return='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -702,10 +706,10 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-        update_zip_with_new_xml(zip_path, output_zip_path,year1invest='12222',
-                                year1return='12222',year2invest='12222',year2return='12222',year3invest='12222',
-                                year3return='12222',year4invest='12222',year4return='12222',year5invest='12222',
-                                year5return='12222')
+        update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
+                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
+                                year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
+                                year5return=year5return)
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
