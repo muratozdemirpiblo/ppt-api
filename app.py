@@ -19,8 +19,8 @@ import shutil
 app = Flask(__name__)
 
 def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
-                               itfinance=0,rpo=0,poa=0,cip=0,mspi=0,valmsl=0,valfqmr=0,valdcap=0,
-                               valcifw=0,valoem=0,valbnft=0,valnpvv=0,valacd=0,valroi=0,valinvestment=0,valmonths=0):
+                               itfinance='0',rpo='0',poa='0',cip='0',mspi='0',valmsl='0',valfqmr='0',valdcap='0',
+                               valcifw='0',valoem='0',valbnft='0',valnpvv='0',valacd='0',valroi='0',valinvestment='0',valmonths='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
