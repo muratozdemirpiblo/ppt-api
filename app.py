@@ -602,16 +602,20 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
             if '<c:numCache>' in line:
                 # Yeni verileri ekle
                 lines.insert(index + 1, '    <c:ptCount val="14"/>\n')
-                lines.insert(index + 2, '    <c:pt idx="0"><c:v>{}</c:v></c:pt>\n'.format(year1invest))
-                lines.insert(index + 3, '    <c:pt idx="1"><c:v>{}</c:v></c:pt>\n'.format(year1return))
-                lines.insert(index + 4, '    <c:pt idx="2"><c:v>{}</c:v></c:pt>\n'.format(year2invest))
-                lines.insert(index + 5, '    <c:pt idx="3"><c:v>{}</c:v></c:pt>\n'.format(year2return))
-                lines.insert(index + 6, '    <c:pt idx="4"><c:v>{}</c:v></c:pt>\n'.format(year3invest))
-                lines.insert(index + 7, '    <c:pt idx="5"><c:v>{}</c:v></c:pt>\n'.format(year3return))
-                lines.insert(index + 8, '    <c:pt idx="6"><c:v>{}</c:v></c:pt>\n'.format(year4invest))
-                lines.insert(index + 9, '    <c:pt idx="7"><c:v>{}</c:v></c:pt>\n'.format(year4return))
-                lines.insert(index + 10, '    <c:pt idx="8"><c:v>{}</c:v></c:pt>\n'.format(year5invest))
-                lines.insert(index + 11, '    <c:pt idx="9"><c:v>{}</c:v></c:pt>\n'.format(year5return))
+                lines.insert(index + 2, '    <c:pt idx="0"><c:v>13000</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="1"><c:v>16430.547826086971</c:v></c:pt>\n')
+
+                lines.insert(index + 2, '    <c:pt idx="3"><c:v>13000</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="4"><c:v>16430.547826086971</c:v></c:pt>\n')
+
+                lines.insert(index + 2, '    <c:pt idx="6"><c:v>13000</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="7"><c:v>16430.547826086971</c:v></c:pt>\n')
+
+                lines.insert(index + 2, '    <c:pt idx="9"><c:v>13000</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="10"><c:v>16430.547826086971</c:v></c:pt>\n')
+
+                lines.insert(index + 2, '    <c:pt idx="12"><c:v>13000</c:v></c:pt>\n')
+                lines.insert(index + 3, '    <c:pt idx="13"><c:v>16430.547826086971</c:v></c:pt>\n')
                 break
         xml_file.seek(0)
         xml_file.writelines(lines)
@@ -703,7 +707,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
         update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                                year1return='500',year2invest=year2invest,year2return=year2return,year3invest=year3invest,
+                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
                                 year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
                                 year5return=year5return)
 
