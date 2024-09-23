@@ -602,7 +602,7 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
             if '<c:numCache>' in line:
                 # Yeni verileri ekle
                 lines.insert(index + 1, '    <c:ptCount val="10"/>\n')
-                lines.insert(index + 2, f'    <c:pt idx="0"><c:v></c:v></c:pt>\n'.format(year1invest))
+                lines.insert(index + 2, '    <c:pt idx="0"><c:v>{}</c:v></c:pt>\n'.format(year1invest))
                 lines.insert(index + 3, f'    <c:pt idx="1"><c:v>{year1return}</c:v></c:pt>\n')
                 lines.insert(index + 4, f'    <c:pt idx="2"><c:v>{year2invest}</c:v></c:pt>\n')
                 lines.insert(index + 5, f'    <c:pt idx="3"><c:v>{year2return}</c:v></c:pt>\n')
