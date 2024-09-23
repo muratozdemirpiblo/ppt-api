@@ -595,17 +595,6 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
     with open(new_xml_path, 'w', encoding='utf-8') as xml_file:
         xml_file.write(chart_xml_content)
 
-    with open(new_xml_path, 'r+', encoding='utf-8') as xml_file:
-        lines = xml_file.readlines()
-        for index, line in enumerate(lines):
-            if '<c:numCache>' in line:
-                # Yeni verileri ekle
-                
-                break
-        xml_file.seek(0)
-        xml_file.writelines(lines)
-
-
     # <c:numCache> içerisine yeni verileri ekle
     with open(new_xml_path, 'r+', encoding='utf-8') as xml_file:
         lines = xml_file.readlines()
@@ -613,31 +602,32 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
             if '<c:numCache>' in line:
                 # Yeni verileri ekle
                 lines.insert(index + 1, '    <c:ptCount val="10"/>\n')
-                lines.insert(index + 2, '    <c:pt idx="0"><c:v>{}</c:v></c:pt>\n'.format(year1invest))
-                lines.insert(index + 3, '    <c:pt idx="1"><c:v>{}</c:v></c:pt>\n'.format(year1return))
-                lines.insert(index + 4, '    <c:pt idx="2"><c:v>{}</c:v></c:pt>\n'.format(year2invest))
-                lines.insert(index + 5, '    <c:pt idx="3"><c:v>{}</c:v></c:pt>\n'.format(year2return))
-                lines.insert(index + 6, '    <c:pt idx="4"><c:v>{}</c:v></c:pt>\n'.format(year3invest))
-                lines.insert(index + 7, '    <c:pt idx="5"><c:v>{}</c:v></c:pt>\n'.format(year3return))
-                lines.insert(index + 8, '    <c:pt idx="6"><c:v>{}</c:v></c:pt>\n'.format(year4invest))
-                lines.insert(index + 9, '    <c:pt idx="7"><c:v>{}</c:v></c:pt>\n'.format(year4return))
-                lines.insert(index + 10, '    <c:pt idx="8"><c:v>{}</c:v></c:pt>\n'.format(year5invest))
-                lines.insert(index + 11, '    <c:pt idx="9"><c:v>{}</c:v></c:pt>\n'.format(year5return))
+                lines.insert(index + 2, f'    <c:pt idx="0"><c:v>{year1invest}</c:v></c:pt>\n')
+                lines.insert(index + 3, f'    <c:pt idx="1"><c:v>{year1return}</c:v></c:pt>\n')
+                lines.insert(index + 4, f'    <c:pt idx="2"><c:v>{year2invest}</c:v></c:pt>\n')
+                lines.insert(index + 5, f'    <c:pt idx="3"><c:v>{year2return}</c:v></c:pt>\n')
+                lines.insert(index + 6, f'    <c:pt idx="4"><c:v>{year3invest}</c:v></c:pt>\n')
+                lines.insert(index + 7, f'    <c:pt idx="5"><c:v>{year3return}</c:v></c:pt>\n')
+                lines.insert(index + 8, f'    <c:pt idx="6"><c:v>{year4invest}</c:v></c:pt>\n')
+                lines.insert(index + 9, f'    <c:pt idx="7"><c:v>{year4return}</c:v></c:pt>\n')
+                lines.insert(index + 10, f'    <c:pt idx="8"><c:v>{year5invest}</c:v></c:pt>\n')
+                lines.insert(index + 11, f'    <c:pt idx="9"><c:v>{year5return}</c:v></c:pt>\n')
                 break
         xml_file.seek(0)
         xml_file.writelines(lines)
 
-    # Güncellenmiş dosyaları yeni ZIP dosyası olarak kaydet
-    with zipfile.ZipFile('template.zip', 'w', zipfile.ZIP_DEFLATED) as zip_ref:
-        for foldername, subfolders, filenames in os.walk(temp_dir):
-            for filename in filenames:
-                filepath = os.path.join(foldername, filename)
-                arcname = os.path.relpath(filepath, temp_dir)
-                zip_ref.write(filepath, arcname)
+    # Eski chart1.xml dosyasını zip dosyasından çıkarın
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        with zipfile.ZipFile(output_zip_path, 'w', zipfile.ZIP_DEFLATED) as new_zip:
+            for item in zip_ref.infolist():
+                # chart1.xml haricindeki dosyaları yeni zip'e kopyala
+                if item.filename != 'ppt/charts/chart1.xml':
+                    new_zip.writestr(item, zip_ref.read(item.filename))
+            # Yeni chart1.xml dosyasını zip'e ekle
+            new_zip.write(new_xml_path, 'ppt/charts/chart1.xml')
 
     # Geçici dizini temizle
     shutil.rmtree(temp_dir)
-
 
 
 def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
