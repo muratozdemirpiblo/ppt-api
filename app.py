@@ -616,18 +616,17 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
         xml_file.seek(0)
         xml_file.writelines(lines)
 
-    # Eski chart1.xml dosyasını zip dosyasından çıkarın
-    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        with zipfile.ZipFile(output_zip_path, 'w', zipfile.ZIP_DEFLATED) as new_zip:
-            for item in zip_ref.infolist():
-                # chart1.xml haricindeki dosyaları yeni zip'e kopyala
-                if item.filename != 'ppt/charts/chart1.xml':
-                    new_zip.writestr(item, zip_ref.read(item.filename))
-            # Yeni chart1.xml dosyasını zip'e ekle
-            new_zip.write(new_xml_path, 'ppt/charts/chart1.xml')
+    # Güncellenmiş dosyaları yeni ZIP dosyası olarak kaydet
+    with zipfile.ZipFile(output_zip_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
+        for foldername, subfolders, filenames in os.walk(temp_dir):
+            for filename in filenames:
+                filepath = os.path.join(foldername, filename)
+                arcname = os.path.relpath(filepath, temp_dir)
+                zip_ref.write(filepath, arcname)
 
     # Geçici dizini temizle
     shutil.rmtree(temp_dir)
+
 
 
 def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
@@ -704,7 +703,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
         update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
+                                year1return='500',year2invest=year2invest,year2return=year2return,year3invest=year3invest,
                                 year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
                                 year5return=year5return)
 
