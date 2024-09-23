@@ -18,9 +18,7 @@ import shutil
 
 app = Flask(__name__)
 
-def create_chart_xml(year1invest, year1return, year2invest, year2return,
-                                          year3invest, year3return, year4invest, year4return,
-                                          year5invest, year5return):
+def create_chart_xml():
     # XML içeriğini tanımla
     xml_content = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <c:chartSpace
@@ -590,9 +588,7 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
         zip_ref.extractall(temp_dir)
 
     # Yeni XML içeriğini oluştur
-    chart_xml_content = create_chart_xml(year1invest, year1return, year2invest, year2return,
-                                          year3invest, year3return, year4invest, year4return,
-                                          year5invest, year5return)
+    chart_xml_content = create_chart_xml()
 
     # Yeni içeriği chart1.xml olarak kaydet
     new_xml_path = os.path.join(temp_dir, 'ppt', 'charts', 'chart1.xml')
