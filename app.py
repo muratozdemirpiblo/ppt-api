@@ -778,10 +778,10 @@ def create_ppt():
 
     modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
                                valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths,valhours,
-                               year1invest='0',
-                                year1return='0',year2invest='0',year2return='0',year3invest='0',
-                                year3return='0',year4invest='0',year4return='0',year5invest='0',
-                                year5return='0')
+                               year1invest=year1invest,
+                                year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
+                                year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
+                                year5return=year5total)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
