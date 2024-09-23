@@ -605,7 +605,7 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
         for index, line in enumerate(lines):
             if '<c:numCache>' in line:
                 # Yeni verileri ekle
-                lines.insert(index + 1, '    <c:ptCount val="14"/>\n')
+                lines.insert(index + 1, '    <c:ptCount val="10"/>\n')
                 lines.insert(index + 2, f'    <c:pt idx="0"><c:v>{year1invest}</c:v></c:pt>\n')
                 lines.insert(index + 3, f'    <c:pt idx="1"><c:v>{year1return}</c:v></c:pt>\n')
                 lines.insert(index + 4, f'    <c:pt idx="2"><c:v>{year2invest}</c:v></c:pt>\n')
@@ -773,7 +773,11 @@ def create_ppt():
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
 
     modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
-                               valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths,valhours)
+                               valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths,valhours,
+                               year1invest='0',
+                                year1return='0',year2invest='0',year2return='0',year3invest='0',
+                                year3return='0',year4invest='0',year4return='0',year5invest='0',
+                                year5return='0')
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
