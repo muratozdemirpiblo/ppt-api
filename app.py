@@ -51,12 +51,12 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('valclient', client_name)
             if 'itfinance' in elem.text:
                 elem.text = elem.text.replace('itfinance', itfinance.replace("£", "").replace(" ", ""))
-            if 'rpo' in elem.text:
-                elem.text = elem.text.replace('rpo', rpo.replace("£", "").replace(" ", ""))
-            if 'poa' in elem.text:
-                elem.text = elem.text.replace('poa', poa.replace("£", "").replace(" ", ""))
-            if 'cip' in elem.text:
-                elem.text = elem.text.replace('cip', cip.replace("£", "").replace(" ", ""))
+            if 'valrpo' in elem.text:
+                elem.text = elem.text.replace('valrpo', rpo.replace("£", "").replace(" ", ""))
+            if 'valpoa' in elem.text:
+                elem.text = elem.text.replace('valpoa', poa.replace("£", "").replace(" ", ""))
+            if 'valcip' in elem.text:
+                elem.text = elem.text.replace('valcip', cip.replace("£", "").replace(" ", ""))
             if 'mspi' in elem.text:
                 elem.text = elem.text.replace('mspi', mspi.replace("£", "").replace(" ", ""))
             if 'valmsl' in elem.text:
