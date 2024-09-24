@@ -20,9 +20,7 @@ app = Flask(__name__)
 
 def create_chart_xml(year1invest, year1return, year2invest, year2return,
                              year3invest, year3return, year4invest, year4return, year5invest, year5return):
-    # Yıl değerlerini tanımla
-    year1 = 5000
-    year2 = 7000
+    
     
     # barxml.txt dosyasından XML içeriğini oku
     with open('barxml.txt', 'r', encoding='utf-8') as file:
