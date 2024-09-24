@@ -701,6 +701,10 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, client_name,
     shutil.rmtree(temp_dir)
 
 
+
+
+
+@app.route('/create-ppt', methods=['POST'])
 def create_ppt():
     # 'client_name' parametresini POST isteği ile al
     data = request.get_json()
