@@ -134,35 +134,35 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'valclient' in elem.text:
                 elem.text = elem.text.replace('valclient', client_name)
             if 'itfinance' in elem.text:
-                elem.text = elem.text.replace('itfinance', itfinance.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('itfinance', itfinance)
             if 'valrpo' in elem.text:
-                elem.text = elem.text.replace('valrpo', rpo.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valrpo', rpo)
             if 'valpoa' in elem.text:
-                elem.text = elem.text.replace('valpoa', poa.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valpoa', poa)
             if 'valcip' in elem.text:
-                elem.text = elem.text.replace('valcip', cip.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valcip', cip)
             if 'mspi' in elem.text:
-                elem.text = elem.text.replace('mspi', mspi.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('mspi', mspi)
             if 'valmsl' in elem.text:
-                elem.text = elem.text.replace('valmsl', valmsl.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valmsl', valmsl)
             if 'valfqmr' in elem.text:
-                elem.text = elem.text.replace('valfqmr', valfqmr.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valfqmr', valfqmr)
             if 'valdcap' in elem.text:
-                elem.text = elem.text.replace('valdcap', valdcap.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valdcap', valdcap)
             if 'valcifw' in elem.text:
-                elem.text = elem.text.replace('valcifw', valcifw.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valcifw', valcifw)
             if 'valoem' in elem.text:
-                elem.text = elem.text.replace('valoem', valoem.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valoem', valoem)
             if 'valbnft' in elem.text:
-                elem.text = elem.text.replace('valbnft', valbnft.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valbnft', valbnft)
             if 'valnpvv' in elem.text:
-                elem.text = elem.text.replace('valnpvv', valnpvv.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valnpvv', valnpvv)
             if 'valacd' in elem.text:
-                elem.text = elem.text.replace('valacd', valacd.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valacd', valacd)
             if 'valroi' in elem.text:
                 elem.text = elem.text.replace('valroi', valroi)
             if 'valinvestment' in elem.text:
-                elem.text = elem.text.replace('valinvestment', valinvestment.replace("£", "").replace(" ", ""))
+                elem.text = elem.text.replace('valinvestment', valinvestment)
             if 'valmonths' in elem.text:
                 elem.text = elem.text.replace('valmonths', valmonths)
             if 'valhours' in elem.text:
