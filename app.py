@@ -23,7 +23,7 @@ def create_chart_xml(year1invest, year1return, year2invest, year2return,
     
     
     # barxml.txt dosyasından XML içeriğini oku
-    with open('barxml.txt', 'r', encoding='utf-8') as file:
+    with open('barxml.xml', 'r', encoding='utf-8') as file:
         xml_content = file.read()
     
     # Yıl değerlerini xml_content içinde değiştir
