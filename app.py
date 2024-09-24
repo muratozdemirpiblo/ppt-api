@@ -631,25 +631,22 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
 
 
 
-def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
-                               itfinance='0',rpo='0',poa='0',cip='0',mspi='0',valmsl='0',valfqmr='0',valdcap='0',
-                               valcifw='0',valoem='0',valbnft='0',valnpvv='0',valacd='0',valroi='0',valinvestment='0',valmonths='0',valhours='0',
-                               year1invest='0',
-                                year1return='0',year2invest='0',year2return='0',year3invest='0',
-                                year3return='0',year4invest='0',year4return='0',year5invest='0',
-                                year5return='0'):
+def modify_slide_xml_and_image(zip_path, output_pptx_path, client_name,
+                               itfinance='0', rpo='0', poa='0', cip='0', mspi='0', valmsl='0', valfqmr='0', valdcap='0',
+                               valcifw='0', valoem='0', valbnft='0', valnpvv='0', valacd='0', valroi='0', valinvestment='0',
+                               valmonths='0', valhours='0', year1invest='0', year1return='0', year2invest='0', year2return='0',
+                               year3invest='0', year3return='0', year4invest='0', year4return='0', year5invest='0', year5return='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
 
-    # .pptx dosyasını aç ve dosyaları çıkar
+    # .pptx (ZIP) dosyasını aç ve içeriği çıkar
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
         zip_ref.extractall(temp_dir)
 
     # slides klasöründeki tüm slide XML dosyalarını bul ve işle
     slides_dir = os.path.join(temp_dir, 'ppt', 'slides')
     slide_files = [f for f in os.listdir(slides_dir) if f.startswith('slide') and f.endswith('.xml')]
-    
 
     # Her bir slide dosyasını işle
     for slide_file in slide_files:
@@ -659,63 +656,40 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         tree = ET.parse(slide_xml_path)
         root = tree.getroot()
 
-        # XML namespace tanımı (değiştirebilir)
+        # XML namespace tanımı
         namespace = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}
 
-        # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
+        # XML içeriğinde placeholder'ları değiştir
         for elem in root.findall('.//a:t', namespace):
-            if 'valclient' in elem.text:
-                elem.text = elem.text.replace('valclient', client_name)
-            if 'itfinance' in elem.text:
-                elem.text = elem.text.replace('itfinance', itfinance.replace("£", "").replace(" ", ""))
-            if 'valrpo' in elem.text:
-                elem.text = elem.text.replace('valrpo', rpo.replace("£", "").replace(" ", ""))
-            if 'valpoa' in elem.text:
-                elem.text = elem.text.replace('valpoa', poa.replace("£", "").replace(" ", ""))
-            if 'valcip' in elem.text:
-                elem.text = elem.text.replace('valcip', cip.replace("£", "").replace(" ", ""))
-            if 'mspi' in elem.text:
-                elem.text = elem.text.replace('mspi', mspi.replace("£", "").replace(" ", ""))
-            if 'valmsl' in elem.text:
-                elem.text = elem.text.replace('valmsl', valmsl.replace("£", "").replace(" ", ""))
-            if 'valfqmr' in elem.text:
-                elem.text = elem.text.replace('valfqmr', valfqmr.replace("£", "").replace(" ", ""))
-            if 'valdcap' in elem.text:
-                elem.text = elem.text.replace('valdcap', valdcap.replace("£", "").replace(" ", ""))
-            if 'valcifw' in elem.text:
-                elem.text = elem.text.replace('valcifw', valcifw.replace("£", "").replace(" ", ""))
-            if 'valoem' in elem.text:
-                elem.text = elem.text.replace('valoem', valoem.replace("£", "").replace(" ", ""))
-            if 'valbnft' in elem.text:
-                elem.text = elem.text.replace('valbnft', valbnft.replace("£", "").replace(" ", ""))
-            if 'valnpvv' in elem.text:
-                elem.text = elem.text.replace('valnpvv', valnpvv.replace("£", "").replace(" ", ""))
-            if 'valacd' in elem.text:
-                elem.text = elem.text.replace('valacd', valacd.replace("£", "").replace(" ", ""))
-            if 'valroi' in elem.text:
-                elem.text = elem.text.replace('valroi', valroi)
-            if 'valinvestment' in elem.text:
-                elem.text = elem.text.replace('valinvestment', valinvestment.replace("£", "").replace(" ", ""))
-            if 'valmonths' in elem.text:
-                elem.text = elem.text.replace('valmonths', valmonths)
-            if 'valhours' in elem.text:
-                elem.text = elem.text.replace('valhours', valhours)
-        zip_path = 'template.zip'  # Güncellemek istediğin template.zip
-        output_zip_path = 'template.zip'  # Çıkış dosyasının adı
-
-        # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-        update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                                year1return='500',year2invest=year2invest,year2return=year2return,year3invest=year3invest,
-                                year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
-                                year5return=year5return)
+            text_replacements = {
+                'valclient': client_name,
+                'itfinance': itfinance,
+                'valrpo': rpo,
+                'valpoa': poa,
+                'valcip': cip,
+                'mspi': mspi,
+                'valmsl': valmsl,
+                'valfqmr': valfqmr,
+                'valdcap': valdcap,
+                'valcifw': valcifw,
+                'valoem': valoem,
+                'valbnft': valbnft,
+                'valnpvv': valnpvv,
+                'valacd': valacd,
+                'valroi': valroi,
+                'valinvestment': valinvestment,
+                'valmonths': valmonths,
+                'valhours': valhours
+            }
+            
+            for placeholder, value in text_replacements.items():
+                if placeholder in elem.text:
+                    elem.text = elem.text.replace(placeholder, value.replace("£", "").replace(" ", ""))
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
 
-
-    
-
-    # Güncellenmiş dosyaları tekrar ZIP yap
+    # Güncellenmiş dosyaları tekrar ZIP yaparak yeni bir pptx oluştur
     with zipfile.ZipFile(output_pptx_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
         for foldername, subfolders, filenames in os.walk(temp_dir):
             for filename in filenames:
@@ -726,7 +700,6 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     # Geçici çalışma dizinini temizle
     shutil.rmtree(temp_dir)
 
-@app.route('/create-ppt', methods=['POST'])
 def create_ppt():
     # 'client_name' parametresini POST isteği ile al
     data = request.get_json()
@@ -768,7 +741,7 @@ def create_ppt():
         return "Error: 'client_name' parameter is required", 400
 
 
-
+	
 
 
     zip_path = r"template.zip"  # Tam dosya yolunu girin
