@@ -197,38 +197,38 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
 def create_ppt():
     # 'client_name' parametresini POST isteği ile al
     data = request.get_json()
-    client_name = data.get('client_name')
-    itfinance = data.get('itfinance')
-    rpo = data.get('rpo')
-    poa = data.get('poa')
-    cip = data.get('cip')
-    mspi = data.get('mspi')
-    valmsl = data.get('valmsl')
-    valfqmr = data.get('valfqmr')
-    valdcap = data.get('valdcap')
-    valcifw = data.get('valcifw')
-    valoem = data.get('valoem')
-    valbnft = data.get('valbnft')
-    valnpvv = data.get('valnpvv')
-    valacd = data.get('valacd')
-    valroi = data.get('valroi')
-    valinvestment = data.get('valinvestment')
-    valmonths = data.get('valmonths')
-    valhours = data.get('valhours')
-    year1total = data.get('year1total')
-    year1invest = data.get('year1invest')
+    client_name = data.get('client_name') or ""
+    itfinance = data.get('itfinance') or ""
+    rpo = data.get('rpo') or ""
+    poa = data.get('poa') or ""
+    cip = data.get('cip') or ""
+    mspi = data.get('mspi') or ""
+    valmsl = data.get('valmsl') or ""
+    valfqmr = data.get('valfqmr') or ""
+    valdcap = data.get('valdcap') or ""
+    valcifw = data.get('valcifw') or ""
+    valoem = data.get('valoem') or ""
+    valbnft = data.get('valbnft') or ""
+    valnpvv = data.get('valnpvv') or ""
+    valacd = data.get('valacd') or ""
+    valroi = data.get('valroi') or ""
+    valinvestment = data.get('valinvestment') or ""
+    valmonths = data.get('valmonths') or ""
+    valhours = data.get('valhours') or ""
+    year1total = data.get('year1total') or ""
+    year1invest = data.get('year1invest') or ""
 
-    year2otal = data.get('year2total')
-    year2invest = data.get('year2invest')
+    year2otal = data.get('year2total') or ""
+    year2invest = data.get('year2invest') or ""
 
-    year3total = data.get('year3total')
-    year3invest = data.get('year3invest')
+    year3total = data.get('year3total') or ""
+    year3invest = data.get('year3invest') or ""
 
-    year4total = data.get('year4total')
-    year4invest = data.get('year4invest')
+    year4total = data.get('year4total') or ""
+    year4invest = data.get('year4invest') or ""
 
-    year5total = data.get('year5total')
-    year5invest = data.get('year5invest')
+    year5total = data.get('year5total') or ""
+    year5invest = data.get('year5invest') or ""
     
     
     if not client_name:
