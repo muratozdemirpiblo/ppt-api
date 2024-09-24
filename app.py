@@ -640,7 +640,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, client_name,
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
 
-    # .pptx (ZIP) dosyasını aç ve içeriği çıkar
+    # .pptx dosyasını aç ve dosyaları çıkar
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
         zip_ref.extractall(temp_dir)
 
@@ -656,40 +656,53 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, client_name,
         tree = ET.parse(slide_xml_path)
         root = tree.getroot()
 
-        # XML namespace tanımı
+        # XML namespace tanımı (değiştirebilir)
         namespace = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}
 
-        # XML içeriğinde placeholder'ları değiştir
+        # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
         for elem in root.findall('.//a:t', namespace):
-            text_replacements = {
-                'valclient': client_name,
-                'itfinance': itfinance,
-                'valrpo': rpo,
-                'valpoa': poa,
-                'valcip': cip,
-                'mspi': mspi,
-                'valmsl': valmsl,
-                'valfqmr': valfqmr,
-                'valdcap': valdcap,
-                'valcifw': valcifw,
-                'valoem': valoem,
-                'valbnft': valbnft,
-                'valnpvv': valnpvv,
-                'valacd': valacd,
-                'valroi': valroi,
-                'valinvestment': valinvestment,
-                'valmonths': valmonths,
-                'valhours': valhours
-            }
-            
-            for placeholder, value in text_replacements.items():
-                if placeholder in elem.text:
-                    elem.text = elem.text.replace(placeholder, value.replace("£", "").replace(" ", ""))
+            if elem.text:  # Eğer elem.text None değilse
+                if 'valclient' in elem.text:
+                    elem.text = elem.text.replace('valclient', client_name)
+                if 'itfinance' in elem.text:
+                    elem.text = elem.text.replace('itfinance', itfinance.replace("£", "").replace(" ", ""))
+                if 'valrpo' in elem.text:
+                    elem.text = elem.text.replace('valrpo', rpo.replace("£", "").replace(" ", ""))
+                if 'valpoa' in elem.text:
+                    elem.text = elem.text.replace('valpoa', poa.replace("£", "").replace(" ", ""))
+                if 'valcip' in elem.text:
+                    elem.text = elem.text.replace('valcip', cip.replace("£", "").replace(" ", ""))
+                if 'mspi' in elem.text:
+                    elem.text = elem.text.replace('mspi', mspi.replace("£", "").replace(" ", ""))
+                if 'valmsl' in elem.text:
+                    elem.text = elem.text.replace('valmsl', valmsl.replace("£", "").replace(" ", ""))
+                if 'valfqmr' in elem.text:
+                    elem.text = elem.text.replace('valfqmr', valfqmr.replace("£", "").replace(" ", ""))
+                if 'valdcap' in elem.text:
+                    elem.text = elem.text.replace('valdcap', valdcap.replace("£", "").replace(" ", ""))
+                if 'valcifw' in elem.text:
+                    elem.text = elem.text.replace('valcifw', valcifw.replace("£", "").replace(" ", ""))
+                if 'valoem' in elem.text:
+                    elem.text = elem.text.replace('valoem', valoem.replace("£", "").replace(" ", ""))
+                if 'valbnft' in elem.text:
+                    elem.text = elem.text.replace('valbnft', valbnft.replace("£", "").replace(" ", ""))
+                if 'valnpvv' in elem.text:
+                    elem.text = elem.text.replace('valnpvv', valnpvv.replace("£", "").replace(" ", ""))
+                if 'valacd' in elem.text:
+                    elem.text = elem.text.replace('valacd', valacd.replace("£", "").replace(" ", ""))
+                if 'valroi' in elem.text:
+                    elem.text = elem.text.replace('valroi', valroi)
+                if 'valinvestment' in elem.text:
+                    elem.text = elem.text.replace('valinvestment', valinvestment.replace("£", "").replace(" ", ""))
+                if 'valmonths' in elem.text:
+                    elem.text = elem.text.replace('valmonths', valmonths)
+                if 'valhours' in elem.text:
+                    elem.text = elem.text.replace('valhours', valhours)
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
 
-    # Güncellenmiş dosyaları tekrar ZIP yaparak yeni bir pptx oluştur
+    # Güncellenmiş dosyaları tekrar ZIP yaparak .pptx olarak kaydet
     with zipfile.ZipFile(output_pptx_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
         for foldername, subfolders, filenames in os.walk(temp_dir):
             for filename in filenames:
@@ -699,8 +712,6 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, client_name,
 
     # Geçici çalışma dizinini temizle
     shutil.rmtree(temp_dir)
-
-
 
 
 
