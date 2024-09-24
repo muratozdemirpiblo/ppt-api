@@ -104,7 +104,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                year1invest='0',
                                 year1return='0',year2invest='0',year2return='0',year3invest='0',
                                 year3return='0',year4invest='0',year4return='0',year5invest='0',
-                                year5return='0'):
+                                year5return='0',costofdoingnothing1='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -167,6 +167,8 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('valmonths', valmonths)
             if 'valhours' in elem.text:
                 elem.text = elem.text.replace('valhours', valhours)
+            if 'valcostof' in elem.text:
+                elem.text = elem.text.replace('valcostof', costofdoingnothing1)
         zip_path = 'template.zip'  # Güncellemek istediğin template.zip
         output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
@@ -217,7 +219,7 @@ def create_ppt():
     valhours = data.get('valhours') or ""
     year1total = data.get('year1total') or ""
     year1invest = data.get('year1invest') or ""
-
+	
     year2otal = data.get('year2total') or ""
     year2invest = data.get('year2invest') or ""
 
@@ -229,6 +231,7 @@ def create_ppt():
 
     year5total = data.get('year5total') or ""
     year5invest = data.get('year5invest') or ""
+    costofdoingnothing1 = data.get('costofdoingnothing1') or ""
     
     
     if not client_name:
@@ -246,7 +249,7 @@ def create_ppt():
                                year1invest=year1invest,
                                 year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
                                 year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
-                                year5return=year5total)
+                                year5return=year5total,costofdoingnothing1)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
