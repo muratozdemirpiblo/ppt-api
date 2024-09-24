@@ -700,6 +700,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path, client_name,
     # Geçici çalışma dizinini temizle
     shutil.rmtree(temp_dir)
 
+
 def create_ppt():
     # 'client_name' parametresini POST isteği ile al
     data = request.get_json()
