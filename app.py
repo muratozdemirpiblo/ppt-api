@@ -132,41 +132,41 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'valclient' in elem.text:
                 elem.text = elem.text.replace('valclient', client_name)
             if 'itfinance' in elem.text:
-                elem.text = elem.text.replace('itfinance', itfinance)
+                elem.text = elem.text.replace('itfinance', itfinance.replace('£',''))
             if 'valrpo' in elem.text:
-                elem.text = elem.text.replace('valrpo', rpo)
+                elem.text = elem.text.replace('valrpo', rpo.replace('£',''))
             if 'valpoa' in elem.text:
-                elem.text = elem.text.replace('valpoa', poa)
+                elem.text = elem.text.replace('valpoa', poa.replace('£',''))
             if 'valcip' in elem.text:
-                elem.text = elem.text.replace('valcip', cip)
+                elem.text = elem.text.replace('valcip', cip.replace('£',''))
             if 'mspi' in elem.text:
-                elem.text = elem.text.replace('mspi', mspi)
+                elem.text = elem.text.replace('mspi', mspi.replace('£',''))
             if 'valmsl' in elem.text:
-                elem.text = elem.text.replace('valmsl', valmsl)
+                elem.text = elem.text.replace('valmsl', valmsl.replace('£',''))
             if 'valfqmr' in elem.text:
-                elem.text = elem.text.replace('valfqmr', valfqmr)
+                elem.text = elem.text.replace('valfqmr', valfqmr.replace('£',''))
             if 'valdcap' in elem.text:
-                elem.text = elem.text.replace('valdcap', valdcap)
+                elem.text = elem.text.replace('valdcap', valdcap.replace('£',''))
             if 'valcifw' in elem.text:
-                elem.text = elem.text.replace('valcifw', valcifw)
+                elem.text = elem.text.replace('valcifw', valcifw.replace('£',''))
             if 'valoem' in elem.text:
-                elem.text = elem.text.replace('valoem', valoem)
+                elem.text = elem.text.replace('valoem', valoem.replace('£',''))
             if 'valbnft' in elem.text:
-                elem.text = elem.text.replace('valbnft', valbnft)
+                elem.text = elem.text.replace('valbnft', valbnft.replace('£',''))
             if 'valnpvv' in elem.text:
-                elem.text = elem.text.replace('valnpvv', valnpvv)
+                elem.text = elem.text.replace('valnpvv', valnpvv.replace('£',''))
             if 'valacd' in elem.text:
-                elem.text = elem.text.replace('valacd', valacd)
+                elem.text = elem.text.replace('valacd', valacd.replace('£',''))
             if 'valroi' in elem.text:
-                elem.text = elem.text.replace('valroi', valroi)
+                elem.text = elem.text.replace('valroi', valroi.replace('£',''))
             if 'valinvestment' in elem.text:
-                elem.text = elem.text.replace('valinvestment', valinvestment)
+                elem.text = elem.text.replace('valinvestment', valinvestment.replace('£',''))
             if 'valmonths' in elem.text:
                 elem.text = elem.text.replace('valmonths', valmonths)
             if 'valhours' in elem.text:
                 elem.text = elem.text.replace('valhours', valhours)
             if 'valcostof' in elem.text:
-                elem.text = elem.text.replace('valcostof', costofdoingnothing1)
+                elem.text = elem.text.replace('valcostof', costofdoingnothing1.replace('£',''))
         zip_path = 'template.zip'  # Güncellemek istediğin template.zip
         output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
