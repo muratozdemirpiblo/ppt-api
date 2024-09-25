@@ -2,6 +2,7 @@ from flask import Flask, request, send_file, jsonify,render_template
 from pptx import Presentation
 from pptx.util import Inches, Pt, Cm
 from pptx.dml.color import RGBColor
+from bs4 import BeautifulSoup
 import os
 import io,time
 import base64
@@ -15,6 +16,7 @@ import os
 import xml.etree.ElementTree as ET
 import requests
 import shutil
+from pptx.enum.text import PP_ALIGN
 
 app = Flask(__name__)
 
@@ -50,10 +52,41 @@ def format_with_commas(value):
     except ValueError:
         return "0"
 
+def create_donut_xml(donutit,donutrpo,donutpoa,
+                             donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem):
+    
+    
+    # barxml.txt dosyasından XML içeriğini oku
+    with open('donutxml.xml', 'r', encoding='utf-8') as file:
+        xml_content = file.read()
+    
+    # Yıl değerlerini xml_content içinde değiştir
+    xml_content = xml_content.replace('{donutrpo}', str(donutrpo))
+    xml_content = xml_content.replace('{donutpoa}', str(donutpoa))
+    xml_content = xml_content.replace('{donutcip}', str(donutcip))
+    xml_content = xml_content.replace('{donutmspi}', str(donutmspi))
+    xml_content = xml_content.replace('{donutmsl}', str(donutmsl))
+    xml_content = xml_content.replace('{donutfqmr}', str(donutfqmr))
+    xml_content = xml_content.replace('{donutdcap}', str(donutdcap))
+    xml_content = xml_content.replace('{donutcifw}', str(donutcifw))
+    xml_content = xml_content.replace('{donutit}', str(donutit))
+    xml_content = xml_content.replace('{donutoem}', str(donutoem))
+    
+    return xml_content
 
+def format_with_commas(value):
+    try:
+        # String değeri önce float veya int'e çevir
+        num = float(value)
+        
+        # Virgüllü formatlama
+        return f"{num:,.0f}"
+    except ValueError:
+        return "0"
 
 def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return, year2invest, year2return,
-                             year3invest, year3return, year4invest, year4return, year5invest, year5return):
+                             year3invest, year3return, year4invest, year4return, year5invest, year5return,donutit,donutrpo,donutpoa,
+                             donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem):
     temp_dir = 'temp_zip'
     os.makedirs(temp_dir, exist_ok=True)
 
@@ -64,10 +97,17 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
     # Yeni XML içeriğini oluştur
     chart_xml_content = create_chart_xml(year1invest, year1return, year2invest, year2return,
                              year3invest, year3return, year4invest, year4return, year5invest, year5return)
+    
+    donut_xml_content = create_donut_xml(donutit,donutrpo,donutpoa,
+                             donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem)
+
+    new_xml_path = os.path.join(temp_dir, 'ppt', 'charts', 'chart2.xml')
+    with open(new_xml_path, 'w', encoding='utf-8') as xml_file:
+        xml_file.write(chart_xml_content)
 
     new_xml_path = os.path.join(temp_dir, 'ppt', 'charts', 'chart1.xml')
     with open(new_xml_path, 'w', encoding='utf-8') as xml_file:
-        xml_file.write(chart_xml_content)
+        xml_file.write(donut_xml_content)
 
     # Güncellenmiş dosyaları yeni ZIP dosyası olarak kaydet
     with zipfile.ZipFile(output_zip_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
@@ -90,7 +130,9 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                 year3return='0',year4invest='0',year4return='0',year5invest='0',
                                 year5return='0',costofdoingnothing1='0',itfinanceper='0',rpoper='0',poaper='0',cipper='0'
                                 ,mspiper='0',valmslper='0',valfqmrper='0',valdcapper='0',
-                               valcifwper='0',valoemper='0'):
+                               valcifwper='0',valoemper='0',
+                               donutit='0',donutrpo='0',donutpoa='0',donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',
+                               donutfqmr='0',donutcifw='0',donutoem='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -206,6 +248,8 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     # Geçici çalışma dizinini temizle
     shutil.rmtree(temp_dir)
 
+
+
 @app.route('/create-ppt', methods=['POST'])
 def create_ppt():
     # 'client_name' parametresini POST isteği ile al
@@ -254,7 +298,17 @@ def create_ppt():
     valdcapper = data.get('valdcapper') or ""
     valcifwper = data.get('valcifwper') or ""
     valoemper = data.get('valoemper') or ""
-    
+
+    donutit = data.get('donutit') or "0"
+    donutrpo = data.get('donutrpo') or "0"
+    donutpoa = data.get('donutpoa') or "0"
+    donutdcap = data.get('donutdcap') or "0"
+    donutcip = data.get('donutcip') or "0"
+    donutmspi = data.get('donutmspi') or "0"
+    donutmsl = data.get('donutmsl') or "0"
+    donutfqmr = data.get('donutfqmr') or "0"
+    donutcifw = data.get('donutcifw') or "0"
+    donutoem = data.get('donutoem') or "0"
     
     if not client_name:
         return "Error: 'client_name' parameter is required", 400
@@ -276,11 +330,16 @@ def create_ppt():
                                 year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
                                 year5return=year5total,costofdoingnothing1=costofdoingnothing1,itfinanceper=itfinanceper,rpoper=rpoper,
                                 poaper=poaper,cipper=cipper,mspiper=mspiper,valmslper=valmslper,valfqmrper=valfqmrper,valdcapper=valdcapper,
-                                valcifwper=valcifwper,valoemper=valoemper)
+                                valcifwper=valcifwper,valoemper=valoemper,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,
+                                donutdcap=donutdcap,donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,
+                                donutcifw=donutcifw,donutoem=donutoem)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
+    
+
+   
 
 
     pptx_io = io.BytesIO()
