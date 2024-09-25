@@ -273,7 +273,7 @@ def create_ppt():
                                year1invest=year1invest,
                                 year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
                                 year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
-                                year5return=year5total,costofdoingnothing1=costofdoingnothing1)
+                                year5return=year5total,costofdoingnothing1=costofdoingnothing1,rpoper=rpoper)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
