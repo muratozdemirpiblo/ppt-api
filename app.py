@@ -135,6 +135,14 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         # XML namespace tanımı (değiştirebilir)
         namespace = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}
 
+        donutpercentvals = '''Raising Purchase Orders: We anticipate a XX% efficiency 
+Purchase Order Approvals: We anticipate a XX% efficiency 
+Coding invoice processes: We anticipate a XX% efficiency 
+Management of supplier and purchase invoices: We anticipate a XX% efficiency 
+Managing spend leakage: We anticipate a XX% efficiency 
+Finance query management & reporting: We anticipate a XX% efficiency 
+'''
+
         # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
         for elem in root.findall('.//a:t', namespace):
             if 'valclient' in elem.text:
@@ -175,6 +183,8 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('valhours', valhours)
             if 'valcostof' in elem.text:
                 elem.text = elem.text.replace('valcostof', format_with_commas(costofdoingnothing1.replace('£','')))
+            if 'valdonutpercentvalues' in elem.text:
+                elem.text = elem.text.replace('valdonutpercentvalues',donutpercentvals)
         zip_path = 'template.zip'  # Güncellemek istediğin template.zip
         output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
