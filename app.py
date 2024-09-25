@@ -61,16 +61,16 @@ def create_donut_xml(donutit,donutrpo,donutpoa,
         xml_content = file.read()
     
     # Yıl değerlerini xml_content içinde değiştir
-    xml_content = xml_content.replace('{donutrpo}', str(donutrpo))
-    xml_content = xml_content.replace('{donutpoa}', str(donutpoa))
-    xml_content = xml_content.replace('{donutcip}', str(donutcip))
-    xml_content = xml_content.replace('{donutmspi}', str(donutmspi))
-    xml_content = xml_content.replace('{donutmsl}', str(donutmsl))
-    xml_content = xml_content.replace('{donutfqmr}', str(donutfqmr))
-    xml_content = xml_content.replace('{donutdcap}', str(donutdcap))
-    xml_content = xml_content.replace('{donutcifw}', str(donutcifw))
-    xml_content = xml_content.replace('{donutit}', str(donutit))
-    xml_content = xml_content.replace('{donutoem}', str(donutoem))
+    xml_content = xml_content.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutpoa}', str(donutpoa).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutcip}', str(donutcip).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutmspi}', str(donutmspi).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutmsl}', str(donutmsl).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutfqmr}', str(donutfqmr).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutdcap}', str(donutdcap).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutcifw}', str(donutcifw).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
     
     return xml_content
 
