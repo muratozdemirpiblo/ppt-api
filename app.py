@@ -110,7 +110,9 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                year1invest='0',
                                 year1return='0',year2invest='0',year2return='0',year3invest='0',
                                 year3return='0',year4invest='0',year4return='0',year5invest='0',
-                                year5return='0',costofdoingnothing1='0'):
+                                year5return='0',costofdoingnothing1='0',itfinanceper='0',rpoper='0',poaper='0',cipper='0'
+                                ,mspiper='0',valmslper='0',valfqmrper='0',valdcapper='0',
+                               valcifwper='0',valoemper='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -135,14 +137,9 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         # XML namespace tanımı (değiştirebilir)
         namespace = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}
 
-        donutpercentvals = '''Raising Purchase Orders: We anticipate a XX% efficiency 
-Purchase Order Approvals: We anticipate a XX% efficiency 
-Coding invoice processes: We anticipate a XX% efficiency 
-Management of supplier and purchase invoices: We anticipate a XX% efficiency 
-Managing spend leakage: We anticipate a XX% efficiency 
-Finance query management & reporting: We anticipate a XX% efficiency 
-'''
-
+        donutpercentvals = ''''''
+        if rpoper!='0' and rpoper:
+            donutpercentvals+='Raising Purchase Orders: We anticipate a {}% efficiency'.format(rpoper)
         # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
         for elem in root.findall('.//a:t', namespace):
             if 'valclient' in elem.text:
@@ -248,6 +245,17 @@ def create_ppt():
     year5total = data.get('year5total') or ""
     year5invest = data.get('year5invest') or ""
     costofdoingnothing1 = data.get('costofdoingnothing1') or ""
+
+    itfinanceper = data.get('itfinanceper') or ""
+    rpoper = data.get('rpoper') or ""
+    poaper = data.get('poaper') or ""
+    cipper = data.get('cipper') or ""
+    mspiper = data.get('mspiper') or ""
+    valmslper = data.get('valmslper') or ""
+    valfqmrper = data.get('valfqmrper') or ""
+    valdcapper = data.get('valdcapper') or ""
+    valcifwper = data.get('valcifwper') or ""
+    valoemper = data.get('valoemper') or ""
     
     
     if not client_name:
