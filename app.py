@@ -229,7 +229,9 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
                                 year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
                                 year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
-                                year5return=year5return)
+                                year5return=year5return,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
+                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
+                                donutoem=donutoem)
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
