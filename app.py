@@ -65,31 +65,9 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
     chart_xml_content = create_chart_xml(year1invest, year1return, year2invest, year2return,
                              year3invest, year3return, year4invest, year4return, year5invest, year5return)
 
-    # Yeni içeriği chart1.xml olarak kaydet
     new_xml_path = os.path.join(temp_dir, 'ppt', 'charts', 'chart1.xml')
     with open(new_xml_path, 'w', encoding='utf-8') as xml_file:
         xml_file.write(chart_xml_content)
-
-    # # <c:numCache> içerisine yeni verileri ekle
-    # with open(new_xml_path, 'r+', encoding='utf-8') as xml_file:
-    #     lines = xml_file.readlines()
-    #     for index, line in enumerate(lines):
-    #         if '<c:numCache>' in line:
-    #             # Yeni verileri ekle
-    #             lines.insert(index + 1, '    <c:ptCount val="10"/>\n')
-    #             lines.insert(index + 2, f'    <c:pt idx="0"><c:v>{year1invest}</c:v></c:pt>\n')
-    #             lines.insert(index + 3, f'    <c:pt idx="1"><c:v>{year1return}</c:v></c:pt>\n')
-    #             lines.insert(index + 4, f'    <c:pt idx="2"><c:v>{year2invest}</c:v></c:pt>\n')
-    #             lines.insert(index + 5, f'    <c:pt idx="3"><c:v>{year2return}</c:v></c:pt>\n')
-    #             lines.insert(index + 6, f'    <c:pt idx="4"><c:v>{year3invest}</c:v></c:pt>\n')
-    #             lines.insert(index + 7, f'    <c:pt idx="5"><c:v>{year3return}</c:v></c:pt>\n')
-    #             lines.insert(index + 8, f'    <c:pt idx="6"><c:v>{year4invest}</c:v></c:pt>\n')
-    #             lines.insert(index + 9, f'    <c:pt idx="7"><c:v>{year4return}</c:v></c:pt>\n')
-    #             lines.insert(index + 10, f'    <c:pt idx="8"><c:v>{year5invest}</c:v></c:pt>\n')
-    #             lines.insert(index + 11, f'    <c:pt idx="9"><c:v>{year5return}</c:v></c:pt>\n')
-    #             break
-    #     xml_file.seek(0)
-    #     xml_file.writelines(lines)
 
     # Güncellenmiş dosyaları yeni ZIP dosyası olarak kaydet
     with zipfile.ZipFile(output_zip_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
@@ -196,6 +174,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'valmonths' in elem.text:
                 elem.text = elem.text.replace('valmonths', valmonths)
             if 'valhours' in elem.text:
+                valhours+='h'
                 elem.text = elem.text.replace('valhours', valhours)
             if 'valcostof' in elem.text:
                 elem.text = elem.text.replace('valcostof', format_with_commas(costofdoingnothing1.replace('£','')))
@@ -280,7 +259,10 @@ def create_ppt():
     if not client_name:
         return "Error: 'client_name' parameter is required", 400
 
+    zip_dosya = 'template.zip'
+    gecici_zip_dosya = 'temp_template.zip'
 
+    
 
 
 
