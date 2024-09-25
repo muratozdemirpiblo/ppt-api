@@ -40,7 +40,15 @@ def create_chart_xml(year1invest, year1return, year2invest, year2return,
     
     return xml_content
 
-
+def format_with_commas(value):
+    try:
+        # String değeri önce float veya int'e çevir
+        num = float(value)
+        
+        # Virgüllü formatlama
+        return f"{num:,.0f}"
+    except ValueError:
+        return "Undefined"
 
 
 
@@ -132,41 +140,41 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'valclient' in elem.text:
                 elem.text = elem.text.replace('valclient', client_name)
             if 'itfinance' in elem.text:
-                elem.text = elem.text.replace('itfinance', itfinance.replace('£',''))
+                elem.text = elem.text.replace('itfinance', format_with_commas(itfinance.replace('£','')))
             if 'valrpo' in elem.text:
-                elem.text = elem.text.replace('valrpo', rpo.replace('£',''))
+                elem.text = elem.text.replace('valrpo', format_with_commas(rpo.replace('£','')))
             if 'valpoa' in elem.text:
-                elem.text = elem.text.replace('valpoa', poa.replace('£',''))
+                elem.text = elem.text.replace('valpoa', format_with_commas(poa.replace('£','')))
             if 'valcip' in elem.text:
-                elem.text = elem.text.replace('valcip', cip.replace('£',''))
+                elem.text = elem.text.replace('valcip', format_with_commas(cip.replace('£','')))
             if 'mspi' in elem.text:
-                elem.text = elem.text.replace('mspi', mspi.replace('£',''))
+                elem.text = elem.text.replace('mspi', format_with_commas(mspi.replace('£','')))
             if 'valmsl' in elem.text:
-                elem.text = elem.text.replace('valmsl', valmsl.replace('£',''))
+                elem.text = elem.text.replace('valmsl', format_with_commas(valmsl.replace('£','')))
             if 'valfqmr' in elem.text:
-                elem.text = elem.text.replace('valfqmr', valfqmr.replace('£',''))
+                elem.text = elem.text.replace('valfqmr', format_with_commas(valfqmr.replace('£','')))
             if 'valdcap' in elem.text:
-                elem.text = elem.text.replace('valdcap', valdcap.replace('£',''))
+                elem.text = elem.text.replace('valdcap', format_with_commas(valdcap.replace('£','')))
             if 'valcifw' in elem.text:
-                elem.text = elem.text.replace('valcifw', valcifw.replace('£',''))
+                elem.text = elem.text.replace('valcifw', format_with_commas(valcifw.replace('£','')))
             if 'valoem' in elem.text:
-                elem.text = elem.text.replace('valoem', valoem.replace('£',''))
+                elem.text = elem.text.replace('valoem', format_with_commas(valoem.replace('£','')))
             if 'valbnft' in elem.text:
-                elem.text = elem.text.replace('valbnft', valbnft.replace('£',''))
+                elem.text = elem.text.replace('valbnft', format_with_commas(valbnft.replace('£','')))
             if 'valnpvv' in elem.text:
-                elem.text = elem.text.replace('valnpvv', valnpvv.replace('£',''))
+                elem.text = elem.text.replace('valnpvv', format_with_commas(valnpvv.replace('£','')))
             if 'valacd' in elem.text:
-                elem.text = elem.text.replace('valacd', valacd.replace('£',''))
+                elem.text = elem.text.replace('valacd', format_with_commas(valacd.replace('£','')))
             if 'valroi' in elem.text:
-                elem.text = elem.text.replace('valroi', valroi.replace('£',''))
+                elem.text = elem.text.replace('valroi', format_with_commas(valroi.replace('£','')))
             if 'valinvestment' in elem.text:
-                elem.text = elem.text.replace('valinvestment', valinvestment.replace('£',''))
+                elem.text = elem.text.replace('valinvestment', format_with_commas(valinvestment.replace('£','')))
             if 'valmonths' in elem.text:
                 elem.text = elem.text.replace('valmonths', valmonths)
             if 'valhours' in elem.text:
                 elem.text = elem.text.replace('valhours', valhours)
             if 'valcostof' in elem.text:
-                elem.text = elem.text.replace('valcostof', costofdoingnothing1.replace('£',''))
+                elem.text = elem.text.replace('valcostof', format_with_commas(costofdoingnothing1.replace('£','')))
         zip_path = 'template.zip'  # Güncellemek istediğin template.zip
         output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
