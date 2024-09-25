@@ -48,7 +48,7 @@ def format_with_commas(value):
         # Virgüllü formatlama
         return f"{num:,.0f}"
     except ValueError:
-        return "Undefined"
+        return "0"
 
 
 
