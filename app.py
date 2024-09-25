@@ -140,6 +140,25 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         donutpercentvals = ''''''
         if rpoper!='0' and rpoper:
             donutpercentvals+='Raising Purchase Orders: We anticipate a {}% efficiency'.format(rpoper)
+        if itfinanceper!='0' and itfinanceper:
+            donutpercentvals+='\nIT finance systems: We anticipate a {}% efficiency'.format(itfinanceper)
+        if poaper!='0' and poaper:
+            donutpercentvals+='\nPurchase Order Approvals: We anticipate a {}% efficiency'.format(poaper)
+        if cipper!='0' and cipper:
+            donutpercentvals+='\nCoding invoice processes: We anticipate a {}% efficiency'.format(cipper)
+        if mspiper!='0' and mspiper:
+            donutpercentvals+='\nManagement of Supplier and Purchase Invoices: We anticipate a {}% efficiency'.format(mspiper)
+        if valmslper!='0' and valmslper:
+            donutpercentvals+='\nManaging Maverick Spend & Spend Leakage: We anticipate a {}% efficiency'.format(valmslper)
+        if valfqmrper!='0' and valfqmrper:
+            donutpercentvals+='\nFinance Query Management and Dashboard Reporting: We anticipate a {}% efficiency'.format(valfqmrper)
+        if valdcapper!='0' and valdcapper:
+            donutpercentvals+='\nDebt Collection Administration Processes: We anticipate a {}% efficiency'.format(valdcapper)
+        if valcifwper!='0' and valcifwper:
+            donutpercentvals+='\nCustomer Invoicing & Finance Workflow Management: We anticipate a {}% efficiency'.format(valcifwper)
+        if valoemper!='0' and valoemper:
+            donutpercentvals+='\nOnline expense management: We anticipate a {}% efficiency'.format(valoemper)
+        
         # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
         for elem in root.findall('.//a:t', namespace):
             if 'valclient' in elem.text:
@@ -273,7 +292,9 @@ def create_ppt():
                                year1invest=year1invest,
                                 year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
                                 year3return=year3total,year4invest=year4invest,year4return=year4total,year5invest=year5invest,
-                                year5return=year5total,costofdoingnothing1=costofdoingnothing1,rpoper=rpoper)
+                                year5return=year5total,costofdoingnothing1=costofdoingnothing1,itfinanceper=itfinanceper,rpoper=rpoper,
+                                poaper=poaper,cipper=cipper,mspiper=mspiper,valmslper=valmslper,valfqmrper=valfqmrper,valdcapper=valdcapper,
+                                valcifwper=valcifwper,valoemper=valoemper)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
