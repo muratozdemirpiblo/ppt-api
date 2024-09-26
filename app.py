@@ -180,8 +180,6 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             donutpercentvals+='\nDebt Collection Administration Processes: We anticipate a {}% efficiency'.format(valdcapper)
         if valcifwper!='0' and valcifwper:
             donutpercentvals+='\nCustomer Invoicing & Finance Workflow Management: We anticipate a {}% efficiency'.format(valcifwper)
-        if valoemper!='0' and valoemper:
-            donutpercentvals+='\nOnline expense management: We anticipate a {}% efficiency'.format(valoemper)
         
         for elem in root.findall('.//a:t', namespace):
             if 'prpoval' in elem.text:
