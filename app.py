@@ -132,7 +132,9 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                 ,mspiper='0',valmslper='0',valfqmrper='0',valdcapper='0',
                                valcifwper='0',valoemper='0',
                                donutit='0',donutrpo='0',donutpoa='0',donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',
-                               donutfqmr='0',donutcifw='0',donutoem='0'):
+                               donutfqmr='0',donutcifw='0',donutoem='0',
+                               prpoval='0',ppoaval='0',pcipval='0',pmspival='0',pmslval='0',pfqmrval='0',
+                                pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -181,6 +183,27 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         
         # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
         for elem in root.findall('.//a:t', namespace):
+            if 'prpoval' in elem.text:
+                elem.text = elem.text.replace('prpoval', format_with_commas(prpoval.replace('£','')))
+            if 'ppoaval' in elem.text:
+                elem.text = elem.text.replace('ppoaval', format_with_commas(ppoaval.replace('£','')))
+            if 'pcipval' in elem.text:
+                elem.text = elem.text.replace('pcipval', format_with_commas(pcipval.replace('£','')))
+            if 'pmspival' in elem.text:
+                elem.text = elem.text.replace('pmspival', format_with_commas(pmspival.replace('£','')))
+            if 'pmslval' in elem.text:
+                elem.text = elem.text.replace('pmslval', format_with_commas(pmslval.replace('£','')))
+            if 'pfqmrval' in elem.text:
+                elem.text = elem.text.replace('pfqmrval', format_with_commas(pfqmrval.replace('£','')))
+            if 'pdcapval' in elem.text:
+                elem.text = elem.text.replace('pdcapval', format_with_commas(pdcapval.replace('£','')))
+            if 'pcifwval' in elem.text:
+                elem.text = elem.text.replace('pcifwval', format_with_commas(pcifwval.replace('£','')))
+            if 'poemval' in elem.text:
+                elem.text = elem.text.replace('poemval', format_with_commas(poemval.replace('£','')))
+            if 'pitfinanceval' in elem.text:
+                elem.text = elem.text.replace('pitfinanceval', format_with_commas(pitfinanceval.replace('£','')))
+
             if 'valclient' in elem.text:
                 elem.text = elem.text.replace('valclient', client_name)
             if 'itfinance' in elem.text:
@@ -311,6 +334,17 @@ def create_ppt():
     donutfqmr = data.get('donutfqmr') or "0"
     donutcifw = data.get('donutcifw') or "0"
     donutoem = data.get('donutoem') or "0"
+
+    prpoval = data.get('prpoval') or "0"
+    ppoaval = data.get('ppoaval') or "0"
+    pcipval = data.get('pcipval') or "0"
+    pmspival = data.get('pmspival') or "0"
+    pmslval = data.get('pmslval') or "0"
+    pfqmrval = data.get('pfqmrval') or "0"
+    pdcapval = data.get('pdcapval') or "0"
+    pcifwval = data.get('pcifwval') or "0"
+    poemval = data.get('poemval') or "0"
+    pitfinanceval = data.get('pitfinanceval') or "0"
     
     if not client_name:
         return "Error: 'client_name' parameter is required", 400
@@ -334,7 +368,9 @@ def create_ppt():
                                 poaper=poaper,cipper=cipper,mspiper=mspiper,valmslper=valmslper,valfqmrper=valfqmrper,valdcapper=valdcapper,
                                 valcifwper=valcifwper,valoemper=valoemper,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,
                                 donutdcap=donutdcap,donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,
-                                donutcifw=donutcifw,donutoem=donutoem)
+                                donutcifw=donutcifw,donutoem=donutoem,
+                                prpoval=prpoval,ppoaval=ppoaval,pcipval=pcipval,pmspival=pmspival,pmslval=pmslval,pfqmrval=pfqmrval,
+                                pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
