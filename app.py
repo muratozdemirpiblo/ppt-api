@@ -139,6 +139,8 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
 
+    print(pitfinanceval)
+
     # .pptx dosyasını aç ve dosyaları çıkar
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
         zip_ref.extractall(temp_dir)
@@ -181,29 +183,30 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         if valoemper!='0' and valoemper:
             donutpercentvals+='\nOnline expense management: We anticipate a {}% efficiency'.format(valoemper)
         
-        # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
         for elem in root.findall('.//a:t', namespace):
             if 'prpoval' in elem.text:
-                elem.text = elem.text.replace('prpoval', format_with_commas(prpoval.replace('£','')))
+                print(prpoval)
+                elem.text = elem.text.replace('prpoval', prpoval.replace('£',''))
             if 'ppoaval' in elem.text:
-                elem.text = elem.text.replace('ppoaval', format_with_commas(ppoaval.replace('£','')))
+                elem.text = elem.text.replace('ppoaval', ppoaval.replace('£',''))
             if 'pcipval' in elem.text:
-                elem.text = elem.text.replace('pcipval', format_with_commas(pcipval.replace('£','')))
+                elem.text = elem.text.replace('pcipval', pcipval.replace('£',''))
             if 'pmspival' in elem.text:
-                elem.text = elem.text.replace('pmspival', format_with_commas(pmspival.replace('£','')))
+                elem.text = elem.text.replace('pmspival', pmspival.replace('£',''))
             if 'pmslval' in elem.text:
-                elem.text = elem.text.replace('pmslval', format_with_commas(pmslval.replace('£','')))
+                elem.text = elem.text.replace('pmslval', pmslval.replace('£',''))
             if 'pfqmrval' in elem.text:
-                elem.text = elem.text.replace('pfqmrval', format_with_commas(pfqmrval.replace('£','')))
+                elem.text = elem.text.replace('pfqmrval', pfqmrval.replace('£',''))
             if 'pdcapval' in elem.text:
-                elem.text = elem.text.replace('pdcapval', format_with_commas(pdcapval.replace('£','')))
+                elem.text = elem.text.replace('pdcapval', pdcapval.replace('£',''))
             if 'pcifwval' in elem.text:
-                elem.text = elem.text.replace('pcifwval', format_with_commas(pcifwval.replace('£','')))
+                elem.text = elem.text.replace('pcifwval', pcifwval.replace('£',''))
             if 'poemval' in elem.text:
-                elem.text = elem.text.replace('poemval', format_with_commas(poemval.replace('£','')))
+                elem.text = elem.text.replace('poemval', poemval.replace('£',''))
             if 'pitfinanceval' in elem.text:
-                elem.text = elem.text.replace('pitfinanceval', format_with_commas(pitfinanceval.replace('£','')))
-
+                elem.text = elem.text.replace('pitfinanceval', pitfinanceval.replace('£',''))
+        # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
+        for elem in root.findall('.//a:t', namespace):
             if 'valclient' in elem.text:
                 elem.text = elem.text.replace('valclient', client_name)
             if 'itfinance' in elem.text:
@@ -354,7 +357,7 @@ def create_ppt():
 
     
 
-
+    print(pitfinanceval)
 
     zip_path = r"template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
