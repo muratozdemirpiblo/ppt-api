@@ -163,7 +163,8 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                donutit='0',donutrpo='0',donutpoa='0',donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',
                                donutfqmr='0',donutcifw='0',donutoem='0',
                                prpoval='0',ppoaval='0',pcipval='0',pmspival='0',pmslval='0',pfqmrval='0',
-                                pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval=0):
+                                pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval=0,per1x='0',per2x='0',
+                                per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -211,8 +212,28 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             donutpercentvals+='\nCustomer Invoicing & Finance Workflow Management: We anticipate a {}% efficiency'.format(valcifwper)
         
         for elem in root.findall('.//a:t', namespace):
+            if 'per1x' in elem.text:
+                elem.text = elem.text.replace('per1x', per1x)
+            if 'per2x' in elem.text:
+                elem.text = elem.text.replace('per2x', per2x)
+            if 'per3x' in elem.text:
+                elem.text = elem.text.replace('per3x', per3x)
+            if 'per4x' in elem.text:
+                elem.text = elem.text.replace('per4x', per4x)
+            if 'per5x' in elem.text:
+                elem.text = elem.text.replace('per5x', per5x)
+            if 'per6x' in elem.text:
+                elem.text = elem.text.replace('per6x', per6x)
+            if 'per7x' in elem.text:
+                elem.text = elem.text.replace('per7x', per7x)
+            if 'per8x' in elem.text:
+                elem.text = elem.text.replace('per8x', per8x)
+            if 'per9x' in elem.text:
+                elem.text = elem.text.replace('per9x', per9x)
+            if 'per10x' in elem.text:
+                elem.text = elem.text.replace('per10x', per10x)
+
             if 'prpoval' in elem.text:
-                print(prpoval)
                 elem.text = elem.text.replace('prpoval', prpoval.replace('£',''))
             if 'ppoaval' in elem.text:
                 elem.text = elem.text.replace('ppoaval', ppoaval.replace('£',''))
@@ -531,6 +552,8 @@ def create_ppt():
     poemval = data.get('poemval') or "0"
     pitfinanceval = data.get('pitfinanceval') or "0"
 
+    
+
     totalcostval = (int(str(donutit).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutpoa).replace('£','').replace(',','').replace(' ',''))+
@@ -541,6 +564,17 @@ def create_ppt():
                     int(str(donutfqmr).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutoem).replace('£','').replace(',','').replace(' ','')))
+    
+    per1x = int(str(donutit).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
+    per2x = int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
+    per3x = int(str(donutpoa).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
+    per4x = int(str(donutdcap).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
+    per5x = int(str(donutcip).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
+    per6x = int(str(donutmspi).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
+    per7x = int(str(donutmsl).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
+    per8x = int(str(donutfqmr).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
+    per9x = int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
+    per10x = int(str(donutoem).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
     
     if not client_name:
         return "Error: 'client_name' parameter is required", 400
