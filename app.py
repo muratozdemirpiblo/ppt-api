@@ -213,25 +213,25 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         
         for elem in root.findall('.//a:t', namespace):
             if 'per1x' in elem.text:
-                elem.text = elem.text.replace('per1x', per1x)
+                elem.text = elem.text.replace('per1x', str(per1x))
             if 'per2x' in elem.text:
-                elem.text = elem.text.replace('per2x', per2x)
+                elem.text = elem.text.replace('per2x', str(per2x))
             if 'per3x' in elem.text:
-                elem.text = elem.text.replace('per3x', per3x)
+                elem.text = elem.text.replace('per3x', str(per3x))
             if 'per4x' in elem.text:
-                elem.text = elem.text.replace('per4x', per4x)
+                elem.text = elem.text.replace('per4x', str(per4x))
             if 'per5x' in elem.text:
-                elem.text = elem.text.replace('per5x', per5x)
+                elem.text = elem.text.replace('per5x', str(per5x))
             if 'per6x' in elem.text:
-                elem.text = elem.text.replace('per6x', per6x)
+                elem.text = elem.text.replace('per6x', str(per6x))
             if 'per7x' in elem.text:
-                elem.text = elem.text.replace('per7x', per7x)
+                elem.text = elem.text.replace('per7x', str(per7x))
             if 'per8x' in elem.text:
-                elem.text = elem.text.replace('per8x', per8x)
+                elem.text = elem.text.replace('per8x', str(per8x))
             if 'per9x' in elem.text:
-                elem.text = elem.text.replace('per9x', per9x)
+                elem.text = elem.text.replace('per9x', str(per9x))
             if 'per10x' in elem.text:
-                elem.text = elem.text.replace('per10x', per10x)
+                elem.text = elem.text.replace('per10x', str(per10x))
 
             if 'prpoval' in elem.text:
                 elem.text = elem.text.replace('prpoval', prpoval.replace('£',''))
@@ -565,16 +565,16 @@ def create_ppt():
                     int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutoem).replace('£','').replace(',','').replace(' ','')))
     
-    per1x = int(str(donutit).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
-    per2x = int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
-    per3x = int(str(donutpoa).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
-    per4x = int(str(donutdcap).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
-    per5x = int(str(donutcip).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
-    per6x = int(str(donutmspi).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
-    per7x = int(str(donutmsl).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
-    per8x = int(str(donutfqmr).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
-    per9x = int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
-    per10x = int(str(donutoem).replace('£','').replace(',','').replace(' ',''))/totalcostval*100
+    per1x = round((int(str(donutit).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+    per2x = round((int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+    per3x = round((int(str(donutpoa).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+    per4x = round((int(str(donutdcap).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+    per5x = round((int(str(donutcip).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+    per6x = round((int(str(donutmspi).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+    per7x = round((int(str(donutmsl).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+    per8x = round((int(str(donutfqmr).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+    per9x = round((int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+    per10x = round((int(str(donutoem).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
     
     if not client_name:
         return "Error: 'client_name' parameter is required", 400
@@ -600,7 +600,8 @@ def create_ppt():
                                 donutdcap=donutdcap,donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,
                                 donutcifw=donutcifw,donutoem=donutoem,
                                 prpoval=prpoval,ppoaval=ppoaval,pcipval=pcipval,pmspival=pmspival,pmslval=pmslval,pfqmrval=pfqmrval,
-                                pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval,totalcostval=totalcostval)
+                                pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval,totalcostval=totalcostval,per1x=per1x,
+                                per2x=per2x,per3x=per3x,per4x=per4x,per5x=per5x,per6x=per6x,per7x=per7x,per8x=per8x,per9x=per9x,per10x=per10x)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
