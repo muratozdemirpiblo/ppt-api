@@ -293,7 +293,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                 valhours+='h'
                 elem.text = elem.text.replace('valhours', valhours)
             if 'valcostof' in elem.text:
-                elem.text = elem.text.replace('valcostof', costofdoingnothing1.replace('£',''))
+                elem.text = elem.text.replace('valcostof', costofdoingnothing1.replace('£','').replace(' ',''))
             if 'valdonutpercentvalues' in elem.text:
                 elem.text = elem.text.replace('valdonutpercentvalues',donutpercentvals)
             
