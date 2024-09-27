@@ -565,16 +565,17 @@ def create_ppt():
                     int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutoem).replace('£','').replace(',','').replace(' ','')))
     
-    per1x = round((int(str(donutit).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
-    per2x = round((int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
-    per3x = round((int(str(donutpoa).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
-    per4x = round((int(str(donutdcap).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
-    per5x = round((int(str(donutcip).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
-    per6x = round((int(str(donutmspi).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
-    per7x = round((int(str(donutmsl).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
-    per8x = round((int(str(donutfqmr).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
-    per9x = round((int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
-    per10x = round((int(str(donutoem).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+    if totalcostval!=0:
+        per1x = round((int(str(donutit).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per2x = round((int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per3x = round((int(str(donutpoa).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per4x = round((int(str(donutdcap).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per5x = round((int(str(donutcip).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per6x = round((int(str(donutmspi).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per7x = round((int(str(donutmsl).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per8x = round((int(str(donutfqmr).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per9x = round((int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per10x = round((int(str(donutoem).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
     
     if not client_name:
         return "Error: 'client_name' parameter is required", 400
