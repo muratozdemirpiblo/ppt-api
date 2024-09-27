@@ -564,7 +564,16 @@ def create_ppt():
                     int(str(donutfqmr).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutoem).replace('£','').replace(',','').replace(' ','')))
-    
+    per1x=0
+    per2x=0
+    per3x=0
+    per4x=0
+    per5x=0
+    per6x=0
+    per7x=0
+    per8x=0
+    per9x=0
+    per10x=0
     if totalcostval!=0:
         per1x = round((int(str(donutit).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
         per2x = round((int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
