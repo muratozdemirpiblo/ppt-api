@@ -782,8 +782,7 @@ def create_client_ppt():
     poemval = data.get('poemval') or "0"
     pitfinanceval = data.get('pitfinanceval') or "0"
     
-    if not client_name:
-        return "Error: 'client_name' parameter is required", 400
+    
 
     zip_dosya = 'client_template.zip'
     gecici_zip_dosya = 'temp_client_template.zip'
