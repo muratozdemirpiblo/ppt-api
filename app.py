@@ -221,25 +221,25 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
 
 
             if 'asrpoval' in elem.text:
-                elem.text = elem.text.replace('asrpoval', str(asrpoval))
+                elem.text = elem.text.replace('asrpoval', str(format_with_commas(asrpoval)))
             if 'aspoaval' in elem.text:
-                elem.text = elem.text.replace('aspoaval', str(aspoaval))
+                elem.text = elem.text.replace('aspoaval', str(format_with_commas(aspoaval)))
             if 'ascipval' in elem.text:
-                elem.text = elem.text.replace('ascipval', str(ascipval))
+                elem.text = elem.text.replace('ascipval', str(format_with_commas(ascipval)))
             if 'asmspival' in elem.text:
-                elem.text = elem.text.replace('asmspival', str(asmspival))
+                elem.text = elem.text.replace('asmspival', str(format_with_commas(asmspival)))
             if 'asmslval' in elem.text:
-                elem.text = elem.text.replace('asmslval', str(asmslval))
+                elem.text = elem.text.replace('asmslval', str(format_with_commas(asmslval)))
             if 'asfqmrval' in elem.text:
-                elem.text = elem.text.replace('asfqmrval', str(asfqmrval))
+                elem.text = elem.text.replace('asfqmrval', str(format_with_commas(asfqmrval)))
             if 'asdcapval' in elem.text:
-                elem.text = elem.text.replace('asdcapval', str(asdcapval))
+                elem.text = elem.text.replace('asdcapval', str(format_with_commas(asdcapval)))
             if 'ascifwval' in elem.text:
-                elem.text = elem.text.replace('ascifwval', str(ascifwval))
+                elem.text = elem.text.replace('ascifwval', str(format_with_commas(ascifwval)))
             if 'asoemval' in elem.text:
-                elem.text = elem.text.replace('asoemval', str(asoemval))
+                elem.text = elem.text.replace('asoemval', str(format_with_commas(asoemval)))
             if 'asitfinance' in elem.text:
-                elem.text = elem.text.replace('asitfinance', str(asitfinance))
+                elem.text = elem.text.replace('asitfinance', str(format_with_commas(asitfinance)))
 
             if 'rpoper' in elem.text:
                 elem.text = elem.text.replace('rpoper', str(rpoper))
