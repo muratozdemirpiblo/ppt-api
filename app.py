@@ -164,7 +164,8 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                donutfqmr='0',donutcifw='0',donutoem='0',
                                prpoval='0',ppoaval='0',pcipval='0',pmspival='0',pmslval='0',pfqmrval='0',
                                 pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval=0,per1x='0',per2x='0',
-                                per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0',asrpoval='0',aspoaval='0',ascipval='0',asmspival='0',asmslval='0',asfqmrval='0',asdcapval='0',ascifwval='0',asoemval='0',asitfinance='0'):
+                                per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0',asrpoval='0',aspoaval='0',ascipval='0',asmspival='0',asmslval='0',
+                                asfqmrval='0',asdcapval='0',ascifwval='0',asoemval='0',asitfinance='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -193,23 +194,44 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         
         
         for elem in root.findall('.//a:t', namespace):
-            if rpoper in elem.text:
+            if 'asrpoval' in elem.text:
+                elem.text = elem.text.replace('asrpoval', str(asrpoval))
+            if 'aspoaval' in elem.text:
+                elem.text = elem.text.replace('aspoaval', str(aspoaval))
+            if 'ascipval' in elem.text:
+                elem.text = elem.text.replace('ascipval', str(ascipval))
+            if 'asmspival' in elem.text:
+                elem.text = elem.text.replace('asmspival', str(asmspival))
+            if 'asmslval' in elem.text:
+                elem.text = elem.text.replace('asmslval', str(asmslval))
+            if 'asfqmrval' in elem.text:
+                elem.text = elem.text.replace('asfqmrval', str(asfqmrval))
+            if 'asdcapval' in elem.text:
+                elem.text = elem.text.replace('asdcapval', str(asdcapval))
+            if 'ascifwval' in elem.text:
+                elem.text = elem.text.replace('ascifwval', str(ascifwval))
+            if 'asoemval' in elem.text:
+                elem.text = elem.text.replace('asoemval', str(asoemval))
+            if 'asitfinance' in elem.text:
+                elem.text = elem.text.replace('asitfinance', str(asitfinance))
+
+            if 'rpoper' in elem.text:
                 elem.text = elem.text.replace('rpoper', str(rpoper))
-            if itfinanceper in elem.text:
+            if 'itfinanceper' in elem.text:
                 elem.text = elem.text.replace('itfinanceper', str(itfinanceper))
-            if poaper in elem.text:
+            if 'poaper' in elem.text:
                 elem.text = elem.text.replace('poaper', str(poaper))
-            if cipper in elem.text:
+            if 'cipper' in elem.text:
                 elem.text = elem.text.replace('cipper', str(cipper))
-            if mspiper in elem.text:
+            if 'mspiper' in elem.text:
                 elem.text = elem.text.replace('mspiper', str(mspiper))
-            if valmslper in elem.text:
+            if 'valmslper' in elem.text:
                 elem.text = elem.text.replace('valmslper', str(valmslper))
-            if valfqmrper in elem.text:
+            if 'valfqmrper' in elem.text:
                 elem.text = elem.text.replace('valfqmrper', str(valfqmrper))
-            if valdcapper in elem.text:
+            if 'valdcapper' in elem.text:
                 elem.text = elem.text.replace('valdcapper', str(valdcapper))
-            if valcifwper in elem.text:
+            if 'valcifwper' in elem.text:
                 elem.text = elem.text.replace('valcifwper', str(valcifwper))
 
             if 'per1x' in elem.text:
