@@ -164,7 +164,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                donutfqmr='0',donutcifw='0',donutoem='0',
                                prpoval='0',ppoaval='0',pcipval='0',pmspival='0',pmslval='0',pfqmrval='0',
                                 pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval=0,per1x='0',per2x='0',
-                                per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0'):
+                                per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0',asrpoval='0',aspoaval='0',ascipval='0',asmspival='0',asmslval='0',asfqmrval='0',asdcapval='0',ascifwval='0',asoemval='0',asitfinance='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -190,28 +190,28 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
 
         # XML namespace tanımı (değiştirebilir)
         namespace = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}
-
-        donutpercentvals = ''''''
-        if rpoper!='0' and rpoper:
-            donutpercentvals+='\nRaising Purchase Orders: We anticipate a {}% efficiency'.format(rpoper)
-        if itfinanceper!='0' and itfinanceper:
-            donutpercentvals+='\nIT finance systems: We anticipate a {}% efficiency'.format(itfinanceper)
-        if poaper!='0' and poaper:
-            donutpercentvals+='\nPurchase Order Approvals: We anticipate a {}% efficiency'.format(poaper)
-        if cipper!='0' and cipper:
-            donutpercentvals+='\nCoding invoice processes: We anticipate a {}% efficiency'.format(cipper)
-        if mspiper!='0' and mspiper:
-            donutpercentvals+='\nManagement of Supplier and Purchase Invoices: We anticipate a {}% efficiency'.format(mspiper)
-        if valmslper!='0' and valmslper:
-            donutpercentvals+='\nManaging Maverick Spend & Spend Leakage: We anticipate a {}% efficiency'.format(valmslper)
-        if valfqmrper!='0' and valfqmrper:
-            donutpercentvals+='\nFinance Query Management and Dashboard Reporting: We anticipate a {}% efficiency'.format(valfqmrper)
-        if valdcapper!='0' and valdcapper:
-            donutpercentvals+='\nDebt Collection Administration Processes: We anticipate a {}% efficiency'.format(valdcapper)
-        if valcifwper!='0' and valcifwper:
-            donutpercentvals+='\nCustomer Invoicing & Finance Workflow Management: We anticipate a {}% efficiency'.format(valcifwper)
+        
         
         for elem in root.findall('.//a:t', namespace):
+            if rpoper in elem.text:
+                elem.text = elem.text.replace('rpoper', str(rpoper))
+            if itfinanceper in elem.text:
+                elem.text = elem.text.replace('itfinanceper', str(itfinanceper))
+            if poaper in elem.text:
+                elem.text = elem.text.replace('poaper', str(poaper))
+            if cipper in elem.text:
+                elem.text = elem.text.replace('cipper', str(cipper))
+            if mspiper in elem.text:
+                elem.text = elem.text.replace('mspiper', str(mspiper))
+            if valmslper in elem.text:
+                elem.text = elem.text.replace('valmslper', str(valmslper))
+            if valfqmrper in elem.text:
+                elem.text = elem.text.replace('valfqmrper', str(valfqmrper))
+            if valdcapper in elem.text:
+                elem.text = elem.text.replace('valdcapper', str(valdcapper))
+            if valcifwper in elem.text:
+                elem.text = elem.text.replace('valcifwper', str(valcifwper))
+
             if 'per1x' in elem.text:
                 elem.text = elem.text.replace('per1x', str(per1x))
             if 'per2x' in elem.text:
@@ -293,10 +293,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                 valhours+='h'
                 elem.text = elem.text.replace('valhours', valhours)
             if 'valcostof' in elem.text:
-                elem.text = elem.text.replace('valcostof', costofdoingnothing1.replace('£','').replace(' ',''))
-            if 'valdonutpercentvalues' in elem.text:
-                elem.text = elem.text.replace('valdonutpercentvalues',donutpercentvals)
-            
+                elem.text = elem.text.replace('valcostof', costofdoingnothing1.replace('£','').replace(' ',''))            
             if 'totalcostval' in elem.text:
                 elem.text = elem.text.replace('totalcostval',str(format_with_commas(totalcostval)))
         zip_path = 'template.zip'  # Güncellemek istediğin template.zip
@@ -552,6 +549,17 @@ def create_ppt():
     poemval = data.get('poemval') or "0"
     pitfinanceval = data.get('pitfinanceval') or "0"
 
+    asrpoval = data.get('asrpoval') or "0"
+    aspoaval = data.get('aspoaval') or "0"
+    ascipval = data.get('ascipval') or "0"
+    asmspival = data.get('asmspival') or "0"
+    asmslval = data.get('asmslval') or "0"
+    asfqmrval = data.get('asfqmrval') or "0"
+    asdcapval = data.get('asdcapval') or "0"
+    ascifwval = data.get('ascifwval') or "0"
+    asoemval = data.get('asoemval') or "0"
+    asitfinance = data.get('asitfinance') or "0"
+
     
 
     totalcostval = (int(str(donutit).replace('£','').replace(',','').replace(' ',''))+
@@ -613,7 +621,9 @@ def create_ppt():
                                 donutcifw=donutcifw,donutoem=donutoem,
                                 prpoval=prpoval,ppoaval=ppoaval,pcipval=pcipval,pmspival=pmspival,pmslval=pmslval,pfqmrval=pfqmrval,
                                 pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval,totalcostval=totalcostval,per1x=per1x,
-                                per2x=per2x,per3x=per3x,per4x=per4x,per5x=per5x,per6x=per6x,per7x=per7x,per8x=per8x,per9x=per9x,per10x=per10x)
+                                per2x=per2x,per3x=per3x,per4x=per4x,per5x=per5x,per6x=per6x,per7x=per7x,per8x=per8x,per9x=per9x,per10x=per10x,
+                                asrpoval=asrpoval,aspoaval=aspoaval,ascipval=ascipval,asmspival=asmspival,asmslval=asmslval,asfqmrval=asfqmrval,
+                                asdcapval=asdcapval,ascifwval=ascifwval,asoemval=asoemval,asitfinance=asitfinance)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
