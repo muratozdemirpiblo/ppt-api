@@ -165,7 +165,11 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                prpoval='0',ppoaval='0',pcipval='0',pmspival='0',pmslval='0',pfqmrval='0',
                                 pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval=0,per1x='0',per2x='0',
                                 per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0',asrpoval='0',aspoaval='0',ascipval='0',asmspival='0',asmslval='0',
-                                asfqmrval='0',asdcapval='0',ascifwval='0',asoemval='0',asitfinance='0'):
+                                asfqmrval='0',asdcapval='0',ascifwval='0',asoemval='0',asitfinance='0',
+                                eytimerpo='0',eytimepoa='0',eytimecip='0',eytimemspi='0',eytimemsl='0',eytimefqmr='0',eytimedcap='0',
+                                eytimecifw='0',eytimeoem='0',eytimeitfinance='0'):
+    
+
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -194,6 +198,28 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         
         
         for elem in root.findall('.//a:t', namespace):
+            if 'eytimerpo' in elem.text:
+                elem.text = elem.text.replace('eytimerpo', str(eytimerpo))
+            if 'eytimepoa' in elem.text:
+                elem.text = elem.text.replace('eytimepoa', str(eytimepoa))
+            if 'eytimecip' in elem.text:
+                elem.text = elem.text.replace('eytimecip', str(eytimecip))
+            if 'eytimemspi' in elem.text:
+                elem.text = elem.text.replace('eytimemspi', str(eytimemspi))
+            if 'eytimemsl' in elem.text:
+                elem.text = elem.text.replace('eytimemsl', str(eytimemsl))
+            if 'eytimefqmr' in elem.text:
+                elem.text = elem.text.replace('eytimefqmr', str(eytimefqmr))
+            if 'eytimedcap' in elem.text:
+                elem.text = elem.text.replace('eytimedcap', str(eytimedcap))
+            if 'eytimecifw' in elem.text:
+                elem.text = elem.text.replace('eytimecifw', str(eytimecifw))
+            if 'eytimeoem' in elem.text:
+                elem.text = elem.text.replace('eytimeoem', str(eytimeoem))
+            if 'eytimeitfinance' in elem.text:
+                elem.text = elem.text.replace('eytimeitfinance', str(eytimeitfinance))
+
+
             if 'asrpoval' in elem.text:
                 elem.text = elem.text.replace('asrpoval', str(asrpoval))
             if 'aspoaval' in elem.text:
@@ -583,6 +609,17 @@ def create_ppt():
     asitfinance = data.get('asitfinance') or "0"
 
     
+    eytimerpo = data.get('eytimerpo') or "0"
+    eytimepoa = data.get('eytimepoa') or "0"
+    eytimecip = data.get('eytimecip') or "0"
+    eytimemspi = data.get('eytimemspi') or "0"
+    eytimemsl = data.get('eytimemsl') or "0"
+    eytimefqmr = data.get('eytimefqmr') or "0"
+    eytimedcap = data.get('eytimedcap') or "0"
+    eytimecifw = data.get('eytimecifw') or "0"
+    eytimeoem = data.get('eytimeoem') or "0"
+    eytimeitfinance = data.get('eytimeitfinance') or "0"
+    
 
     totalcostval = (int(str(donutit).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))+
@@ -645,7 +682,9 @@ def create_ppt():
                                 pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval,totalcostval=totalcostval,per1x=per1x,
                                 per2x=per2x,per3x=per3x,per4x=per4x,per5x=per5x,per6x=per6x,per7x=per7x,per8x=per8x,per9x=per9x,per10x=per10x,
                                 asrpoval=asrpoval,aspoaval=aspoaval,ascipval=ascipval,asmspival=asmspival,asmslval=asmslval,asfqmrval=asfqmrval,
-                                asdcapval=asdcapval,ascifwval=ascifwval,asoemval=asoemval,asitfinance=asitfinance)
+                                asdcapval=asdcapval,ascifwval=ascifwval,asoemval=asoemval,asitfinance=asitfinance,eytimerpo=eytimerpo,
+                                eytimepoa=eytimepoa,eytimecip=eytimecip,eytimemspi=eytimemspi,eytimemsl=eytimemsl,eytimefqmr=eytimefqmr,
+                                eytimedcap=eytimedcap,eytimecifw=eytimecifw,eytimeoem=eytimeoem,eytimeitfinance=eytimeitfinance)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
