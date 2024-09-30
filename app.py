@@ -384,7 +384,7 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
                                donutit='0',donutrpo='0',donutpoa='0',donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',
                                donutfqmr='0',donutcifw='0',donutoem='0',
                                prpoval='0',ppoaval='0',pcipval='0',pmspival='0',pmslval='0',pfqmrval='0',
-                                pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0'):
+                                pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'client_temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -782,6 +782,39 @@ def create_client_ppt():
     poemval = data.get('poemval') or "0"
     pitfinanceval = data.get('pitfinanceval') or "0"
     
+    totalcostval = (int(str(donutit).replace('£','').replace(',','').replace(' ',''))+
+                    int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))+
+                    int(str(donutpoa).replace('£','').replace(',','').replace(' ',''))+
+                    int(str(donutdcap).replace('£','').replace(',','').replace(' ',''))+
+                    int(str(donutcip).replace('£','').replace(',','').replace(' ',''))+
+                    int(str(donutmspi).replace('£','').replace(',','').replace(' ',''))+
+                    int(str(donutmsl).replace('£','').replace(',','').replace(' ',''))+
+                    int(str(donutfqmr).replace('£','').replace(',','').replace(' ',''))+
+                    int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))+
+                    int(str(donutoem).replace('£','').replace(',','').replace(' ','')))
+    per1x=0
+    per2x=0
+    per3x=0
+    per4x=0
+    per5x=0
+    per6x=0
+    per7x=0
+    per8x=0
+    per9x=0
+    per10x=0 
+
+    
+    if totalcostval!=0:
+        per1x = round((int(str(donutit).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per2x = round((int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per3x = round((int(str(donutpoa).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per4x = round((int(str(donutdcap).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per5x = round((int(str(donutcip).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per6x = round((int(str(donutmspi).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per7x = round((int(str(donutmsl).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per8x = round((int(str(donutfqmr).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per9x = round((int(str(donutcifw).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
+        per10x = round((int(str(donutoem).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
     
 
     zip_dosya = 'client_template.zip'
