@@ -306,44 +306,9 @@
 								xmlns:c15="http://schemas.microsoft.com/office/drawing/2012/chart"/>
 							</c:extLst>
 						</c:dLbls>
-						<c:cat>
-							<c:strRef>
-								<c:f>'[Value Calculator_Financials LIVE v9.xlsm]Value Analysis'!$C$46:$C$54</c:f>
-								<c:strCache>
-									<c:ptCount val="9"/>
-									<c:pt idx="0">
-										<c:v>Raising Purchase Orders</c:v>
-									</c:pt>
-									<c:pt idx="1">
-										<c:v>Purchase Order approvals</c:v>
-									</c:pt>
-									<c:pt idx="2">
-										<c:v>Coding invoice processes</c:v>
-									</c:pt>
-									<c:pt idx="3">
-										<c:v>Management of supplier and purchase invoices</c:v>
-									</c:pt>
-									<c:pt idx="4">
-										<c:v>Managing Spend leakage </c:v>
-									</c:pt>
-									<c:pt idx="5">
-										<c:v>Finance query management &amp; reporting</c:v>
-									</c:pt>
-									<c:pt idx="6">
-										<c:v>Debt collection administration processes</c:v>
-									</c:pt>
-									<c:pt idx="7">
-										<c:v>Customer Invoicing &amp; Finance Workflow</c:v>
-									</c:pt>
-									<c:pt idx="8">
-										<c:v>Online expense management</c:v>
-									</c:pt>
-								</c:strCache>
-							</c:strRef>
-						</c:cat>
+						
 						<c:val>
 							<c:numRef>
-								<c:f>'[Value Calculator_Financials LIVE v9.xlsm]Value Analysis'!$L$45:$L$54</c:f>
 								<c:numCache>
 									<c:formatCode>"£"#,##0</c:formatCode>
 									<c:ptCount val="10"/>
@@ -394,7 +359,7 @@
 						<c:showSerName val="0"/>
 						<c:showPercent val="1"/>
 						<c:showBubbleSize val="0"/>
-						<c:showLeaderLines val="1"/>
+						<c:showLeaderLines val="0"/>
 					</c:dLbls>
 					<c:firstSliceAng val="0"/>
 					<c:holeSize val="75"/>

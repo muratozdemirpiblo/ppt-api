@@ -145,7 +145,7 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
 def update_zip_with_new_xml_client(zip_path, output_zip_path, year1invest, year1return, year2invest, year2return,
                              year3invest, year3return, year4invest, year4return, year5invest, year5return,donutit,donutrpo,donutpoa,
                              donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem):
-    temp_dir = 'tempclient_zip'
+    temp_dir = 'temp_zip'
     os.makedirs(temp_dir, exist_ok=True)
 
     # ZIP dosyasını çıkar
@@ -153,13 +153,13 @@ def update_zip_with_new_xml_client(zip_path, output_zip_path, year1invest, year1
         zip_ref.extractall(temp_dir)
 
     
-    donut_xml_content = create_clientdonut_xml(donutit,donutrpo,donutpoa,
+    donut_xml_content_client = create_clientdonut_xml(donutit,donutrpo,donutpoa,
                              donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem)
 
 
     new_xml_path = os.path.join(temp_dir, 'ppt', 'charts', 'chart1.xml')
     with open(new_xml_path, 'w', encoding='utf-8') as xml_file:
-        xml_file.write(donut_xml_content)
+        xml_file.write(donut_xml_content_client)
 
     # Güncellenmiş dosyaları yeni ZIP dosyası olarak kaydet
     with zipfile.ZipFile(output_zip_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
@@ -409,10 +409,10 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
                                 pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval='0',per1x='0',per2x='0',
                                 per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0'):
     # Geçici çalışma dizinini oluştur
-    temp_dir = 'client_temp_pptx'
+    temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
 
-    print(pitfinanceval)
+    print("pitfinanceval")
 
     # .pptx dosyasını aç ve dosyaları çıkar
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
@@ -540,6 +540,8 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('valcostof', costofdoingnothing1.replace('£',''))
             if 'valdonutpercentvalues' in elem.text:
                 elem.text = elem.text.replace('valdonutpercentvalues',donutpercentvals)
+            if 'totalcostval' in elem.text:
+                elem.text = elem.text.replace('totalcostval',str(format_with_commas(totalcostval)))
         zip_path = 'client_template.zip'  # Güncellemek istediğin template.zip
         output_zip_path = 'client_template.zip'  # Çıkış dosyasının adı
 

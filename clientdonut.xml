@@ -38,7 +38,7 @@
 					<c:order val="0"/>
 					<c:dPt>
 						<c:idx val="0"/>
-						
+						<c:bubble3D val="0"/>
 						<c:spPr>
 							<a:solidFill>
 								<a:schemeClr val="accent1"/>
@@ -286,32 +286,15 @@
 						<c:showSerName val="0"/>
 						<c:showPercent val="1"/>
 						<c:showBubbleSize val="0"/>
-						<c:showLeaderLines val="1"/>
-						<c:leaderLines>
-							<c:spPr>
-								<a:ln w="9525" cap="flat" cmpd="sng" algn="ctr">
-									<a:solidFill>
-										<a:schemeClr val="tx1">
-											<a:lumMod val="35000"/>
-											<a:lumOff val="65000"/>
-										</a:schemeClr>
-									</a:solidFill>
-									<a:round/>
-								</a:ln>
-								<a:effectLst/>
-							</c:spPr>
-						</c:leaderLines>
+						<c:showLeaderLines val="0"/>
 						<c:extLst>
 							<c:ext uri="{CE6537A1-D6FC-4f65-9D91-7224C49458BB}"
 								xmlns:c15="http://schemas.microsoft.com/office/drawing/2012/chart"/>
 							</c:extLst>
 						</c:dLbls>
-						<c:cat>
-							
-						</c:cat>
+						
 						<c:val>
 							<c:numRef>
-								<c:f>'[Value Calculator_Financials LIVE v9.xlsm]Value Analysis'!$L$45:$L$54</c:f>
 								<c:numCache>
 									<c:formatCode>"£"#,##0</c:formatCode>
 									<c:ptCount val="10"/>
