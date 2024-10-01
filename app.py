@@ -712,7 +712,8 @@ def create_ppt():
 def create_client_ppt():
     # 'client_name' parametresini POST isteği ile al
     data = request.get_json()
-    client_name = data.get('client_name') or ""
+    firstname = data.get('firstname') or ""
+    lastname = data.get('lastname') or ""
     itfinance = data.get('itfinance') or ""
     rpo = data.get('rpo') or ""
     poa = data.get('poa') or ""
@@ -802,6 +803,8 @@ def create_client_ppt():
     per8x=0
     per9x=0
     per10x=0 
+
+    client_name = firstname + " " + lastname
 
     
     if totalcostval!=0:
