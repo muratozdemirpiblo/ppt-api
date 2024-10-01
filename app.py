@@ -123,7 +123,7 @@ def update_zip_with_new_xml(zip_path, output_zip_path, year1invest, year1return,
 def update_zip_with_new_xml_client(zip_path, output_zip_path, year1invest, year1return, year2invest, year2return,
                              year3invest, year3return, year4invest, year4return, year5invest, year5return,donutit,donutrpo,donutpoa,
                              donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem):
-    temp_dir = 'temp_zip'
+    temp_dir = 'tempclient_zip'
     os.makedirs(temp_dir, exist_ok=True)
 
     # ZIP dosyasını çıkar
@@ -488,7 +488,7 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
             if 'valcip' in elem.text:
                 elem.text = elem.text.replace('valcip', format_with_commas(cip.replace('£','')))
             if 'valmspi' in elem.text:
-                elem.text = elem.text.replace('mspi', format_with_commas(mspi.replace('£','')))
+                elem.text = elem.text.replace('valmspi', format_with_commas(mspi.replace('£','')))
             if 'valmsl' in elem.text:
                 elem.text = elem.text.replace('valmsl', format_with_commas(valmsl.replace('£','')))
             if 'valfqmr' in elem.text:
