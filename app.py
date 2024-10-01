@@ -412,7 +412,7 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
 
-    print("pitfinanceval")
+    print(pitfinanceval)
 
     # .pptx dosyasını aç ve dosyaları çıkar
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
