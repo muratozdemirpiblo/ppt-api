@@ -863,7 +863,8 @@ def create_client_ppt():
                                 donutdcap=donutdcap,donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,
                                 donutcifw=donutcifw,donutoem=donutoem,
                                 prpoval=prpoval,ppoaval=ppoaval,pcipval=pcipval,pmspival=pmspival,pmslval=pmslval,pfqmrval=pfqmrval,
-                                pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval,totalcostval=totalcostval)
+                                pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval,totalcostval=totalcostval,
+                                per1x=per1x,per2x=per2x,per3x=per3x,per4x=per4x,per5x=per5x,per6x=per6x,per7x=per7x,per8x=per8x,per9x=per9x,per10x=per10x)
     
     zip_path = 'client_template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'client_template.zip'  # Çıkış dosyasının adı
