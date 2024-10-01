@@ -384,7 +384,8 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
                                donutit='0',donutrpo='0',donutpoa='0',donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',
                                donutfqmr='0',donutcifw='0',donutoem='0',
                                prpoval='0',ppoaval='0',pcipval='0',pmspival='0',pmslval='0',pfqmrval='0',
-                                pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval='0'):
+                                pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval='0',per1x='0',per2x='0',
+                                per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0'):
     # Geçici çalışma dizinini oluştur
     temp_dir = 'client_temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -432,6 +433,27 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
             donutpercentvals+='\nCustomer Invoicing & Finance Workflow Management: We anticipate a {}% efficiency'.format(valcifwper)
         
         for elem in root.findall('.//a:t', namespace):
+            if 'per1x' in elem.text:
+                elem.text = elem.text.replace('per1x', str(per1x))
+            if 'per2x' in elem.text:
+                elem.text = elem.text.replace('per2x', str(per2x))
+            if 'per3x' in elem.text:
+                elem.text = elem.text.replace('per3x', str(per3x))
+            if 'per4x' in elem.text:
+                elem.text = elem.text.replace('per4x', str(per4x))
+            if 'per5x' in elem.text:
+                elem.text = elem.text.replace('per5x', str(per5x))
+            if 'per6x' in elem.text:
+                elem.text = elem.text.replace('per6x', str(per6x))
+            if 'per7x' in elem.text:
+                elem.text = elem.text.replace('per7x', str(per7x))
+            if 'per8x' in elem.text:
+                elem.text = elem.text.replace('per8x', str(per8x))
+            if 'per9x' in elem.text:
+                elem.text = elem.text.replace('per9x', str(per9x))
+            if 'per10x' in elem.text:
+                elem.text = elem.text.replace('per10x', str(per10x))
+
             if 'prpoval' in elem.text:
                 print(prpoval)
                 elem.text = elem.text.replace('prpoval', prpoval.replace('£',''))
@@ -465,7 +487,7 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('valpoa', format_with_commas(poa.replace('£','')))
             if 'valcip' in elem.text:
                 elem.text = elem.text.replace('valcip', format_with_commas(cip.replace('£','')))
-            if 'mspi' in elem.text:
+            if 'valmspi' in elem.text:
                 elem.text = elem.text.replace('mspi', format_with_commas(mspi.replace('£','')))
             if 'valmsl' in elem.text:
                 elem.text = elem.text.replace('valmsl', format_with_commas(valmsl.replace('£','')))
@@ -830,7 +852,7 @@ def create_client_ppt():
     zip_path = r"client_template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"client_output.pptx"  # Çıkış dosyasının yolunu belirtin
 
-    modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
+    modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
                                valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths,valhours,
                                year1invest=year1invest,
                                 year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
