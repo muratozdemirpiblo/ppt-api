@@ -298,25 +298,25 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
 
 
             if 'asrpoval' in elem.text:
-                elem.text = elem.text.replace('asrpoval', str(format_with_commas(asrpoval)))
+                elem.text = elem.text.replace('asrpoval', str(format_with_commas(asrpoval)).replace(' ',''))
             if 'aspoaval' in elem.text:
-                elem.text = elem.text.replace('aspoaval', str(format_with_commas(aspoaval)))
+                elem.text = elem.text.replace('aspoaval', str(format_with_commas(aspoaval)).replace(' ',''))
             if 'ascipval' in elem.text:
-                elem.text = elem.text.replace('ascipval', str(format_with_commas(ascipval)))
+                elem.text = elem.text.replace('ascipval', str(format_with_commas(ascipval)).replace(' ',''))
             if 'asmspival' in elem.text:
-                elem.text = elem.text.replace('asmspival', str(format_with_commas(asmspival)))
+                elem.text = elem.text.replace('asmspival', str(format_with_commas(asmspival)).replace(' ',''))
             if 'asmslval' in elem.text:
-                elem.text = elem.text.replace('asmslval', str(format_with_commas(asmslval)))
+                elem.text = elem.text.replace('asmslval', str(format_with_commas(asmslval)).replace(' ',''))
             if 'asfqmrval' in elem.text:
-                elem.text = elem.text.replace('asfqmrval', str(format_with_commas(asfqmrval)))
+                elem.text = elem.text.replace('asfqmrval', str(format_with_commas(asfqmrval)).replace(' ',''))
             if 'asdcapval' in elem.text:
-                elem.text = elem.text.replace('asdcapval', str(format_with_commas(asdcapval)))
+                elem.text = elem.text.replace('asdcapval', str(format_with_commas(asdcapval)).replace(' ',''))
             if 'ascifwval' in elem.text:
-                elem.text = elem.text.replace('ascifwval', str(format_with_commas(ascifwval)))
+                elem.text = elem.text.replace('ascifwval', str(format_with_commas(ascifwval)).replace(' ',''))
             if 'asoemval' in elem.text:
-                elem.text = elem.text.replace('asoemval', str(format_with_commas(asoemval)))
+                elem.text = elem.text.replace('asoemval', str(format_with_commas(asoemval)).replace(' ',''))
             if 'asitfinance' in elem.text:
-                elem.text = elem.text.replace('asitfinance', str(format_with_commas(asitfinance)))
+                elem.text = elem.text.replace('asitfinance', str(format_with_commas(asitfinance)).replace(' ',''))
 
             if 'rpoper' in elem.text:
                 elem.text = elem.text.replace('rpoper', str(rpoper))
@@ -359,23 +359,23 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('per10x', str(per10x))
 
             if 'prpoval' in elem.text:
-                elem.text = elem.text.replace('prpoval', prpoval.replace('£',''))
+                elem.text = elem.text.replace('prpoval', prpoval.replace('£','').replace(' ',''))
             if 'ppoaval' in elem.text:
-                elem.text = elem.text.replace('ppoaval', ppoaval.replace('£',''))
+                elem.text = elem.text.replace('ppoaval', ppoaval.replace('£','').replace(' ',''))
             if 'pcipval' in elem.text:
-                elem.text = elem.text.replace('pcipval', pcipval.replace('£',''))
+                elem.text = elem.text.replace('pcipval', pcipval.replace('£','').replace(' ',''))
             if 'pmspival' in elem.text:
-                elem.text = elem.text.replace('pmspival', pmspival.replace('£',''))
+                elem.text = elem.text.replace('pmspival', pmspival.replace('£','').replace(' ',''))
             if 'pmslval' in elem.text:
-                elem.text = elem.text.replace('pmslval', pmslval.replace('£',''))
+                elem.text = elem.text.replace('pmslval', pmslval.replace('£','').replace(' ',''))
             if 'pfqmrval' in elem.text:
-                elem.text = elem.text.replace('pfqmrval', pfqmrval.replace('£',''))
+                elem.text = elem.text.replace('pfqmrval', pfqmrval.replace('£','').replace(' ',''))
             if 'pdcapval' in elem.text:
-                elem.text = elem.text.replace('pdcapval', pdcapval.replace('£',''))
+                elem.text = elem.text.replace('pdcapval', pdcapval.replace('£','').replace(' ',''))
             if 'pcifwval' in elem.text:
-                elem.text = elem.text.replace('pcifwval', pcifwval.replace('£',''))
+                elem.text = elem.text.replace('pcifwval', pcifwval.replace('£','').replace(' ',''))
             if 'poemval' in elem.text:
-                elem.text = elem.text.replace('poemval', poemval.replace('£',''))
+                elem.text = elem.text.replace('poemval', poemval.replace('£','').replace(' ',''))
             if 'pitfinanceval' in elem.text:
                 elem.text = elem.text.replace('pitfinanceval', pitfinanceval.replace('£',''))
         # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
