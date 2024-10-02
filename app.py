@@ -97,6 +97,29 @@ def create_clientdonut_xml(donutit,donutrpo,donutpoa,
     
     return xml_content
 
+def create_questionaredonut_xml(donutit,donutrpo,donutpoa,
+                             donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem):
+    
+    
+    # barxml.txt dosyasından XML içeriğini oku
+    with open('questionaredonut.xml', 'r', encoding='utf-8') as file:
+        xml_content = file.read()
+    
+    # Yıl değerlerini xml_content içinde değiştir
+    xml_content = xml_content.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutpoa}', str(donutpoa).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutcip}', str(donutcip).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutmspi}', str(donutmspi).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutmsl}', str(donutmsl).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutfqmr}', str(donutfqmr).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutdcap}', str(donutdcap).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutcifw}', str(donutcifw).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
+    xml_content = xml_content.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
+    
+    return xml_content
+
+
 def format_with_commas(value):
     try:
         # String değeri önce float veya int'e çevir
@@ -155,6 +178,37 @@ def update_zip_with_new_xml_client(zip_path, output_zip_path, year1invest, year1
 
     
     donut_xml_content_client = create_clientdonut_xml(donutit,donutrpo,donutpoa,
+                             donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem)
+
+
+    new_xml_path = os.path.join(temp_dir, 'ppt', 'charts', 'chart1.xml')
+    with open(new_xml_path, 'w', encoding='utf-8') as xml_file:
+        xml_file.write(donut_xml_content_client)
+
+    # Güncellenmiş dosyaları yeni ZIP dosyası olarak kaydet
+    with zipfile.ZipFile(output_zip_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
+        for foldername, subfolders, filenames in os.walk(temp_dir):
+            for filename in filenames:
+                filepath = os.path.join(foldername, filename)
+                arcname = os.path.relpath(filepath, temp_dir)
+                zip_ref.write(filepath, arcname)
+
+    # Geçici dizini temizle
+    shutil.rmtree(temp_dir)
+
+
+def update_zip_with_new_xml_questionare(zip_path, output_zip_path, year1invest, year1return, year2invest, year2return,
+                             year3invest, year3return, year4invest, year4return, year5invest, year5return,donutit,donutrpo,donutpoa,
+                             donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem):
+    temp_dir = 'temp_zip'
+    os.makedirs(temp_dir, exist_ok=True)
+
+    # ZIP dosyasını çıkar
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        zip_ref.extractall(temp_dir)
+
+    
+    donut_xml_content_client = create_questionaredonut_xml(donutit,donutrpo,donutpoa,
                              donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem)
 
 
@@ -586,7 +640,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
                                 pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval='0',per1x='0',per2x='0',
                                 per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0'):
     # Geçici çalışma dizinini oluştur
-    temp_dir = 'client_temp_pptx'
+    temp_dir = 'questionare_temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
 
     print(pitfinanceval)
@@ -717,11 +771,11 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
                 elem.text = elem.text.replace('valcostof', costofdoingnothing1.replace('£',''))
             if 'valdonutpercentvalues' in elem.text:
                 elem.text = elem.text.replace('valdonutpercentvalues',donutpercentvals)
-        zip_path = 'client_template.zip'  # Güncellemek istediğin template.zip
-        output_zip_path = 'client_template.zip'  # Çıkış dosyasının adı
+        zip_path = 'questionare_template.zip'  # Güncellemek istediğin template.zip
+        output_zip_path = 'questionare_template.zip'  # Çıkış dosyasının adı
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-        update_zip_with_new_xml_client(zip_path, output_zip_path,year1invest=year1invest,
+        update_zip_with_new_xml_questionare(zip_path, output_zip_path,year1invest=year1invest,
                                 year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
                                 year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
                                 year5return=year5return,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
@@ -1091,8 +1145,7 @@ def create_client_ppt():
 def create_questionare_ppt():
     # 'client_name' parametresini POST isteği ile al
     data = request.get_json()
-    firstname = data.get('firstname') or ""
-    lastname = data.get('lastname') or ""
+    client_name = data.get('client_name') or ""
     itfinance = data.get('itfinance') or ""
     rpo = data.get('rpo') or ""
     poa = data.get('poa') or ""
@@ -1183,7 +1236,6 @@ def create_questionare_ppt():
     per9x=0
     per10x=0 
 
-    client_name = firstname + " " + lastname
 
     
     if totalcostval!=0:
@@ -1199,8 +1251,8 @@ def create_questionare_ppt():
         per10x = round((int(str(donutoem).replace('£','').replace(',','').replace(' ',''))/totalcostval*100),1)
     
 
-    zip_dosya = 'client_template.zip'
-    gecici_zip_dosya = 'temp_client_template.zip'
+    zip_dosya = 'questionare_template.zip'
+    gecici_zip_dosya = 'temp_questionare_template.zip'
 
     
 
@@ -1209,7 +1261,7 @@ def create_questionare_ppt():
     zip_path = r"questionare_template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"questionare_output.pptx"  # Çıkış dosyasının yolunu belirtin
 
-    modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
+    modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_name,itfinance,rpo,poa,cip,mspi,valmsl,valfqmr,valdcap,
                                valcifw,valoem,valbnft,valnpvv,valacd,valroi,valinvestment,valmonths,valhours,
                                year1invest=year1invest,
                                 year1return=year1total,year2invest=year2invest,year2return=year2otal,year3invest=year3invest,
