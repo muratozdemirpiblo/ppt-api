@@ -20,6 +20,7 @@ from pptx.enum.text import PP_ALIGN
 
 app = Flask(__name__)
 
+
 def create_chart_xml(year1invest, year1return, year2invest, year2return,
                              year3invest, year3return, year4invest, year4return, year5invest, year5return):
     
