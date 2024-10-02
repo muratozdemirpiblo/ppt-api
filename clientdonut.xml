@@ -345,36 +345,15 @@
 							<c:numRef>
 								<c:numCache>
 									<c:formatCode>"£"#,##0</c:formatCode>
-									<c:ptCount val="10"/>
-									<c:pt idx="0">
-										<c:v>{donutrpo}</c:v>
-									</c:pt>
-									<c:pt idx="1">
-										<c:v>{donutpoa}</c:v>
-									</c:pt>
-									<c:pt idx="2">
-										<c:v>{donutcip}</c:v>
-									</c:pt>
+									<c:ptCount val="3"/>									
 									<c:pt idx="3">
 										<c:v>{donutmspi}</c:v>
-									</c:pt>
-									<c:pt idx="4">
-										<c:v>{donutmsl}</c:v>
 									</c:pt>
 									<c:pt idx="5">
 										<c:v>{donutfqmr}</c:v>
 									</c:pt>
 									<c:pt idx="6">
 										<c:v>{donutdcap}</c:v>
-									</c:pt>
-									<c:pt idx="7">
-										<c:v>{donutcifw}</c:v>
-									</c:pt>
-									<c:pt idx="8">
-										<c:v>{donutit}</c:v>
-									</c:pt>
-									<c:pt idx="9">
-										<c:v>{donutoem}</c:v>
 									</c:pt>
 								</c:numCache>
 								
