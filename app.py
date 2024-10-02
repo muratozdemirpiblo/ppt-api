@@ -630,7 +630,11 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
                                baitval='0',barpoval='0',bapoaval='0',bacipval='0',bamspival='0',bamslval='0',bafqmrval='0',badcapval='0',
                                bacifwval='0',baoemval='0',batotalval='0',
                                donutit='0',donutrpo='0',donutpoa='0',donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',
-                               donutfqmr='0',donutcifw='0',donutoem='0'):
+                               donutfqmr='0',donutcifw='0',donutoem='0',prpoval='0',ppoaval='0',pcipval='0',pmspival='0',pmslval='0',
+                               pfqmrval='0',pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0'):
+    
+
+
     # Geçici çalışma dizinini oluştur
     temp_dir = 'questionare_temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -682,7 +686,28 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
                 elem.text = elem.text.replace('baoemval', format_with_commas(baoemval.replace('£','')))
             if 'batotalval' in elem.text:
                 elem.text = elem.text.replace('batotalval', format_with_commas(batotalval.replace('£','')))
-            
+
+
+            if 'prpoval' in elem.text:
+                elem.text = elem.text.replace('prpoval', format_with_commas(prpoval.replace('%','')))
+            if 'ppoaval' in elem.text:
+                elem.text = elem.text.replace('ppoaval', format_with_commas(ppoaval.replace('%','')))
+            if 'pcipval' in elem.text:
+                elem.text = elem.text.replace('pcipval', format_with_commas(pcipval.replace('%','')))
+            if 'pmspival' in elem.text:
+                elem.text = elem.text.replace('pmspival', format_with_commas(pmspival.replace('%','')))
+            if 'pmslval' in elem.text:
+                elem.text = elem.text.replace('pmslval', format_with_commas(pmslval.replace('%','')))
+            if 'pfqmrval' in elem.text:
+                elem.text = elem.text.replace('pfqmrval', format_with_commas(pfqmrval.replace('%','')))
+            if 'pdcapval' in elem.text:
+                elem.text = elem.text.replace('pdcapval', format_with_commas(pdcapval.replace('%','')))
+            if 'pcifwval' in elem.text:
+                elem.text = elem.text.replace('pcifwval', format_with_commas(pcifwval.replace('%','')))
+            if 'poemval' in elem.text:
+                elem.text = elem.text.replace('poemval', format_with_commas(poemval.replace('%','')))
+            if 'pitfinanceval' in elem.text:
+                elem.text = elem.text.replace('pitfinanceval', format_with_commas(pitfinanceval.replace('%','')))
         zip_path = 'questionare_template.zip'  # Güncellemek istediğin template.zip
         output_zip_path = 'questionare_template.zip'  # Çıkış dosyasının adı
 
@@ -1143,7 +1168,8 @@ def create_questionare_ppt():
                                            baitval=baitval,barpoval=barpoval,bapoaval=bapoaval,bacipval=bacipval,bamspival=bamspival,bamslval=bamslval,bafqmrval=bafqmrval,badcapval=badcapval,
                                bacifwval=bacifwval,baoemval=baoemval,batotalval=batotalval,
                                donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,
-                               donutfqmr=donutfqmr,donutcifw=donutcifw,donutoem=donutoem)
+                               donutfqmr=donutfqmr,donutcifw=donutcifw,donutoem=donutoem,prpoval=prpoval,ppoaval=ppoaval,pcipval=pcipval,pmspival=pmspival,pmslval=pmslval,
+                               pfqmrval=pfqmrval,pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval)
     
     zip_path = 'questionare_template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'questionare_template.zip'  # Çıkış dosyasının adı
