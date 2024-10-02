@@ -373,6 +373,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'pdcapval' in elem.text:
                 elem.text = elem.text.replace('pdcapval', pdcapval.replace('£','').replace(' ',''))
             if 'pcifwval' in elem.text:
+                print(pdcapval)
                 elem.text = elem.text.replace('pcifwval', pcifwval.replace('£','').replace(' ',''))
             if 'poemval' in elem.text:
                 elem.text = elem.text.replace('poemval', poemval.replace('£','').replace(' ',''))
@@ -533,25 +534,25 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
 
             if 'prpoval' in elem.text:
                 print(prpoval)
-                elem.text = elem.text.replace('prpoval', prpoval.replace('£',''))
+                elem.text = elem.text.replace('prpoval', prpoval.replace('£','').replace(' ',''))
             if 'ppoaval' in elem.text:
-                elem.text = elem.text.replace('ppoaval', ppoaval.replace('£',''))
+                elem.text = elem.text.replace('ppoaval', ppoaval.replace('£','').replace(' ',''))
             if 'pcipval' in elem.text:
-                elem.text = elem.text.replace('pcipval', pcipval.replace('£',''))
+                elem.text = elem.text.replace('pcipval', pcipval.replace('£','').replace(' ',''))
             if 'pmspival' in elem.text:
-                elem.text = elem.text.replace('pmspival', pmspival.replace('£',''))
+                elem.text = elem.text.replace('pmspival', pmspival.replace('£','').replace(' ',''))
             if 'pmslval' in elem.text:
-                elem.text = elem.text.replace('pmslval', pmslval.replace('£',''))
+                elem.text = elem.text.replace('pmslval', pmslval.replace('£','').replace(' ',''))
             if 'pfqmrval' in elem.text:
-                elem.text = elem.text.replace('pfqmrval', pfqmrval.replace('£',''))
+                elem.text = elem.text.replace('pfqmrval', pfqmrval.replace('£','').replace(' ',''))
             if 'pdcapval' in elem.text:
-                elem.text = elem.text.replace('pdcapval', pdcapval.replace('£',''))
+                elem.text = elem.text.replace('pdcapval', pdcapval.replace('£','').replace(' ',''))
             if 'pcifwval' in elem.text:
-                elem.text = elem.text.replace('pcifwval', pcifwval.replace('£',''))
+                elem.text = elem.text.replace('pcifwval', pcifwval.replace('£','').replace(' ',''))
             if 'poemval' in elem.text:
-                elem.text = elem.text.replace('poemval', poemval.replace('£',''))
+                elem.text = elem.text.replace('poemval', poemval.replace('£','').replace(' ',''))
             if 'pitfinanceval' in elem.text:
-                elem.text = elem.text.replace('pitfinanceval', pitfinanceval.replace('£',''))
+                elem.text = elem.text.replace('pitfinanceval', pitfinanceval.replace('£','').replace(' ',''))
         # XML içeriğinde £XX,000 ifadelerini sırayla değiştir
         for elem in root.findall('.//a:t', namespace):
             if 'valclient' in elem.text:
