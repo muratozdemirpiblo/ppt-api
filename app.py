@@ -102,7 +102,7 @@ def create_questionaredonut_xml(donutit,donutrpo,donutpoa,
     
     
     # barxml.txt dosyasından XML içeriğini oku
-    with open('questionaredonut.xml', 'r', encoding='utf-8') as file:
+    with open('qdonutxml.xml', 'r', encoding='utf-8') as file:
         xml_content = file.read()
     
     # Yıl değerlerini xml_content içinde değiştir
