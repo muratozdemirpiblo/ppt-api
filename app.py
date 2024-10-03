@@ -665,7 +665,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
             if 'valclient' in elem.text:
                 elem.text = elem.text.replace('valclient', client_name)
             if 'baitval' in elem.text:
-                elem.text = elem.text.replace('baitval', format_with_commas(baitval).replace('£','')))
+                elem.text = elem.text.replace('baitval', format_with_commas(baitval).replace('£',''))
             if 'barpoval' in elem.text:
                 elem.text = elem.text.replace('barpoval', format_with_commas(barpoval).replace('£',''))
             if 'bapoaval' in elem.text:
@@ -717,8 +717,8 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
         output_zip_path = 'questionare_template.zip'  # Çıkış dosyasının adı
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-        update_zip_with_new_xml_questionare(zip_path, output_zip_path,baitval='0',barpoval='0',bapoaval='0',bacipval='0',bamspival='0',bamslval='0',bafqmrval='0',badcapval='0',
-                               bacifwval='0',baoemval='0',batotalval='0',donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
+        update_zip_with_new_xml_questionare(zip_path, output_zip_path,baitval=baitval,barpoval=barpoval,bapoaval=bapoaval,bacipval=bacipval,bamspival=bamspival,bamslval=bamslval,bafqmrval=bafqmrval,badcapval=badcapval,
+                               bacifwval=bacifwval,baoemval=baoemval,batotalval=batotalval,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
                                 donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
                                 donutoem=donutoem)
 
