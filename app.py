@@ -665,7 +665,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
             if 'valclient' in elem.text:
                 elem.text = elem.text.replace('valclient', client_name)
             if 'baitval' in elem.text:
-                elem.text = elem.text.replace('baitval', format_with_commas(baitval).replace('£',''))
+                elem.text = elem.text.replace('baitval', format_with_commas(baitval).replace('£','')))
             if 'barpoval' in elem.text:
                 elem.text = elem.text.replace('barpoval', format_with_commas(barpoval).replace('£',''))
             if 'bapoaval' in elem.text:
@@ -685,7 +685,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
             if 'baoemval' in elem.text:
                 elem.text = elem.text.replace('baoemval', format_with_commas(baoemval).replace('£',''))
             if 'batotalval' in elem.text:
-                elem.text = elem.text.replace('batotalval', format_with_commas(batotalval).replace('£',''))
+                elem.text = elem.text.replace('batotalval', batotalval.replace('£',''))
 
 
             if 'prpoval' in elem.text:
