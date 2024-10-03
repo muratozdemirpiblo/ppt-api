@@ -631,7 +631,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
                                bacifwval='0',baoemval='0',batotalval='0',
                                donutit='0',donutrpo='0',donutpoa='0',donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',
                                donutfqmr='0',donutcifw='0',donutoem='0',prpoval='0',ppoaval='0',pcipval='0',pmspival='0',pmslval='0',
-                               pfqmrval='0',pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0'):
+                               pfqmrval='0',pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',period1=' ',period2=' '):
     
 
 
@@ -708,6 +708,11 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
                 elem.text = elem.text.replace('poemval', format_with_commas(poemval.replace('%','')))
             if 'pitfinanceval' in elem.text:
                 elem.text = elem.text.replace('pitfinanceval', format_with_commas(pitfinanceval.replace('%','')))
+
+            if 'period1val' in elem.text:
+                elem.text = elem.text.replace('period1val', period1)
+            if 'period2val' in elem.text:
+                elem.text = elem.text.replace('period2val', period2)
         zip_path = 'questionare_template.zip'  # Güncellemek istediğin template.zip
         output_zip_path = 'questionare_template.zip'  # Çıkış dosyasının adı
 
@@ -1104,6 +1109,9 @@ def create_questionare_ppt():
     donutcifw = data.get('donutcifw') or "0"
     donutoem = data.get('donutoem') or "0"
 
+    period1 = data.get('period1') or " "
+    period2 = data.get('period2') or " "
+
     
     
 
@@ -1169,7 +1177,7 @@ def create_questionare_ppt():
                                bacifwval=bacifwval,baoemval=baoemval,batotalval=batotalval,
                                donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,
                                donutfqmr=donutfqmr,donutcifw=donutcifw,donutoem=donutoem,prpoval=prpoval,ppoaval=ppoaval,pcipval=pcipval,pmspival=pmspival,pmslval=pmslval,
-                               pfqmrval=pfqmrval,pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval)
+                               pfqmrval=pfqmrval,pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval,period1=period1,period2=period2)
     
     zip_path = 'questionare_template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'questionare_template.zip'  # Çıkış dosyasının adı
