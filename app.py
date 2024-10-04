@@ -339,6 +339,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'rpoper' in elem.text:
                 elem.text = elem.text.replace('rpoper', str(rpoper))
             if 'itfinanceper' in elem.text:
+                print(itfinanceper)
                 elem.text = elem.text.replace('itfinanceper', str(itfinanceper))
             if 'poaper' in elem.text:
                 elem.text = elem.text.replace('poaper', str(poaper))
@@ -793,16 +794,16 @@ def create_ppt():
     year5invest = data.get('year5invest') or ""
     costofdoingnothing1 = data.get('costofdoingnothing1') or ""
 
-    itfinanceper = data.get('itfinanceper') or ""
-    rpoper = data.get('rpoper') or ""
-    poaper = data.get('poaper') or ""
-    cipper = data.get('cipper') or ""
-    mspiper = data.get('mspiper') or ""
-    valmslper = data.get('valmslper') or ""
-    valfqmrper = data.get('valfqmrper') or ""
-    valdcapper = data.get('valdcapper') or ""
-    valcifwper = data.get('valcifwper') or ""
-    valoemper = data.get('valoemper') or ""
+    itfinanceper = data.get('itfinanceper') or "0"
+    rpoper = data.get('rpoper') or "0"
+    poaper = data.get('poaper') or "0"
+    cipper = data.get('cipper') or "0"
+    mspiper = data.get('mspiper') or "0"
+    valmslper = data.get('valmslper') or "0"
+    valfqmrper = data.get('valfqmrper') or "0"
+    valdcapper = data.get('valdcapper') or "0"
+    valcifwper = data.get('valcifwper') or "0"
+    valoemper = data.get('valoemper') or "0"
 
     donutit = data.get('donutit') or "0"
     donutrpo = data.get('donutrpo') or "0"
