@@ -684,23 +684,23 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
             if 'barpoval' in elem.text:
                 elem.text = elem.text.replace('barpoval', format_with_commas(barpoval).replace('£',''))
             if 'bapoaval' in elem.text:
-                elem.text = elem.text.replace('bapoaval', format_with_commas(bapoaval).replace('£',''))
+                elem.text = elem.text.replace('bapoaval', bapoaval.replace('£','').replace(' ',''))
             if 'bacipval' in elem.text:
-                elem.text = elem.text.replace('bacipval', format_with_commas(bacipval).replace('£',''))
+                elem.text = elem.text.replace('bacipval', bacipval.replace('£','').replace(' ',''))
             if 'bamspival' in elem.text:
-                elem.text = elem.text.replace('bamspival', format_with_commas(bamspival).replace('£',''))
+                elem.text = elem.text.replace('bamspival', bamspival.replace('£','').replace(' ',''))
             if 'bamslval' in elem.text:
-                elem.text = elem.text.replace('bamslval', format_with_commas(bamslval).replace('£',''))
+                elem.text = elem.text.replace('bamslval', bamslval.replace('£','').replace(' ',''))
             if 'bafqmrval' in elem.text:
-                elem.text = elem.text.replace('bafqmrval', format_with_commas(bafqmrval).replace('£',''))
+                elem.text = elem.text.replace('bafqmrval', bafqmrval.replace('£','').replace(' ',''))
             if 'badcapval' in elem.text:
-                elem.text = elem.text.replace('badcapval', format_with_commas(badcapval).replace('£',''))
+                elem.text = elem.text.replace('badcapval', badcapval.replace('£','').replace(' ',''))
             if 'bacifwval' in elem.text:
-                elem.text = elem.text.replace('bacifwval', format_with_commas(bacifwval).replace('£',''))
+                elem.text = elem.text.replace('bacifwval', bacifwval.replace('£','').replace(' ',''))
             if 'baoemval' in elem.text:
-                elem.text = elem.text.replace('baoemval', format_with_commas(baoemval).replace('£',''))
+                elem.text = elem.text.replace('baoemval', baoemval.replace('£','').replace(' ',''))
             if 'batotalval' in elem.text:
-                elem.text = elem.text.replace('batotalval', batotalval.replace('£',''))
+                elem.text = elem.text.replace('batotalval', batotalval.replace('£','').replace(' ',''))
 
 
             if 'prpoval' in elem.text:
