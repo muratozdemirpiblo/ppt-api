@@ -384,7 +384,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'valclient' in elem.text:
                 elem.text = elem.text.replace('valclient', client_name)
             if 'itfinance' in elem.text:
-                elem.text = elem.text.replace('itfinance', format_with_commas(itfinance.replace('£','')))
+                elem.text = elem.text.replace('itfinance', format_with_commas(itfinance).replace('£',''))
             if 'valrpo' in elem.text:
                 elem.text = elem.text.replace('valrpo', format_with_commas(rpo.replace('£','')))
             if 'valpoa' in elem.text:
