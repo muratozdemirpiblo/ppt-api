@@ -60,7 +60,26 @@ def create_donut_xml(donutit,donutrpo,donutpoa,
     # barxml.txt dosyasından XML içeriğini oku
     with open('donutxml.xml', 'r', encoding='utf-8') as file:
         xml_content = file.read()
-    
+    if (str(donutrpo).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutrpo=''
+    if (str(donutpoa).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutpoa=''
+    if (str(donutcip).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutcip=''
+    if (str(donutmspi).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutmspi=''
+    if (str(donutmsl).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutmsl=''
+    if (str(donutfqmr).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutfqmr=''
+    if (str(donutdcap).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutdcap=''
+    if (str(donutcifw).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutcifw=''
+    if (str(donutit).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutit=''
+    if (str(donutoem).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutoem=''
     # Yıl değerlerini xml_content içinde değiştir
     xml_content = xml_content.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
     xml_content = xml_content.replace('{donutpoa}', str(donutpoa).replace('£','').replace(',','').replace(' ',''))
@@ -82,7 +101,26 @@ def create_clientdonut_xml(donutit,donutrpo,donutpoa,
     # barxml.txt dosyasından XML içeriğini oku
     with open('clientdonut.xml', 'r', encoding='utf-8') as file:
         xml_content = file.read()
-    
+    if (str(donutrpo).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutrpo=''
+    if (str(donutpoa).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutpoa=''
+    if (str(donutcip).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutcip=''
+    if (str(donutmspi).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutmspi=''
+    if (str(donutmsl).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutmsl=''
+    if (str(donutfqmr).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutfqmr=''
+    if (str(donutdcap).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutdcap=''
+    if (str(donutcifw).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutcifw=''
+    if (str(donutit).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutit=''
+    if (str(donutoem).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutoem=''
     # Yıl değerlerini xml_content içinde değiştir
     xml_content = xml_content.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
     xml_content = xml_content.replace('{donutpoa}', str(donutpoa).replace('£','').replace(',','').replace(' ',''))
