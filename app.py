@@ -251,7 +251,6 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
 
-    print(pitfinanceval)
 
     # .pptx dosyasını aç ve dosyaları çıkar
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
@@ -373,7 +372,6 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'pdcapval' in elem.text:
                 elem.text = elem.text.replace('pdcapval', pdcapval.replace('£','').replace(' ',''))
             if 'pcifwval' in elem.text:
-                print(pdcapval)
                 elem.text = elem.text.replace('pcifwval', pcifwval.replace('£','').replace(' ',''))
             if 'poemval' in elem.text:
                 elem.text = elem.text.replace('poemval', poemval.replace('£','').replace(' ',''))
@@ -384,7 +382,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'valclient' in elem.text:
                 elem.text = elem.text.replace('valclient', client_name)
             if 'itfinance' in elem.text:
-                elem.text = elem.text.replace('itfinance', format_with_commas(itfinance).replace('£',''))
+                elem.text = elem.text.replace('itfinance', itfinance.replace('£','').replace(' ',''))
             if 'valrpo' in elem.text:
                 elem.text = elem.text.replace('valrpo', format_with_commas(rpo.replace('£','')))
             if 'valpoa' in elem.text:
@@ -468,7 +466,6 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
 
-    print(pitfinanceval)
 
     # .pptx dosyasını aç ve dosyaları çıkar
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
@@ -533,7 +530,6 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('per10x', str(per10x))
 
             if 'prpoval' in elem.text:
-                print(prpoval)
                 elem.text = elem.text.replace('prpoval', prpoval.replace('£','').replace(' ',''))
             if 'ppoaval' in elem.text:
                 elem.text = elem.text.replace('ppoaval', ppoaval.replace('£','').replace(' ',''))
@@ -877,7 +873,6 @@ def create_ppt():
 
     
 
-    print(pitfinanceval)
 
     zip_path = r"template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"output.pptx"  # Çıkış dosyasının yolunu belirtin
@@ -1039,7 +1034,6 @@ def create_client_ppt():
 
     
 
-    print(pitfinanceval)
 
     zip_path = r"client_template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"client_output.pptx"  # Çıkış dosyasının yolunu belirtin
@@ -1167,7 +1161,6 @@ def create_questionare_ppt():
 
     
 
-    print(pitfinanceval)
 
     zip_path = r"questionare_template.zip"  # Tam dosya yolunu girin
     output_pptx_path = r"questionare_output.pptx"  # Çıkış dosyasının yolunu belirtin
