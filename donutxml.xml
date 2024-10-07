@@ -345,6 +345,8 @@
 					</c:cat>
 					<c:val>
 						<c:numRef>
+							<c:f>'[Value Calculator_Financials LIVE v9.xlsm]Value
+								Analysis'!$L$45:$L$54</c:f>
 								<c:numCache>
 									<c:formatCode>"£"#,##0</c:formatCode>
 									<c:ptCount val="10"/>
@@ -379,7 +381,7 @@
 										<c:v>{donutoem}</c:v>
 									</c:pt>
 								</c:numCache>
-							</c:numRef>
+						</c:numRef>
 					</c:val>
 					<c:extLst>
 						<c:ext uri="{C3380CC4-5D6E-409C-BE32-E72D297353CC}"

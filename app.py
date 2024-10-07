@@ -56,10 +56,11 @@ def format_with_commas(value):
 def create_donut_xml(donutit='0',donutrpo='0',donutpoa='0',
                              donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',donutfqmr='0',donutcifw='0',donutoem='0'):
     
-    
-    # barxml.txt dosyasından XML içeriğini oku
-    with open('donutxml.xml', 'r', encoding='utf-8') as file:
-        xml_content = file.read()
+    xml_content =''
+    with zipfile.ZipFile('template.zip', 'r') as zip_file:
+    # ppt/charts/chart1.xml dosyasını okuyun
+        with zip_file.open('ppt/charts/chart1.xml') as xml_file:
+            xml_content = xml_file.read().decode('utf-8')
     
     # Yıl değerlerini xml_content içinde değiştir
     xml_content = xml_content.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
@@ -72,6 +73,8 @@ def create_donut_xml(donutit='0',donutrpo='0',donutpoa='0',
     xml_content = xml_content.replace('{donutcifw}', str(donutcifw).replace('£','').replace(',','').replace(' ',''))
     xml_content = xml_content.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
     xml_content = xml_content.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
+
+    print("test")
     
     return xml_content
 
@@ -463,18 +466,18 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         output_zip_path = 'template.zip'  # Çıkış dosyasının adı
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-        update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
-                                year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
-                                year5return=year5return,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
-                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
-                                donutoem=donutoem)
+        
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
 
 
-    
+    update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
+                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
+                                year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
+                                year5return=year5return,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
+                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
+                                donutoem=donutoem)
 
     # Güncellenmiş dosyaları tekrar ZIP yap
     with zipfile.ZipFile(output_pptx_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
