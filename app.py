@@ -56,8 +56,12 @@ def format_with_commas(value):
 def create_donut_xml(donutit='0',donutrpo='0',donutpoa='0',
                              donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',donutfqmr='0',donutcifw='0',donutoem='0'):
     
-    with open('donutxml.xml', 'r', encoding='utf-8') as file:
-        xml_content = file.read()
+    
+
+    with zipfile.ZipFile('template.zip', 'r') as zip_file:
+    # ppt/charts/chart1.xml dosyasını okuyun
+        with zip_file.open('ppt/charts/chart1.xml') as xml_file:
+            xml_content = xml_file.read().decode('utf-8') 
     
     # Yıl değerlerini xml_content içinde değiştir
     xml_content = xml_content.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
@@ -911,7 +915,11 @@ def create_ppt():
     zip_dosya = 'template.zip'
     gecici_zip_dosya = 'temp_template.zip'
 
-    
+    output_ppt_path = 'output.pptx'
+
+    # Dosya mevcutsa sil
+    if os.path.exists(output_ppt_path):
+        os.remove(output_ppt_path)
 
 
     zip_path = r"template.zip"  # Tam dosya yolunu girin
