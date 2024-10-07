@@ -514,7 +514,16 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
     # slides klasöründeki tüm slide XML dosyalarını bul ve işle
     slides_dir = os.path.join(temp_dir, 'ppt', 'slides')
     slide_files = [f for f in os.listdir(slides_dir) if f.startswith('slide') and f.endswith('.xml')]
-    
+    zip_path = 'client_template.zip'  # Güncellemek istediğin template.zip
+    output_zip_path = 'client_template.zip'  # Çıkış dosyasının adı
+
+        # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
+    update_zip_with_new_xml_client(zip_path, output_zip_path,year1invest=year1invest,
+                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
+                                year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
+                                year5return=year5return,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
+                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
+                                donutoem=donutoem)
 
     # Her bir slide dosyasını işle
     for slide_file in slide_files:
@@ -634,16 +643,7 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('valdonutpercentvalues',donutpercentvals)
             if 'totalcostval' in elem.text:
                 elem.text = elem.text.replace('totalcostval',str(format_with_commas(totalcostval)).replace(' ',''))
-        zip_path = 'client_template.zip'  # Güncellemek istediğin template.zip
-        output_zip_path = 'client_template.zip'  # Çıkış dosyasının adı
-
-        # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-        update_zip_with_new_xml_client(zip_path, output_zip_path,year1invest=year1invest,
-                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
-                                year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
-                                year5return=year5return,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
-                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
-                                donutoem=donutoem)
+        
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
@@ -684,7 +684,14 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
     slides_dir = os.path.join(temp_dir, 'ppt', 'slides')
     slide_files = [f for f in os.listdir(slides_dir) if f.startswith('slide') and f.endswith('.xml')]
     
+    zip_path = 'questionare_template.zip'  # Güncellemek istediğin template.zip
+    output_zip_path = 'questionare_template.zip'  # Çıkış dosyasının adı
 
+        # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
+    update_zip_with_new_xml_questionare(zip_path, output_zip_path,baitval=baitval,barpoval=barpoval,bapoaval=bapoaval,bacipval=bacipval,bamspival=bamspival,bamslval=bamslval,bafqmrval=bafqmrval,badcapval=badcapval,
+                               bacifwval=bacifwval,baoemval=baoemval,batotalval=batotalval,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
+                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
+                                donutoem=donutoem)
     # Her bir slide dosyasını işle
     for slide_file in slide_files:
         slide_xml_path = os.path.join(slides_dir, slide_file)
@@ -749,14 +756,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
                 elem.text = elem.text.replace('period1val', period1)
             if 'period2val' in elem.text:
                 elem.text = elem.text.replace('period2val', period2)
-        zip_path = 'questionare_template.zip'  # Güncellemek istediğin template.zip
-        output_zip_path = 'questionare_template.zip'  # Çıkış dosyasının adı
-
-        # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-        update_zip_with_new_xml_questionare(zip_path, output_zip_path,baitval=baitval,barpoval=barpoval,bapoaval=bapoaval,bacipval=bacipval,bamspival=bamspival,bamslval=bamslval,bafqmrval=bafqmrval,badcapval=badcapval,
-                               bacifwval=bacifwval,baoemval=baoemval,batotalval=batotalval,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
-                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
-                                donutoem=donutoem)
+        
 
         # Güncellenmiş slide XML dosyasını kaydet
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
