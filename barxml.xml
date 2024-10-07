@@ -340,12 +340,12 @@
 					<c:cat>
 						<c:multiLvlStrRef>
 							<c:multiLvlStrCache>
-								<c:ptCount val="10"/>
+								<c:ptCount val="14"/>
 								<c:lvl>
-									<c:pt idx="1">
+									<c:pt idx="0">
 										<c:v>£</c:v>
 									</c:pt>
-									<c:pt idx="2">
+									<c:pt idx="1">
 										<c:v>£</c:v>
 									</c:pt>
 									<c:pt idx="3">
@@ -354,16 +354,10 @@
 									<c:pt idx="4">
 										<c:v>£</c:v>
 									</c:pt>
-									<c:pt idx="5">
-										<c:v>£</c:v>
-									</c:pt>
 									<c:pt idx="6">
 										<c:v>£</c:v>
 									</c:pt>
 									<c:pt idx="7">
-										<c:v>£</c:v>
-									</c:pt>
-									<c:pt idx="8">
 										<c:v>£</c:v>
 									</c:pt>
 									<c:pt idx="9">
@@ -372,12 +366,18 @@
 									<c:pt idx="10">
 										<c:v>£</c:v>
 									</c:pt>
+									<c:pt idx="12">
+										<c:v>£</c:v>
+									</c:pt>
+									<c:pt idx="13">
+										<c:v>£</c:v>
+									</c:pt>
 								</c:lvl>
 								<c:lvl>
-									<c:pt idx="1">
+									<c:pt idx="0">
 										<c:v> 1 Year Investment </c:v>
 									</c:pt>
-									<c:pt idx="2">
+									<c:pt idx="1">
 										<c:v> 1 Year Return </c:v>
 									</c:pt>
 									<c:pt idx="3">
@@ -386,22 +386,22 @@
 									<c:pt idx="4">
 										<c:v> 2 Year Return </c:v>
 									</c:pt>
-									<c:pt idx="5">
+									<c:pt idx="6">
 										<c:v> 3 Year Investment </c:v>
 									</c:pt>
-									<c:pt idx="6">
+									<c:pt idx="7">
 										<c:v> 3 Year Return </c:v>
 									</c:pt>
-									<c:pt idx="7">
+									<c:pt idx="9">
 										<c:v> 4 Year Investment </c:v>
 									</c:pt>
-									<c:pt idx="8">
+									<c:pt idx="10">
 										<c:v> 4 Year Return </c:v>
 									</c:pt>
-									<c:pt idx="9">
+									<c:pt idx="12">
 										<c:v> 5 Year Investment </c:v>
 									</c:pt>
-									<c:pt idx="10">
+									<c:pt idx="13">
 										<c:v> 5 Year Return </c:v>
 									</c:pt>
 								</c:lvl>
@@ -411,35 +411,35 @@
 					<c:val>
 						<c:numRef>
 							<c:numCache>
-								<c:ptCount val="10"/>
+								<c:ptCount val="14"/>
 								<c:pt idx="0">
 									<c:v>{year1invest}</c:v>
 								</c:pt>
 								<c:pt idx="1">
 									<c:v>{year1return}</c:v>
 								</c:pt>
-								<c:pt idx="2">
+								<c:pt idx="3">
 									<c:v>{year2invest}</c:v>
 								</c:pt>
-								<c:pt idx="3">
+								<c:pt idx="4">
 									<c:v>{year2return}</c:v>
 								</c:pt>
-								<c:pt idx="4">
+								<c:pt idx="6">
 									<c:v>{year3invest}</c:v>
 								</c:pt>
-								<c:pt idx="5">
+								<c:pt idx="7">
 									<c:v>{year3return}</c:v>
 								</c:pt>
-								<c:pt idx="6">
+								<c:pt idx="9">
 									<c:v>{year4invest}</c:v>
 								</c:pt>
-								<c:pt idx="7">
+								<c:pt idx="10">
 									<c:v>{year4return}</c:v>
 								</c:pt>
-								<c:pt idx="8">
+								<c:pt idx="12">
 									<c:v>{year5invest}</c:v>
 								</c:pt>
-								<c:pt idx="9">
+								<c:pt idx="13">
 									<c:v>{year5return}</c:v>
 								</c:pt>
 							</c:numCache>
