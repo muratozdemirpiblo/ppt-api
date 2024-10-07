@@ -67,25 +67,58 @@ def create_donut_xml(donutit,donutrpo,donutpoa,
     donutcifw = '' if donutcifw in [None, 0] else donutcifw
     donutoem = '' if donutoem in [None, 0] else donutoem
 
-    with zipfile.ZipFile('template.zip', 'r') as zip_file:
-    # ppt/charts/chart1.xml dosyasını okuyun
-        with zip_file.open('ppt/charts/chart1.xml') as xml_file:
-            xml_content = xml_file.read().decode('utf-8') 
+    val = '''<c:numCache>
+									<c:formatCode>"£"#,##0</c:formatCode>
+									<c:ptCount val="10"/>
+									<c:pt idx="0">
+										<c:v>{donutrpo}</c:v>
+									</c:pt>
+									<c:pt idx="1">
+										<c:v>{donutpoa}</c:v>
+									</c:pt>
+									<c:pt idx="2">
+										<c:v>{donutcip}</c:v>
+									</c:pt>
+									<c:pt idx="3">
+										<c:v>{donutmspi}</c:v>
+									</c:pt>
+									<c:pt idx="4">
+										<c:v>{donutmsl}</c:v>
+									</c:pt>
+									<c:pt idx="5">
+										<c:v>{donutfqmr}</c:v>
+									</c:pt>
+									<c:pt idx="6">
+										<c:v>{donutdcap}</c:v>
+									</c:pt>
+									<c:pt idx="7">
+										<c:v>{donutcifw}</c:v>
+									</c:pt>
+									<c:pt idx="8">
+										<c:v>{donutit}</c:v>
+									</c:pt>
+									<c:pt idx="9">
+										<c:v>{donutoem}</c:v>
+									</c:pt>
+								</c:numCache>'''
+
+    with open('donutxml.xml', 'r', encoding='utf-8') as file:
+        xml_content = file.read() 
     print(str(donutrpo).replace('£','').replace(',','').replace(' ',''))
     # Yıl değerlerini xml_content içinde değiştir
-    xml_content = xml_content.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
-    xml_content = xml_content.replace('{donutpoa}', str(donutpoa).replace('£','').replace(',','').replace(' ',''))
-    xml_content = xml_content.replace('{donutcip}', str(donutcip).replace('£','').replace(',','').replace(' ',''))
-    xml_content = xml_content.replace('{donutmspi}', str(donutmspi).replace('£','').replace(',','').replace(' ',''))
-    xml_content = xml_content.replace('{donutmsl}', str(donutmsl).replace('£','').replace(',','').replace(' ',''))
-    xml_content = xml_content.replace('{donutfqmr}', str(donutfqmr).replace('£','').replace(',','').replace(' ',''))
-    xml_content = xml_content.replace('{donutdcap}', str(donutdcap).replace('£','').replace(',','').replace(' ',''))
-    xml_content = xml_content.replace('{donutcifw}', str(donutcifw).replace('£','').replace(',','').replace(' ',''))
-    xml_content = xml_content.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
-    xml_content = xml_content.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
-
+    val = val.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutpoa}', str(donutpoa).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutcip}', str(donutcip).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutmspi}', str(donutmspi).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutmsl}', str(donutmsl).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutfqmr}', str(donutfqmr).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutdcap}', str(donutdcap).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutcifw}', str(donutcifw).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
+    print(val)
     
-    return xml_content
+    return xml_content.replace('numrefval1',val)
 
 def create_clientdonut_xml(donutit,donutrpo,donutpoa,
                              donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem):
