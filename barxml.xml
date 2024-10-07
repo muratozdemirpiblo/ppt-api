@@ -339,14 +339,13 @@
 					</c:dPt>
 					<c:cat>
 						<c:multiLvlStrRef>
-							<c:f>'Value Proposition Analysis'!$B$25:$F$38</c:f>
 							<c:multiLvlStrCache>
-								<c:ptCount val="14"/>
+								<c:ptCount val="10"/>
 								<c:lvl>
-									<c:pt idx="0">
+									<c:pt idx="1">
 										<c:v>£</c:v>
 									</c:pt>
-									<c:pt idx="1">
+									<c:pt idx="2">
 										<c:v>£</c:v>
 									</c:pt>
 									<c:pt idx="3">
@@ -355,10 +354,16 @@
 									<c:pt idx="4">
 										<c:v>£</c:v>
 									</c:pt>
+									<c:pt idx="5">
+										<c:v>£</c:v>
+									</c:pt>
 									<c:pt idx="6">
 										<c:v>£</c:v>
 									</c:pt>
 									<c:pt idx="7">
+										<c:v>£</c:v>
+									</c:pt>
+									<c:pt idx="8">
 										<c:v>£</c:v>
 									</c:pt>
 									<c:pt idx="9">
@@ -367,18 +372,12 @@
 									<c:pt idx="10">
 										<c:v>£</c:v>
 									</c:pt>
-									<c:pt idx="12">
-										<c:v>£</c:v>
-									</c:pt>
-									<c:pt idx="13">
-										<c:v>£</c:v>
-									</c:pt>
 								</c:lvl>
 								<c:lvl>
-									<c:pt idx="0">
+									<c:pt idx="1">
 										<c:v> 1 Year Investment </c:v>
 									</c:pt>
-									<c:pt idx="1">
+									<c:pt idx="2">
 										<c:v> 1 Year Return </c:v>
 									</c:pt>
 									<c:pt idx="3">
@@ -387,22 +386,22 @@
 									<c:pt idx="4">
 										<c:v> 2 Year Return </c:v>
 									</c:pt>
-									<c:pt idx="6">
+									<c:pt idx="5">
 										<c:v> 3 Year Investment </c:v>
 									</c:pt>
-									<c:pt idx="7">
+									<c:pt idx="6">
 										<c:v> 3 Year Return </c:v>
 									</c:pt>
-									<c:pt idx="9">
+									<c:pt idx="7">
 										<c:v> 4 Year Investment </c:v>
 									</c:pt>
-									<c:pt idx="10">
+									<c:pt idx="8">
 										<c:v> 4 Year Return </c:v>
 									</c:pt>
-									<c:pt idx="12">
+									<c:pt idx="9">
 										<c:v> 5 Year Investment </c:v>
 									</c:pt>
-									<c:pt idx="13">
+									<c:pt idx="10">
 										<c:v> 5 Year Return </c:v>
 									</c:pt>
 								</c:lvl>
@@ -411,38 +410,36 @@
 					</c:cat>
 					<c:val>
 						<c:numRef>
-							<c:f>'Value Proposition Analysis'!$G$25:$G$38</c:f>
 							<c:numCache>
-								<c:formatCode>_(* #,##0_);_(* \\(#,##0\\);_(* "-"??_);_(@_)</c:formatCode>
-								<c:ptCount val="14"/>
+								<c:ptCount val="10"/>
 								<c:pt idx="0">
 									<c:v>{year1invest}</c:v>
 								</c:pt>
 								<c:pt idx="1">
-									<c:v>{year1return}}</c:v>
+									<c:v>{year1return}</c:v>
 								</c:pt>
-								<c:pt idx="3">
+								<c:pt idx="2">
 									<c:v>{year2invest}</c:v>
 								</c:pt>
-								<c:pt idx="4">
+								<c:pt idx="3">
 									<c:v>{year2return}</c:v>
 								</c:pt>
-								<c:pt idx="6">
+								<c:pt idx="4">
 									<c:v>{year3invest}</c:v>
 								</c:pt>
-								<c:pt idx="7">
+								<c:pt idx="5">
 									<c:v>{year3return}</c:v>
 								</c:pt>
-								<c:pt idx="9">
+								<c:pt idx="6">
 									<c:v>{year4invest}</c:v>
 								</c:pt>
-								<c:pt idx="10">
+								<c:pt idx="7">
 									<c:v>{year4return}</c:v>
 								</c:pt>
-								<c:pt idx="12">
+								<c:pt idx="8">
 									<c:v>{year5invest}</c:v>
 								</c:pt>
-								<c:pt idx="13">
+								<c:pt idx="9">
 									<c:v>{year5return}</c:v>
 								</c:pt>
 							</c:numCache>
