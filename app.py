@@ -53,16 +53,25 @@ def format_with_commas(value):
     except ValueError:
         return "0"
 
-def create_donut_xml(donutit='0',donutrpo='0',donutpoa='0',
-                             donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',donutfqmr='0',donutcifw='0',donutoem='0'):
+def create_donut_xml(donutit,donutrpo,donutpoa,
+                             donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem):
     
-    
+    donutit = '' if donutit in [None, 0] else donutit
+    donutrpo = '' if donutrpo in [None, 0] else donutrpo
+    donutpoa = '' if donutpoa in [None, 0] else donutpoa
+    donutdcap = '' if donutdcap in [None, 0] else donutdcap
+    donutcip = '' if donutcip in [None, 0] else donutcip
+    donutmspi = '' if donutmspi in [None, 0] else donutmspi
+    donutmsl = '' if donutmsl in [None, 0] else donutmsl
+    donutfqmr = '' if donutfqmr in [None, 0] else donutfqmr
+    donutcifw = '' if donutcifw in [None, 0] else donutcifw
+    donutoem = '' if donutoem in [None, 0] else donutoem
 
     with zipfile.ZipFile('template.zip', 'r') as zip_file:
     # ppt/charts/chart1.xml dosyasını okuyun
         with zip_file.open('ppt/charts/chart1.xml') as xml_file:
             xml_content = xml_file.read().decode('utf-8') 
-    
+    print(str(donutrpo).replace('£','').replace(',','').replace(' ',''))
     # Yıl değerlerini xml_content içinde değiştir
     xml_content = xml_content.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
     xml_content = xml_content.replace('{donutpoa}', str(donutpoa).replace('£','').replace(',','').replace(' ',''))
@@ -75,7 +84,6 @@ def create_donut_xml(donutit='0',donutrpo='0',donutpoa='0',
     xml_content = xml_content.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
     xml_content = xml_content.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
 
-    print("test")
     
     return xml_content
 
@@ -369,7 +377,6 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
             if 'rpoper' in elem.text:
                 elem.text = elem.text.replace('rpoper', str(rpoper))
             if 'itfinanceper' in elem.text:
-                print(itfinanceper)
                 elem.text = elem.text.replace('itfinanceper', str(itfinanceper))
             if 'poaper' in elem.text:
                 elem.text = elem.text.replace('poaper', str(poaper))
