@@ -268,10 +268,10 @@
 							<a:lstStyle />
 							<a:p>
 								<a:pPr>
-									<a:defRPr sz="1200" b="0" i="0" u="none" strike="noStrike"
+									<a:defRPr sz="1400" b="1" i="0" u="none" strike="noStrike"
 										kern="1200" baseline="0">
 										<a:solidFill>
-											<a:schemeClr val="bg2" />
+											<a:schemeClr val="tx1" />
 										</a:solidFill>
 										<a:latin typeface="+mn-lt" />
 										<a:ea typeface="+mn-ea" />
