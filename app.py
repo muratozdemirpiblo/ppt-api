@@ -56,11 +56,8 @@ def format_with_commas(value):
 def create_donut_xml(donutit='0',donutrpo='0',donutpoa='0',
                              donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',donutfqmr='0',donutcifw='0',donutoem='0'):
     
-    xml_content =''
-    with zipfile.ZipFile('template.zip', 'r') as zip_file:
-    # ppt/charts/chart1.xml dosyasını okuyun
-        with zip_file.open('ppt/charts/chart1.xml') as xml_file:
-            xml_content = xml_file.read().decode('utf-8')
+    with open('donutxml.xml', 'r', encoding='utf-8') as file:
+        xml_content = file.read()
     
     # Yıl değerlerini xml_content içinde değiştir
     xml_content = xml_content.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
@@ -300,8 +297,15 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     # slides klasöründeki tüm slide XML dosyalarını bul ve işle
     slides_dir = os.path.join(temp_dir, 'ppt', 'slides')
     slide_files = [f for f in os.listdir(slides_dir) if f.startswith('slide') and f.endswith('.xml')]
+    zip_path = 'template.zip'  # Güncellemek istediğin template.zip
+    output_zip_path = 'template.zip'  # Çıkış dosyasının adı
+    update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
+                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
+                                year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
+                                year5return=year5return,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
+                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
+                                donutoem=donutoem)
     
-
     # Her bir slide dosyasını işle
     for slide_file in slide_files:
         slide_xml_path = os.path.join(slides_dir, slide_file)
@@ -462,8 +466,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                 elem.text = elem.text.replace('valcostof', costofdoingnothing1.replace('£','').replace(' ',''))            
             if 'totalcostval' in elem.text:
                 elem.text = elem.text.replace('totalcostval',str(format_with_commas(totalcostval)))
-        zip_path = 'template.zip'  # Güncellemek istediğin template.zip
-        output_zip_path = 'template.zip'  # Çıkış dosyasının adı
+        
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
         
@@ -472,12 +475,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         tree.write(slide_xml_path, xml_declaration=True, encoding='UTF-8')
 
 
-    update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
-                                year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
-                                year5return=year5return,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
-                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
-                                donutoem=donutoem)
+        
 
     # Güncellenmiş dosyaları tekrar ZIP yap
     with zipfile.ZipFile(output_pptx_path, 'w', zipfile.ZIP_DEFLATED) as zip_ref:
