@@ -53,8 +53,8 @@ def format_with_commas(value):
     except ValueError:
         return "0"
 
-def create_donut_xml(donutit,donutrpo,donutpoa,
-                             donutdcap,donutcip,donutmspi,donutmsl,donutfqmr,donutcifw,donutoem):
+def create_donut_xml(donutit='0',donutrpo='0',donutpoa='0',
+                             donutdcap='0',donutcip='0',donutmspi='0',donutmsl='0',donutfqmr='0',donutcifw='0',donutoem='0'):
     
     
     # barxml.txt dosyasından XML içeriğini oku
