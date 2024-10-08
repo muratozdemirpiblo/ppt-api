@@ -101,7 +101,6 @@ def create_donut_xml(donutit,donutrpo,donutpoa,
 										<c:v>{donutoem}</c:v>
 									</c:pt>
 								</c:numCache>'''
-
     with open('donutxml.xml', 'r', encoding='utf-8') as file:
         xml_content = file.read() 
     print(str(donutrpo).replace('£','').replace(',','').replace(' ',''))

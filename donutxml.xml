@@ -309,8 +309,7 @@
 					</c:dLbls>
 					<c:cat>
 						<c:strRef>
-							<c:f>'[Value Calculator_Financials LIVE v9.xlsm]Value
-								Analysis'!$C$46:$C$54</c:f>
+							
 							<c:strCache>
 								<c:ptCount val="9" />
 								<c:pt idx="0">
@@ -345,8 +344,7 @@
 					</c:cat>
 					<c:val>
 						<c:numRef>
-							<c:f>'[Value Calculator_Financials LIVE v9.xlsm]Value
-								Analysis'!$L$45:$L$54</c:f>
+							
 								numrefval1
 						</c:numRef>
 					</c:val>
