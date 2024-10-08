@@ -103,7 +103,7 @@ def create_donut_xml(donutit,donutrpo,donutpoa,
 								</c:numCache>'''
     with open('donutxml.xml', 'r', encoding='utf-8') as file:
         xml_content = file.read() 
-    print(str(donutrpo).replace('£','').replace(',','').replace(' ',''))
+
     # Yıl değerlerini xml_content içinde değiştir
     val = val.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
     val = val.replace('{donutpoa}', str(donutpoa).replace('£','').replace(',','').replace(' ',''))
@@ -115,7 +115,7 @@ def create_donut_xml(donutit,donutrpo,donutpoa,
     val = val.replace('{donutcifw}', str(donutcifw).replace('£','').replace(',','').replace(' ',''))
     val = val.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
     val = val.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
-    print(val)
+
     
     return xml_content.replace('numrefval1',val)
 
@@ -414,7 +414,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     val = val.replace('{donutcifw}', str(donutcifw).replace('£','').replace(',','').replace(' ',''))
     val = val.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
     val = val.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
-    print(val)
+
     updated_content = re.sub(r'(<c:numRef>)(.*?)(</c:numRef>)', r'\1\n\t\t\t\t\t\t\t\t\t' + val + r'\n\t\t\t\t\t\t\3', content, flags=re.DOTALL)
     #updated_content = re.sub(r'<c:pt idx="(\d+)">\s*<c:v>0</c:v>\s*</c:pt>', '', content)
     # Güncellenmiş içeriği tekrar dosyaya yaz
@@ -800,15 +800,94 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
     # slides klasöründeki tüm slide XML dosyalarını bul ve işle
     slides_dir = os.path.join(temp_dir, 'ppt', 'slides')
     slide_files = [f for f in os.listdir(slides_dir) if f.startswith('slide') and f.endswith('.xml')]
+
+    chart_file = os.path.join(temp_dir, 'ppt', 'charts', 'chart1.xml')
+    with open(chart_file, 'r', encoding='utf-8') as file:
+        content = file.read()
+    updated_content = re.sub(r'(<c:numRef>)(.*?)(</c:numRef>)', r'\1\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\3', content, flags=re.DOTALL)
+    # <c:numRef> etiketleri arasındaki numRefValue'yu değiştir
+    if (str(donutrpo).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutrpo=''
+    if (str(donutpoa).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutpoa=''
+    if (str(donutcip).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutcip=''
+    if (str(donutmspi).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutmspi=''
+    if (str(donutmsl).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutmsl=''
+    if (str(donutfqmr).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutfqmr=''
+    if (str(donutdcap).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutdcap=''
+    if (str(donutcifw).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutcifw=''
+    if (str(donutit).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutit=''
+    if (str(donutoem).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutoem=''
+
+    val = '''<c:numCache>
+									<c:formatCode>"£"#,##0</c:formatCode>
+									<c:ptCount val="10"/>
+									<c:pt idx="0">
+										<c:v>{donutrpo}</c:v>
+									</c:pt>
+									<c:pt idx="1">
+										<c:v>{donutpoa}</c:v>
+									</c:pt>
+									<c:pt idx="2">
+										<c:v>{donutcip}</c:v>
+									</c:pt>
+									<c:pt idx="3">
+										<c:v>{donutmspi}</c:v>
+									</c:pt>
+									<c:pt idx="4">
+										<c:v>{donutmsl}</c:v>
+									</c:pt>
+									<c:pt idx="5">
+										<c:v>{donutfqmr}</c:v>
+									</c:pt>
+									<c:pt idx="6">
+										<c:v>{donutdcap}</c:v>
+									</c:pt>
+									<c:pt idx="7">
+										<c:v>{donutcifw}</c:v>
+									</c:pt>
+									<c:pt idx="8">
+										<c:v>{donutit}</c:v>
+									</c:pt>
+									<c:pt idx="9">
+										<c:v>{donutoem}</c:v>
+									</c:pt>
+								</c:numCache>'''
+    
+    # Yıl değerlerini xml_content içinde değiştir
+    val = val.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutpoa}', str(donutpoa).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutcip}', str(donutcip).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutmspi}', str(donutmspi).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutmsl}', str(donutmsl).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutfqmr}', str(donutfqmr).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutdcap}', str(donutdcap).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutcifw}', str(donutcifw).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
+    updated_content = re.sub(r'(<c:numRef>)(.*?)(</c:numRef>)', r'\1\n\t\t\t\t\t\t\t\t\t' + val + r'\n\t\t\t\t\t\t\3', content, flags=re.DOTALL)
+    #updated_content = re.sub(r'<c:pt idx="(\d+)">\s*<c:v>0</c:v>\s*</c:pt>', '', content)
+    # Güncellenmiş içeriği tekrar dosyaya yaz
+    print(val)
+    with open(chart_file, 'w', encoding='utf-8') as file:
+        file.write(updated_content)
     
     zip_path = 'questionare_template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'questionare_template.zip'  # Çıkış dosyasının adı
 
         # Yeni XML dosyasını oluştur ve ZIP dosyasını güncelle
-    update_zip_with_new_xml_questionare(zip_path, output_zip_path,baitval=baitval,barpoval=barpoval,bapoaval=bapoaval,bacipval=bacipval,bamspival=bamspival,bamslval=bamslval,bafqmrval=bafqmrval,badcapval=badcapval,
-                               bacifwval=bacifwval,baoemval=baoemval,batotalval=batotalval,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
-                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
-                                donutoem=donutoem)
+    # update_zip_with_new_xml_questionare(zip_path, output_zip_path,baitval=baitval,barpoval=barpoval,bapoaval=bapoaval,bacipval=bacipval,bamspival=bamspival,bamslval=bamslval,bafqmrval=bafqmrval,badcapval=badcapval,
+    #                            bacifwval=bacifwval,baoemval=baoemval,batotalval=batotalval,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
+    #                             donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
+    #                             donutoem=donutoem)
     # Her bir slide dosyasını işle
     for slide_file in slide_files:
         slide_xml_path = os.path.join(slides_dir, slide_file)
@@ -1320,7 +1399,11 @@ def create_questionare_ppt():
     zip_dosya = 'questionare_template.zip'
     gecici_zip_dosya = 'temp_questionare_template.zip'
 
-    
+    output_ppt_path = 'questionare_output.pptx'
+
+    # Dosya mevcutsa sil
+    if os.path.exists(output_ppt_path):
+        os.remove(output_ppt_path)
 
 
     zip_path = r"questionare_template.zip"  # Tam dosya yolunu girin

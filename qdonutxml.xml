@@ -345,37 +345,37 @@
                <c:val>
                   <c:numLit>
                      <c:formatCode>"£"#,##0</c:formatCode>
-                     <c:ptCount val="10"/>
-									<c:pt idx="0">
-										<c:v>{donutrpo}</c:v>
-									</c:pt>
-									<c:pt idx="1">
-										<c:v>{donutpoa}</c:v>
-									</c:pt>
-									<c:pt idx="2">
-										<c:v>{donutcip}</c:v>
-									</c:pt>
-									<c:pt idx="3">
-										<c:v>{donutmspi}</c:v>
-									</c:pt>
-									<c:pt idx="4">
-										<c:v>{donutmsl}</c:v>
-									</c:pt>
-									<c:pt idx="5">
-										<c:v>{donutfqmr}</c:v>
-									</c:pt>
-									<c:pt idx="6">
-										<c:v>{donutdcap}</c:v>
-									</c:pt>
-									<c:pt idx="7">
-										<c:v>{donutcifw}</c:v>
-									</c:pt>
-									<c:pt idx="8">
-										<c:v>{donutit}</c:v>
-									</c:pt>
-									<c:pt idx="9">
-										<c:v>{donutoem}</c:v>
-									</c:pt>
+                     <c:ptCount val="10" />
+                     <c:pt idx="0">
+                        <c:v>154461</c:v>
+                     </c:pt>
+                     <c:pt idx="1">
+                        <c:v>15453</c:v>
+                     </c:pt>
+                     <c:pt idx="2">
+                        <c:v>26400</c:v>
+                     </c:pt>
+                     <c:pt idx="3">
+                        <c:v>3853</c:v>
+                     </c:pt>
+                     <c:pt idx="4">
+                        <c:v>3017</c:v>
+                     </c:pt>
+                     <c:pt idx="5">
+                        <c:v>925349</c:v>
+                     </c:pt>
+                     <c:pt idx="6">
+                        <c:v>14344</c:v>
+                     </c:pt>
+                     <c:pt idx="7">
+                        <c:v>454393</c:v>
+                     </c:pt>
+                     <c:pt idx="8">
+                        <c:v>1210</c:v>
+                     </c:pt>
+                     <c:pt idx="9">
+                        <c:v>1223748</c:v>
+                     </c:pt>
                   </c:numLit>
                </c:val>
                <c:extLst>
