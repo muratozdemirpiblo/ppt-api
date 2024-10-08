@@ -804,7 +804,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
     chart_file = os.path.join(temp_dir, 'ppt', 'charts', 'chart1.xml')
     with open(chart_file, 'r', encoding='utf-8') as file:
         content = file.read()
-    updated_content = re.sub(r'(<c:numRef>)(.*?)(</c:numRef>)', r'\1\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\3', content, flags=re.DOTALL)
+    updated_content = re.sub(r'(<c:numLit>)(.*?)(</c:numLit>)', r'\1\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\3', content, flags=re.DOTALL)
     # <c:numRef> etiketleri arasındaki numRefValue'yu değiştir
     if (str(donutrpo).replace('£','').replace(',','').replace(' ','')) == '0':
         donutrpo=''
@@ -827,7 +827,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
     if (str(donutoem).replace('£','').replace(',','').replace(' ','')) == '0':
         donutoem=''
 
-    val = '''<c:numCache>
+    val = '''
 									<c:formatCode>"£"#,##0</c:formatCode>
 									<c:ptCount val="10"/>
 									<c:pt idx="0">
@@ -860,7 +860,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
 									<c:pt idx="9">
 										<c:v>{donutoem}</c:v>
 									</c:pt>
-								</c:numCache>'''
+								'''
     
     # Yıl değerlerini xml_content içinde değiştir
     val = val.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
@@ -873,7 +873,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
     val = val.replace('{donutcifw}', str(donutcifw).replace('£','').replace(',','').replace(' ',''))
     val = val.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
     val = val.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
-    updated_content = re.sub(r'(<c:numRef>)(.*?)(</c:numRef>)', r'\1\n\t\t\t\t\t\t\t\t\t' + val + r'\n\t\t\t\t\t\t\3', content, flags=re.DOTALL)
+    updated_content = re.sub(r'(<c:numLit>)(.*?)(</c:numLit>)', r'\1\n\t\t\t\t\t\t\t\t\t' + val + r'\n\t\t\t\t\t\t\3', content, flags=re.DOTALL)
     #updated_content = re.sub(r'<c:pt idx="(\d+)">\s*<c:v>0</c:v>\s*</c:pt>', '', content)
     # Güncellenmiş içeriği tekrar dosyaya yaz
     print(val)
