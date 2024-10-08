@@ -347,16 +347,26 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         content = file.read()
 
     # <c:numRef> etiketleri arasındaki numRefValue'yu değiştir
-    donutit = '' if donutit in [None, 0] else donutit
-    donutrpo = '' if donutrpo in [None, 0] else donutrpo
-    donutpoa = '' if donutpoa in [None, 0] else donutpoa
-    donutdcap = '' if donutdcap in [None, 0] else donutdcap
-    donutcip = '' if donutcip in [None, 0] else donutcip
-    donutmspi = '' if donutmspi in [None, 0] else donutmspi
-    donutmsl = '' if donutmsl in [None, 0] else donutmsl
-    donutfqmr = '' if donutfqmr in [None, 0] else donutfqmr
-    donutcifw = '' if donutcifw in [None, 0] else donutcifw
-    donutoem = '' if donutoem in [None, 0] else donutoem
+    if (str(donutrpo).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutrpo=''
+    if (str(donutpoa).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutpoa=''
+    if (str(donutcip).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutcip=''
+    if (str(donutmspi).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutmspi=''
+    if (str(donutmsl).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutmsl=''
+    if (str(donutfqmr).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutfqmr=''
+    if (str(donutdcap).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutdcap=''
+    if (str(donutcifw).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutcifw=''
+    if (str(donutit).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutit=''
+    if (str(donutoem).replace('£','').replace(',','').replace(' ','')) == '0':
+        donutoem=''
 
     val = '''<c:numCache>
 									<c:formatCode>"£"#,##0</c:formatCode>
@@ -406,7 +416,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     val = val.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
     print(val)
     updated_content = re.sub(r'(<c:numRef>)(.*?)(</c:numRef>)', r'\1\n\t\t\t\t\t\t\t\t\t' + val + r'\n\t\t\t\t\t\t\3', content, flags=re.DOTALL)
-
+    #updated_content = re.sub(r'<c:pt idx="(\d+)">\s*<c:v>0</c:v>\s*</c:pt>', '', content)
     # Güncellenmiş içeriği tekrar dosyaya yaz
     with open(chart_file, 'w', encoding='utf-8') as file:
         file.write(updated_content)
