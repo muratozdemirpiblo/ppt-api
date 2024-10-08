@@ -1358,12 +1358,14 @@ def create_questionare_ppt():
 
 @app.route('/get-emails', methods=['POST'])
 def getemails():
-    url = "https://eu-api.jotform.com/form/242803004503038/submissions"
+    
     # API anahtarınızı buraya ekleyin
     api_key = "cc4c65854e01a444f918600ff6d3e4be"
     data = request.get_json()
     firstemail = data.get('firstemail')
+    tableid = data.get('tableid')
     # GET isteği gönderme
+    url = "https://eu-api.jotform.com/form/{}/submissions".format(tableid)
     response = requests.get(url, params={'apiKey': api_key})
 
     datares = response.json()
