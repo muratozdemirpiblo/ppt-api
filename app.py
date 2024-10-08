@@ -1372,7 +1372,7 @@ def getemails():
     emails=firstemail
     for i in datares['content']:
         if i['answers']['4']:
-            emails+=','
+            emails+=';'
             emails+=i['answers']['4']['answer']
             
 
