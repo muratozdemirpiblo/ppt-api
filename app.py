@@ -3,7 +3,7 @@ from pptx import Presentation
 from pptx.util import Inches, Pt, Cm
 from pptx.dml.color import RGBColor
 from bs4 import BeautifulSoup
-import os
+import os,re
 import io,time
 import base64
 import matplotlib.pyplot as plt
@@ -341,14 +341,78 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     # slides klasöründeki tüm slide XML dosyalarını bul ve işle
     slides_dir = os.path.join(temp_dir, 'ppt', 'slides')
     slide_files = [f for f in os.listdir(slides_dir) if f.startswith('slide') and f.endswith('.xml')]
+
+    chart_file = os.path.join(temp_dir, 'ppt', 'charts', 'chart1.xml')
+    with open(chart_file, 'r', encoding='utf-8') as file:
+        content = file.read()
+
+    # <c:numRef> etiketleri arasındaki numRefValue'yu değiştir
+    donutit = '' if donutit in [None, 0] else donutit
+    donutrpo = '' if donutrpo in [None, 0] else donutrpo
+    donutpoa = '' if donutpoa in [None, 0] else donutpoa
+    donutdcap = '' if donutdcap in [None, 0] else donutdcap
+    donutcip = '' if donutcip in [None, 0] else donutcip
+    donutmspi = '' if donutmspi in [None, 0] else donutmspi
+    donutmsl = '' if donutmsl in [None, 0] else donutmsl
+    donutfqmr = '' if donutfqmr in [None, 0] else donutfqmr
+    donutcifw = '' if donutcifw in [None, 0] else donutcifw
+    donutoem = '' if donutoem in [None, 0] else donutoem
+
+    val = '''<c:numCache>
+									<c:formatCode>"£"#,##0</c:formatCode>
+									<c:ptCount val="10"/>
+									<c:pt idx="0">
+										<c:v>{donutrpo}</c:v>
+									</c:pt>
+									<c:pt idx="1">
+										<c:v>{donutpoa}</c:v>
+									</c:pt>
+									<c:pt idx="2">
+										<c:v>{donutcip}</c:v>
+									</c:pt>
+									<c:pt idx="3">
+										<c:v>{donutmspi}</c:v>
+									</c:pt>
+									<c:pt idx="4">
+										<c:v>{donutmsl}</c:v>
+									</c:pt>
+									<c:pt idx="5">
+										<c:v>{donutfqmr}</c:v>
+									</c:pt>
+									<c:pt idx="6">
+										<c:v>{donutdcap}</c:v>
+									</c:pt>
+									<c:pt idx="7">
+										<c:v>{donutcifw}</c:v>
+									</c:pt>
+									<c:pt idx="8">
+										<c:v>{donutit}</c:v>
+									</c:pt>
+									<c:pt idx="9">
+										<c:v>{donutoem}</c:v>
+									</c:pt>
+								</c:numCache>'''
+    
+    # Yıl değerlerini xml_content içinde değiştir
+    val = val.replace('{donutrpo}', str(donutrpo).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutpoa}', str(donutpoa).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutcip}', str(donutcip).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutmspi}', str(donutmspi).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutmsl}', str(donutmsl).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutfqmr}', str(donutfqmr).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutdcap}', str(donutdcap).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutcifw}', str(donutcifw).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutit}', str(donutit).replace('£','').replace(',','').replace(' ',''))
+    val = val.replace('{donutoem}', str(donutoem).replace('£','').replace(',','').replace(' ',''))
+    print(val)
+    updated_content = re.sub(r'(<c:numRef>)(.*?)(</c:numRef>)', r'\1\n\t\t\t\t\t\t\t\t\t' + val + r'\n\t\t\t\t\t\t\3', content, flags=re.DOTALL)
+
+    # Güncellenmiş içeriği tekrar dosyaya yaz
+    with open(chart_file, 'w', encoding='utf-8') as file:
+        file.write(updated_content)
+
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
-    update_zip_with_new_xml(zip_path, output_zip_path,year1invest=year1invest,
-                                year1return=year1return,year2invest=year2invest,year2return=year2return,year3invest=year3invest,
-                                year3return=year3return,year4invest=year4invest,year4return=year4return,year5invest=year5invest,
-                                year5return=year5return,donutit=donutit,donutrpo=donutrpo,donutpoa=donutpoa,donutdcap=donutdcap,
-                                donutcip=donutcip,donutmspi=donutmspi,donutmsl=donutmsl,donutfqmr=donutfqmr,donutcifw=donutcifw,
-                                donutoem=donutoem)
     
     # Her bir slide dosyasını işle
     for slide_file in slide_files:
