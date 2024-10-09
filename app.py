@@ -423,8 +423,8 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
 
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
+
     
-    # Her bir slide dosyasını işle
     for slide_file in slide_files:
         slide_xml_path = os.path.join(slides_dir, slide_file)
         
