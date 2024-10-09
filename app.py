@@ -733,6 +733,8 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
         namespace = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}
 
 
+
+
         
 
         donutpercentvals = ''''''
