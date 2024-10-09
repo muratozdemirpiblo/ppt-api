@@ -732,6 +732,9 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
         # XML namespace tanımı (değiştirebilir)
         namespace = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}
 
+
+        
+
         donutpercentvals = ''''''
         if rpoper!='0' and rpoper:
             donutpercentvals+='\nRaising Purchase Orders: We anticipate a {}% efficiency'.format(rpoper)
