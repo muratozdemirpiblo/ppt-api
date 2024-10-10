@@ -734,9 +734,6 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
 
 
 
-
-        
-
         donutpercentvals = ''''''
         if rpoper!='0' and rpoper:
             donutpercentvals+='\nRaising Purchase Orders: We anticipate a {}% efficiency'.format(rpoper)
