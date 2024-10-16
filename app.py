@@ -437,6 +437,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         
         
         for elem in root.findall('.//a:t', namespace):
+
             if 'eytimerpo' in elem.text:
                 elem.text = elem.text.replace('eytimerpo', str(eytimerpo))
             if 'eytimepoa' in elem.text:
@@ -1057,6 +1058,7 @@ def modify_slide_xml_and_image_questionare(zip_path, output_pptx_path,client_nam
 def create_ppt():
     # 'client_name' parametresini POST isteği ile al
     data = request.get_json()
+    newmaskedval = data.get('newmaskedval') or ""
     client_name = data.get('client_name') or ""
     itfinance = data.get('itfinance') or ""
     rpo = data.get('rpo') or ""
