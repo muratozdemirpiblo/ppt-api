@@ -326,7 +326,9 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                 per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0',asrpoval='0',aspoaval='0',ascipval='0',asmspival='0',asmslval='0',
                                 asfqmrval='0',asdcapval='0',ascifwval='0',asoemval='0',asitfinance='0',
                                 eytimerpo='0',eytimepoa='0',eytimecip='0',eytimemspi='0',eytimemsl='0',eytimefqmr='0',eytimedcap='0',
-                                eytimecifw='0',eytimeoem='0',eytimeitfinance='0'):
+                                eytimecifw='0',eytimeoem='0',eytimeitfinance='0',q1itfinance='',q1rpo='',q2rpo='',q3rpo='',q1poa='',q2poa='',q3poa='',q1cip='',
+    q2cip='',q3cip='',q4cip='',q1mspi='',q2mspi='',q3mspi='',q1msl='',q2msl='',q1fqmr='',
+    q2fqmr='',q3fqmr='',q4fqmr='',q1dcap='',q2dcap='',q3dcap='',q1cifw='',q2cifw=''):
     
 
     # Geçici çalışma dizinini oluştur
@@ -437,6 +439,82 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         
         
         for elem in root.findall('.//a:t', namespace):
+
+            if 'q1itfinance' in elem.text:
+                elem.text = elem.text.replace('q1itfinance', str(q1itfinance))
+
+            if 'q1rpo' in elem.text:
+                elem.text = elem.text.replace('q1rpo', str(q1rpo))
+            
+            if 'q2rpo' in elem.text:
+                elem.text = elem.text.replace('q2rpo', str(q2rpo))
+            
+            if 'q3rpo' in elem.text:
+                elem.text = elem.text.replace('q3rpo', str(q3rpo))
+
+            if 'q1poa' in elem.text:
+                elem.text = elem.text.replace('q1poa', str(q1poa))
+
+            if 'q2poa' in elem.text:
+                elem.text = elem.text.replace('q2poa', str(q2poa))
+
+            if 'q3poa' in elem.text:
+                elem.text = elem.text.replace('q3poa', str(q3poa))
+
+            if 'q1cip' in elem.text:
+                elem.text = elem.text.replace('q1cip', str(q1cip))
+
+            if 'q2cip' in elem.text:
+                elem.text = elem.text.replace('q2cip', str(q2cip))
+
+            if 'q3cip' in elem.text:
+                elem.text = elem.text.replace('q3cip', str(q3cip))
+
+            if 'q4cip' in elem.text:
+                elem.text = elem.text.replace('q4cip', str(q4cip))
+            
+            if 'q1mspi' in elem.text:
+                elem.text = elem.text.replace('q1mspi', str(q1mspi))
+            
+            if 'q2mspi' in elem.text:
+                elem.text = elem.text.replace('q2mspi', str(q2mspi))
+            
+            if 'q3mspi' in elem.text:
+                elem.text = elem.text.replace('q3mspi', str(q3mspi))
+            
+            if 'q1msl' in elem.text:
+                elem.text = elem.text.replace('q1msl', str(q1msl))
+
+            if 'q2msl' in elem.text:
+                elem.text = elem.text.replace('q2msl', str(q2msl))
+
+            if 'q1fqmr' in elem.text:
+                elem.text = elem.text.replace('q1fqmr', str(q1fqmr))
+
+            if 'q2fqmr' in elem.text:
+                elem.text = elem.text.replace('q2fqmr', str(q2fqmr))
+
+            if 'q3fqmr' in elem.text:
+                elem.text = elem.text.replace('q3fqmr', str(q3fqmr))
+
+            if 'q4fqmr' in elem.text:
+                elem.text = elem.text.replace('q4fqmr', str(q4fqmr))
+
+            if 'q1dcap' in elem.text:
+                elem.text = elem.text.replace('q1dcap', str(q1dcap))
+
+            if 'q2dcap' in elem.text:
+                elem.text = elem.text.replace('q2dcap', str(q2dcap))
+
+            if 'q3dcap' in elem.text:
+                elem.text = elem.text.replace('q3dcap', str(q3dcap))
+
+            if 'q1cifw' in elem.text:
+                elem.text = elem.text.replace('q1cifw', str(q1cifw))
+
+            if 'q2cifw' in elem.text:
+                elem.text = elem.text.replace('q2cifw', str(q2cifw))
+
 
             if 'eytimerpo' in elem.text:
                 elem.text = elem.text.replace('eytimerpo', str(eytimerpo))
@@ -1148,6 +1226,33 @@ def create_ppt():
     eytimecifw = data.get('eytimecifw') or "0"
     eytimeoem = data.get('eytimeoem') or "0"
     eytimeitfinance = data.get('eytimeitfinance') or "0"
+
+    q1itfinance = data.get('q1itfinance') or " "
+    q1rpo = data.get('q1rpo') or " "
+    q2rpo = data.get('q2rpo') or " "
+    q3rpo = data.get('q3rpo') or " "
+    q1poa = data.get('q1poa') or " "
+    q2poa = data.get('q2poa') or " "
+    q3poa = data.get('q3poa') or " "
+    q1cip = data.get('q1cip') or " "
+    q2cip = data.get('q2cip') or " "
+    q3cip = data.get('q3cip') or " "
+    q4cip = data.get('q4cip') or " "
+    q1mspi = data.get('q1mspi') or " "
+    q2mspi = data.get('q2mspi') or " "
+    q3mspi = data.get('q3mspi') or " "
+    q1msl = data.get('q1msl') or " "
+    q2msl = data.get('q2msl') or " "
+    q1fqmr = data.get('q1fqmr') or " "
+    q2fqmr = data.get('q2fqmr') or " "
+    q3fqmr = data.get('q3fqmr') or " "
+    q4fqmr = data.get('q4fqmr') or " "
+    q1dcap = data.get('q1dcap') or " "
+    q2dcap = data.get('q2dcap') or " "
+    q3dcap = data.get('q3dcap') or " "
+    q1cifw = data.get('q1cifw') or " "
+    q2cifw = data.get('q2cifw') or " "
+    
     
 
     totalcostval = (int(str(donutit).replace('£','').replace(',','').replace(' ',''))+
@@ -1216,7 +1321,10 @@ def create_ppt():
                                 asrpoval=asrpoval,aspoaval=aspoaval,ascipval=ascipval,asmspival=asmspival,asmslval=asmslval,asfqmrval=asfqmrval,
                                 asdcapval=asdcapval,ascifwval=ascifwval,asoemval=asoemval,asitfinance=asitfinance,eytimerpo=eytimerpo,
                                 eytimepoa=eytimepoa,eytimecip=eytimecip,eytimemspi=eytimemspi,eytimemsl=eytimemsl,eytimefqmr=eytimefqmr,
-                                eytimedcap=eytimedcap,eytimecifw=eytimecifw,eytimeoem=eytimeoem,eytimeitfinance=eytimeitfinance)
+                                eytimedcap=eytimedcap,eytimecifw=eytimecifw,eytimeoem=eytimeoem,eytimeitfinance=eytimeitfinance,
+                                q1itfinance=q1itfinance,q1rpo=q1rpo,q2rpo=q2rpo,q3rpo=q3rpo,q1poa=q1poa,q2poa=q2poa,q3poa=q3poa,q1cip=q1cip,
+    q2cip=q2cip,q3cip=q3cip,q4cip=q4cip,q1mspi=q1mspi,q2mspi=q2mspi,q3mspi=q3mspi,q1msl=q1msl,q2msl=q2msl,q1fqmr=q1fqmr,
+    q2fqmr=q2fqmr,q3fqmr=q3fqmr,q4fqmr=q4fqmr,q1dcap=q1dcap,q2dcap=q2dcap,q3dcap=q3dcap,q1cifw=q1cifw,q2cifw=q2cifw)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
