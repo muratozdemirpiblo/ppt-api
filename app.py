@@ -727,7 +727,10 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
                                donutfqmr='0',donutcifw='0',donutoem='0',
                                prpoval='0',ppoaval='0',pcipval='0',pmspival='0',pmslval='0',pfqmrval='0',
                                 pdcapval='0',pcifwval='0',poemval='0',pitfinanceval='0',totalcostval='0',per1x='0',per2x='0',
-                                per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0'):
+                                per3x='0',per4x='0',per5x='0',per6x='0',per7x='0',per8x='0',per9x='0',per10x='0',
+                                valsubmissionid=' ',q0mspi=' ',q1mspi=' ',q2mspi=' ',q3mspi=' ',q0fqmr=' ',q1fqmr=' ',
+    q2fqmr=' ',q3fqmr=' ',q4fqmr=' ',q0dcap=' ',q1dcap=' ',q2dcap=' ',q3dcap=' '):
+
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -864,6 +867,52 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
             donutpercentvals+='\nCustomer Invoicing & Finance Workflow Management: We anticipate a {}% efficiency'.format(valcifwper)
         
         for elem in root.findall('.//a:t', namespace):
+            if 'valsubmissionid' in elem.text:
+                elem.text = elem.text.replace('valsubmissionid', str(valsubmissionid))
+
+            if 'q0mspi' in elem.text:
+                elem.text = elem.text.replace('q0mspi', str(q0mspi))
+
+            if 'q1mspi' in elem.text:
+                elem.text = elem.text.replace('q1mspi', str(q1mspi))
+
+            if 'q2mspi' in elem.text:
+                elem.text = elem.text.replace('q2mspi', str(q2mspi))
+
+            if 'q3mspi' in elem.text:
+                elem.text = elem.text.replace('q3mspi', str(q3mspi))
+
+            if 'q0fqmr' in elem.text:
+                elem.text = elem.text.replace('q0fqmr', str(q0fqmr))
+
+            if 'q1fqmr' in elem.text:
+                elem.text = elem.text.replace('q1fqmr', str(q1fqmr))
+
+            if 'q2fqmr' in elem.text:
+                elem.text = elem.text.replace('q2fqmr', str(q2fqmr))
+
+            if 'q3fqmr' in elem.text:
+                elem.text = elem.text.replace('q3fqmr', str(q3fqmr))
+
+            if 'q4fqmr' in elem.text:
+                elem.text = elem.text.replace('q4fqmr', str(q4fqmr))
+
+            if 'q0dcap' in elem.text:
+                elem.text = elem.text.replace('q0dcap', str(q0dcap))
+
+            if 'q1dcap' in elem.text:
+                elem.text = elem.text.replace('q1dcap', str(q1dcap))
+
+            if 'q2dcap' in elem.text:
+                elem.text = elem.text.replace('q2dcap', str(q2dcap))
+
+            if 'q3dcap' in elem.text:
+                elem.text = elem.text.replace('q3dcap', str(q3dcap))
+
+
+
+
+
             if 'per1x' in elem.text:
                 elem.text = elem.text.replace('per1x', str(per1x))
             if 'per2x' in elem.text:
@@ -1462,6 +1511,24 @@ def create_client_ppt():
     pcifwval = data.get('pcifwval') or "0"
     poemval = data.get('poemval') or "0"
     pitfinanceval = data.get('pitfinanceval') or "0"
+
+
+    valsubmissionid = data.get('valsubmissionid') or " "
+    q0mspi = data.get('q0mspi') or " "
+    q1mspi = data.get('q1mspi') or " "
+    q2mspi = data.get('q2mspi') or " "
+    q3mspi = data.get('q3mspi') or " "
+    q0fqmr = data.get('q0fqmr') or " "
+    q1fqmr = data.get('q1fqmr') or " "
+    q2fqmr = data.get('q2fqmr') or " "
+    q3fqmr = data.get('q3fqmr') or " "
+    q4fqmr = data.get('q4fqmr') or " "
+    q0dcap = data.get('q0dcap') or " "
+    q1dcap = data.get('q1dcap') or " "
+    q2dcap = data.get('q2dcap') or " "
+    q3dcap = data.get('q3dcap') or " "
+
+    
     
     totalcostval = (int(str(donutit).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))+
@@ -1521,7 +1588,9 @@ def create_client_ppt():
                                 donutcifw=donutcifw,donutoem=donutoem,
                                 prpoval=prpoval,ppoaval=ppoaval,pcipval=pcipval,pmspival=pmspival,pmslval=pmslval,pfqmrval=pfqmrval,
                                 pdcapval=pdcapval,pcifwval=pcifwval,poemval=poemval,pitfinanceval=pitfinanceval,totalcostval=totalcostval,
-                                per1x=per1x,per2x=per2x,per3x=per3x,per4x=per4x,per5x=per5x,per6x=per6x,per7x=per7x,per8x=per8x,per9x=per9x,per10x=per10x)
+                                per1x=per1x,per2x=per2x,per3x=per3x,per4x=per4x,per5x=per5x,per6x=per6x,per7x=per7x,per8x=per8x,per9x=per9x,per10x=per10x,
+                                valsubmissionid=valsubmissionid,q0mspi=q0mspi,q1mspi=q1mspi,q2mspi=q2mspi,q3mspi=q3mspi,q0fqmr=q0fqmr,q1fqmr=q1fqmr,
+    q2fqmr=q2fqmr,q3fqmr=q3fqmr,q4fqmr=q4fqmr,q0dcap=q0dcap,q1dcap=q1dcap,q2dcap=q2dcap,q3dcap=q3dcap)
     
     zip_path = 'client_template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'client_template.zip'  # Çıkış dosyasının adı
