@@ -329,7 +329,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
                                 eytimecifw='0',eytimeoem='0',eytimeitfinance='0',q1itfinance='',q1rpo='',q2rpo='',q3rpo='',q1poa='',q2poa='',q3poa='',q1cip='',
     q2cip='',q3cip='',q4cip='',q1mspi='',q2mspi='',q3mspi='',q1msl='',q2msl='',q1fqmr='',
     q2fqmr='',q3fqmr='',q4fqmr='',q1dcap='',q2dcap='',q3dcap='',q1cifw='',q2cifw='',
-    q0itfinance='',q0rpo='',q0poa='',q0mspi='',q0msl='',q0fqmr='',q0dcap='',q0cifw=''):
+    q0itfinance='',q0rpo='',q0poa='',q0mspi='',q0msl='',q0fqmr='',q0dcap='',q0cifw='',valsubmissionid=''):
     
 
     # Geçici çalışma dizinini oluştur
@@ -440,6 +440,9 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         
         
         for elem in root.findall('.//a:t', namespace):
+
+            if 'valsubmissionid' in elem.text:
+                elem.text = elem.text.replace('valsubmissionid', str(valsubmissionid))
             if 'q0itfinance' in elem.text:
                 elem.text = elem.text.replace('q0itfinance', str(q0itfinance))
 
@@ -1288,7 +1291,7 @@ def create_ppt():
     q0fqmr = data.get('q0fqmr') or " "
     q0dcap = data.get('q0dcap') or " "
     q0cifw = data.get('q0cifw') or " "
-    
+    valsubmissionid = data.get('valsubmissionid') or " "
     
 
     totalcostval = (int(str(donutit).replace('£','').replace(',','').replace(' ',''))+
@@ -1360,7 +1363,8 @@ def create_ppt():
                                 eytimedcap=eytimedcap,eytimecifw=eytimecifw,eytimeoem=eytimeoem,eytimeitfinance=eytimeitfinance,
                                 q1itfinance=q1itfinance,q1rpo=q1rpo,q2rpo=q2rpo,q3rpo=q3rpo,q1poa=q1poa,q2poa=q2poa,q3poa=q3poa,q1cip=q1cip,
     q2cip=q2cip,q3cip=q3cip,q4cip=q4cip,q1mspi=q1mspi,q2mspi=q2mspi,q3mspi=q3mspi,q1msl=q1msl,q2msl=q2msl,q1fqmr=q1fqmr,
-    q2fqmr=q2fqmr,q3fqmr=q3fqmr,q4fqmr=q4fqmr,q1dcap=q1dcap,q2dcap=q2dcap,q3dcap=q3dcap,q1cifw=q1cifw,q2cifw=q2cifw,q0itfinance=q0itfinance,q0rpo=q0rpo,q0poa=q0poa,q0mspi=q0mspi,q0msl=q0msl,q0fqmr=q0fqmr,q0dcap=q0dcap,q0cifw=q0cifw)
+    q2fqmr=q2fqmr,q3fqmr=q3fqmr,q4fqmr=q4fqmr,q1dcap=q1dcap,q2dcap=q2dcap,q3dcap=q3dcap,q1cifw=q1cifw,q2cifw=q2cifw,q0itfinance=q0itfinance,q0rpo=q0rpo,q0poa=q0poa,q0mspi=q0mspi,q0msl=q0msl,q0fqmr=q0fqmr,q0dcap=q0dcap,q0cifw=q0cifw,
+    valsubmissionid=valsubmissionid)
     
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
