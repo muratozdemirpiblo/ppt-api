@@ -349,6 +349,13 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     with open(chart_file, 'r', encoding='utf-8') as file:
         content = file.read()
 
+    color_hosted='ED7D31'
+    color_happy='92D050'
+    color_better='FFC000'
+    color_manual='C00000'
+    color_gap='C00000'
+
+
     # <c:numRef> etiketleri arasındaki numRefValue'yu değiştir
     if (str(donutrpo).replace('£','').replace(',','').replace(' ','')) == '0':
         donutrpo=''
@@ -423,6 +430,7 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     # Güncellenmiş içeriği tekrar dosyaya yaz
     with open(chart_file, 'w', encoding='utf-8') as file:
         file.write(updated_content)
+    
 
     zip_path = 'template.zip'  # Güncellemek istediğin template.zip
     output_zip_path = 'template.zip'  # Çıkış dosyasının adı
@@ -438,6 +446,104 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
         # XML namespace tanımı (değiştirebilir)
         namespace = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}
         
+
+    # a:srgbClr etiketlerini ara ve değiştir
+        for elem in root.findall('.//a:srgbClr', namespace):  # 'a:srgbClr' tag'ini ara
+            if elem.attrib.get('val') == '011111':  # Eğer 'val' özelliği '111111' ise
+                if q0itfinance.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0itfinance.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0itfinance.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0itfinance.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0itfinance.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
+
+            if elem.attrib.get('val') == '111111':  # Eğer 'val' özelliği '111111' ise
+                if q0rpo.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0rpo.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0rpo.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0rpo.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0rpo.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
+
+            if elem.attrib.get('val') == '211111':  # Eğer 'val' özelliği '111111' ise
+                if q0poa.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0poa.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0poa.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0poa.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0poa.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
+
+            if elem.attrib.get('val') == '411111':  # Eğer 'val' özelliği '111111' ise
+                if q0mspi.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0mspi.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0mspi.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0mspi.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0mspi.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
+
+            if elem.attrib.get('val') == '511111':  # Eğer 'val' özelliği '111111' ise
+                if q0msl.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0msl.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0msl.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0msl.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0msl.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
+
+            if elem.attrib.get('val') == '611111':  # Eğer 'val' özelliği '111111' ise
+                if q0fqmr.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0fqmr.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0fqmr.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0fqmr.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0fqmr.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
+
+            if elem.attrib.get('val') == '711111':  # Eğer 'val' özelliği '111111' ise
+                if q0dcap.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0dcap.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0dcap.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0dcap.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0dcap.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
+
+            if elem.attrib.get('val') == '811111':  # Eğer 'val' özelliği '111111' ise
+                if q0cifw.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0cifw.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0cifw.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0cifw.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0cifw.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
         
         for elem in root.findall('.//a:t', namespace):
 
@@ -735,6 +841,11 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
 
+    color_hosted='ED7D31'
+    color_happy='92D050'
+    color_better='FFC000'
+    color_manual='C00000'
+    color_gap='C00000'
 
     # .pptx dosyasını aç ve dosyaları çıkar
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
@@ -743,6 +854,9 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
     chart_file = os.path.join(temp_dir, 'ppt', 'charts', 'chart1.xml')
     with open(chart_file, 'r', encoding='utf-8') as file:
         content = file.read()
+
+
+     
 
     # <c:numRef> etiketleri arasındaki numRefValue'yu değiştir
     if (str(donutrpo).replace('£','').replace(',','').replace(' ','')) == '0':
@@ -866,6 +980,48 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
         if valcifwper!='0' and valcifwper:
             donutpercentvals+='\nCustomer Invoicing & Finance Workflow Management: We anticipate a {}% efficiency'.format(valcifwper)
         
+        
+        for elem in root.findall('.//a:srgbClr', namespace):  # 'a:srgbClr' tag'ini ara
+         
+           
+           
+            if elem.attrib.get('val') == '411111':  # Eğer 'val' özelliği '111111' ise
+                if q0mspi.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0mspi.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0mspi.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0mspi.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0mspi.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
+
+          
+            if elem.attrib.get('val') == '611111':  # Eğer 'val' özelliği '111111' ise
+                if q0fqmr.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0fqmr.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0fqmr.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0fqmr.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0fqmr.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
+
+            if elem.attrib.get('val') == '711111':  # Eğer 'val' özelliği '111111' ise
+                if q0dcap.lower()=='hosted':
+                    elem.set('val', color_hosted)
+                elif q0dcap.lower()=='happy as it is':
+                    elem.set('val', color_happy)
+                elif q0dcap.lower()=='could be better':
+                    elem.set('val', color_better)
+                elif q0dcap.lower()=='manual entry':
+                    elem.set('val', color_manual)
+                elif q0dcap.lower()=='this is a gap today':
+                    elem.set('val', color_gap)
+
         for elem in root.findall('.//a:t', namespace):
             if 'valsubmissionid' in elem.text:
                 elem.text = elem.text.replace('valsubmissionid', str(valsubmissionid))
