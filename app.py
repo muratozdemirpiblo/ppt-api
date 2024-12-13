@@ -331,6 +331,25 @@ def modify_slide_xml_and_image(zip_path, output_pptx_path,client_name,
     q2fqmr='',q3fqmr='',q4fqmr='',q1dcap='',q2dcap='',q3dcap='',q1cifw='',q2cifw='',
     q0itfinance='hosted',q0rpo='this is a gap today',q0poa='this is a gap today',q0mspi='manual entry',q0msl='this is a gap today',q0fqmr='this is a gap today',q0dcap='this is a gap today',q0cifw='this is a gap today',valsubmissionid=''):
     
+    
+    if q0itfinance==" ":
+        q0itfinance='hosted'
+    if q0rpo==" ":
+        q0rpo='this is a gap today'
+    if q0itfinance==" ":
+        q0itfinance='hosted'
+    if q0poa==" ":
+        q0poa='this is a gap today'
+    if q0mspi==" ":
+        q0mspi='manual entry'
+    if q0msl==" ":
+        q0msl='this is a gap today'
+    if q0fqmr==" ":
+        q0fqmr='this is a gap today'
+    if q0dcap==" ":
+        q0dcap='this is a gap today'
+    if q0cifw==" ":
+        q0cifw='this is a gap today'
 
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
@@ -837,6 +856,8 @@ def modify_slide_xml_and_image_client(zip_path, output_pptx_path,client_name,
                                 valsubmissionid=' ',q0mspi=' ',q1mspi=' ',q2mspi=' ',q3mspi=' ',q0fqmr=' ',q1fqmr=' ',
     q2fqmr=' ',q3fqmr=' ',q4fqmr=' ',q0dcap=' ',q1dcap=' ',q2dcap=' ',q3dcap=' '):
 
+  
+    
     # Geçici çalışma dizinini oluştur
     temp_dir = 'temp_pptx'
     os.makedirs(temp_dir, exist_ok=True)
@@ -1498,6 +1519,8 @@ def create_ppt():
     q0cifw = data.get('q0cifw') or " "
     valsubmissionid = data.get('valsubmissionid') or " "
     
+   
+    
 
     totalcostval = (int(str(donutit).replace('£','').replace(',','').replace(' ',''))+
                     int(str(donutrpo).replace('£','').replace(',','').replace(' ',''))+
@@ -1683,6 +1706,7 @@ def create_client_ppt():
     q1dcap = data.get('q1dcap') or " "
     q2dcap = data.get('q2dcap') or " "
     q3dcap = data.get('q3dcap') or " "
+    
 
     
     
